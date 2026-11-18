@@ -1,0 +1,243 @@
+@charset "UTF-8";
+
+/* ==========================================================
+   手すりができるまで（page-process.php）
+   ========================================================== */
+
+.process-main {
+    overflow-x: clip;
+}
+
+.process-lead {
+    padding-top: 7rem;
+}
+
+.process-lead__text,
+.process-team__text {
+    max-width: 90rem;
+    margin: 0 auto;
+    font-size: 1.6rem;
+    line-height: 1.8;
+}
+
+.process-flow {
+    padding-top: 12rem;
+}
+
+.process-flow .heading-typeC,
+.process-recruit .heading-typeC {
+    margin-bottom: 5rem;
+}
+
+/* flow-typeE（STEP ごとに背景が薄青／なしで交互。左に写真、右に工程名・タグ・仕事内容、下に白ボックス。STEP 間に山形の線） */
+.flow-typeE .flow__item {
+    position: relative;
+    padding: 7rem 0;
+}
+
+.flow-typeE .flow__item:nth-child(odd) {
+    background: var(--tertiary);
+}
+
+.flow-typeE .flow__inner {
+    max-width: 108rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.flow-typeE .flow__main {
+    display: grid;
+    grid-template-columns: 42rem 1fr;
+    align-items: center;
+    gap: 4rem;
+}
+
+.flow-typeE .flow__img img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 42 / 33;
+    object-fit: cover;
+}
+
+.flow-typeE .flow__title {
+    margin-bottom: 1.6rem;
+    font-size: 2.4rem;
+    font-weight: 500;
+    line-height: 1.8;
+    color: var(--primary);
+}
+
+.flow-typeE .flow__step {
+    font-weight: 500;
+}
+
+.flow-typeE .flow__sep {
+    margin: 0 .2em;
+}
+
+.flow-typeE .flow__tag {
+    display: inline-block;
+    margin-bottom: 2rem;
+    padding: .4rem 1.2rem;
+    background: #000;
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 1.8;
+}
+
+.flow-typeE .flow__text,
+.flow-typeE .flow__appeal {
+    font-size: 1.6rem;
+    line-height: 1.8;
+}
+
+.flow-typeE .flow__label {
+    font-weight: 500;
+}
+
+.flow-typeE .flow__appeal {
+    margin-top: 3rem;
+    padding: 3rem 4rem;
+    background: #fff;
+}
+
+.flow-typeE .flow__arrow {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    z-index: 1;
+    width: 13.6rem;
+    height: auto;
+    color: var(--primary);
+    transform: translate(-50%, 50%);
+}
+
+@media screen and (max-width: 768px) {
+    .flow-typeE .flow__item {
+        padding: 5rem 0;
+    }
+
+    .flow-typeE .flow__inner {
+        padding: 0 1.5rem;
+    }
+
+    .flow-typeE .flow__main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .flow-typeE .flow__img img {
+        aspect-ratio: 345 / 271;
+    }
+
+    .flow-typeE .flow__title {
+        margin-bottom: 1.2rem;
+        font-size: 2rem;
+    }
+
+    .flow-typeE .flow__tag {
+        margin-bottom: 1.6rem;
+        font-size: 1.4rem;
+    }
+
+    .flow-typeE .flow__text,
+    .flow-typeE .flow__appeal {
+        font-size: 1.4rem;
+    }
+
+    .flow-typeE .flow__appeal {
+        margin-top: 2rem;
+        padding: 3rem 1.5rem;
+    }
+
+    .flow-typeE .flow__arrow {
+        width: 8.5rem;
+    }
+}
+
+/* チームワーク（中央ロゴ＋見出し＋本文＋写真の横流し scroll-typeA） */
+.process-team {
+    padding-top: 12rem;
+}
+
+.process-team__logo {
+    display: block;
+    width: 30rem;
+    height: auto;
+    margin: 0 auto 3.2rem;
+}
+
+.process-team .heading-typeC {
+    margin-bottom: 4rem;
+}
+
+.process-team__scroll {
+    margin-top: 5rem;
+}
+
+.process-team__scroll .scroll__items {
+    animation-duration: 40s;
+}
+
+.process-team__scroll .scroll__item {
+    width: 31rem;
+    padding-right: 1rem;
+}
+
+.process-team__scroll .scroll__item:nth-of-type(even) {
+    margin-bottom: 0;
+}
+
+.process-team__scroll .scroll__item img {
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.process-recruit {
+    padding-top: 7.7rem;
+}
+
+@media screen and (max-width: 768px) {
+    .process-lead {
+        padding-top: 5rem;
+    }
+
+    .process-lead__text,
+    .process-team__text {
+        font-size: 1.4rem;
+    }
+
+    .process-flow {
+        padding-top: 7rem;
+    }
+
+    .process-flow .heading-typeC,
+    .process-recruit .heading-typeC {
+        margin-bottom: 3rem;
+    }
+
+    .process-team {
+        padding-top: 8rem;
+    }
+
+    .process-team__logo {
+        width: 20rem;
+        margin-bottom: 4rem;
+    }
+
+    .process-team .heading-typeC {
+        margin-bottom: 3rem;
+    }
+
+    .process-team__scroll {
+        margin-top: 4rem;
+    }
+
+    .process-team__scroll .scroll__item {
+        width: 21rem;
+    }
+
+    .process-recruit {
+        padding-top: 7rem;
+    }
+}
