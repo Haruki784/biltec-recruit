@@ -2368,3 +2368,144 @@ a.img-zoom:hover img {
 .interview-card__link:hover {
     color: inherit;
 }
+
+/* media-typeA（左右交互：半分の全幅寄せ画像／テキスト。事業紹介の強み・募集要項の詳細で共用。.media__item--reverse で画像を右に） */
+.media-typeA {
+    display: grid;
+    gap: 8rem;
+}
+
+.media-typeA .media__item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 40rem;
+}
+
+.media-typeA .media__item--reverse .media__img {
+    order: 2;
+}
+
+.media-typeA .media__img {
+    position: relative;
+    min-height: 40rem;
+}
+
+.media-typeA .media__img img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.media-typeA .media__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 72rem;
+    padding: 4rem 6rem;
+}
+
+.media-typeA .media__title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.8;
+}
+
+.media-typeA .media__text {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    color: var(--text-blue);
+}
+
+@media screen and (max-width: 768px) {
+    .media-typeA {
+        gap: 3rem;
+    }
+
+    .media-typeA .media__item {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .media-typeA .media__item--reverse .media__img {
+        order: 0;
+    }
+
+    .media-typeA .media__img {
+        min-height: 0;
+        aspect-ratio: 375 / 208;
+    }
+
+    .media-typeA .media__body {
+        max-width: none;
+        padding: 2rem 1.5rem 0;
+    }
+
+    .media-typeA .media__title {
+        font-size: 1.8rem;
+    }
+
+    .media-typeA .media__text {
+        font-size: 1.4rem;
+    }
+}
+
+/* under-mv-typeB の調整（2026-11-18 下層3ページ制作時。Figma に合わせる）
+   - base.css の .under-mv__title { color: var(--secondary) } が勝っていたので白を指定
+   - 写真に暗いオーバーレイ、文字サイズを Figma の値に
+   - SP ではリードを写真の下（白地）に出す（.under-mv__lead--sp） */
+.under-mv-typeB .under-mv__visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(24, 47, 78, .4);
+}
+
+.under-mv-typeB .under-mv__content {
+    z-index: 1;
+}
+
+.under-mv-typeB .under-mv__title {
+    color: #fff;
+    font-size: 3.6rem;
+}
+
+.under-mv-typeB .under-mv__label { font-size: 2rem; }
+.under-mv-typeB .under-mv__sub { font-size: 2.4rem; }
+.under-mv-typeB .under-mv__lead { font-size: 1.6rem; }
+
+.under-mv-typeB .under-mv__lead--sp {
+    color: var(--text-color);
+    text-align: center;
+    padding-top: 2.4rem;
+    margin-top: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .under-mv-typeB .under-mv__label { font-size: 1.4rem; }
+    .under-mv-typeB .under-mv__title { font-size: 2.6rem; }
+    .under-mv-typeB .under-mv__sub { font-size: 1.8rem; }
+    .under-mv-typeB .under-mv__content .under-mv__lead { display: none; }
+    .under-mv-typeB .under-mv__lead--sp { font-size: 1.4rem; }
+}
+
+/* heading-typeC の modifier（下層ページ用）
+   --black：見出しを黒・線を 2px（事業紹介・わたしたちの想い）／--s：見出し 28px（手すりができるまで） */
+.heading-typeC--black {
+    color: var(--text-color);
+}
+
+.heading-typeC--black .heading-line {
+    height: 2px;
+    background: var(--primary);
+}
+
+.heading-typeC--s .heading-main {
+    font-size: 2.8rem;
+}
+
+@media screen and (max-width: 768px) {
+    .heading-typeC--s .heading-main { font-size: 2.2rem; }
+}

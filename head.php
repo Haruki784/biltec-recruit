@@ -113,6 +113,9 @@ if (!function_exists('theme_get_canonical_url')) {
     <?php endif; ?>
     <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/privacy.css">
     <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/thanks.css">
+    <?php if (is_page('process')) : ?><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/process.css"><?php endif; ?>
+    <?php if (is_page('business')) : ?><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/business.css"><?php endif; ?>
+    <?php if (is_page('philosophy')) : ?><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/philosophy.css"><?php endif; ?>
     <!-- デバイス別出し分け用css -->
     <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/device.css">
     <?php wp_head(); ?>

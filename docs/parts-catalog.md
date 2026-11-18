@@ -120,6 +120,9 @@ CSS はすべて add.css 末尾の「ビルテック案件で追加したパー�
 | `js-lines` / `js-fade` / `js-slide` | 見出しを1行ずつ／フェードアップ／横スライドで表示 | 各所 | add.js `initLines()` `initInview()` |
 | `img-zoom` | ホバーで画像を拡大 | front-page.php | - |
 | `opening` / `top-mv-typeA` | TOPのオープニングとMV（フェード切り替え・帯で文字が出る） | front-page.php | add.js `initTopMv()` |
+| `under-mv under-mv-typeB` | 下層MV（パンくずの白帯＋写真＋中央にラベル/H1/サブ/リード。SPはリードが写真の下） | snippet/under-mv.php | - |
+| `heading-typeC--black` / `--s` | heading-typeC の黒（線2px）/ 28px 版 | page-business.php / page-process.php | - |
+| `media media-typeA` | 左右交互の「半分の全幅寄せ画像／テキスト（`__title` `__text`）」。`media__item--reverse` で画像が右。SPは画像→テキストの縦並び | page-business.php（強み） | - |
 
 ## 修正履歴
 

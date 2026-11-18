@@ -44,4 +44,7 @@ $a = wp_parse_args($args ?? array(), array(
             <?php endif; ?>
         </div>
     </div>
+    <?php if ($a['lead']) : ?>
+        <p class="under-mv__lead under-mv__lead--sp small-hide container"><?php echo nl2br(esc_html($a['lead'])); ?></p>
+    <?php endif; ?>
 </section>
