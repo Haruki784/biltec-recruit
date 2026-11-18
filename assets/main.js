@@ -97,7 +97,8 @@ jQuery(function ($) {
         $content.find('article.article[id]').each(function (i) {
             var uniqueId = 'section-' + (i + 1);
             $(this).attr('id', uniqueId);
-            var title = $(this).find('h2').first().text().trim();
+            // article に data-index があれば目次の文言に使う（なければ h2 の文字）
+            var title = ($(this).attr('data-index') || $(this).find('h2').first().text()).trim();
             if (title) {
                 indexItems += '<li class="index__item pb-1"><a href="#' + uniqueId + '" class="index__link">' + title + '</a></li>';
             }

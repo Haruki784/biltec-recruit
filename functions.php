@@ -91,7 +91,8 @@ add_post_type_support('page', 'excerpt');
  */
 add_action('pre_get_posts', function ($query) {
     if (!is_admin() && $query->is_main_query() && $query->is_archive()) {
-        $query->set('posts_per_page', 9);
+        // 先輩インタビュー一覧は4列なので12件、ほかは9件
+        $query->set('posts_per_page', $query->is_post_type_archive('interview') ? 12 : 9);
     }
 });
 

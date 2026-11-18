@@ -123,6 +123,8 @@ CSS はすべて add.css 末尾の「ビルテック案件で追加したパー�
 | `under-mv under-mv-typeB` | 下層MV（パンくずの白帯＋写真＋中央にラベル/H1/サブ/リード。SPはリードが写真の下） | snippet/under-mv.php | - |
 | `heading-typeC--black` / `--s` | heading-typeC の黒（線2px）/ 28px 版 | page-business.php / page-process.php | - |
 | `media media-typeA` | 左右交互の「半分の全幅寄せ画像／テキスト（`__title` `__text`）」。`media__item--reverse` で画像が右。SPは画像→テキストの縦並び | page-business.php（強み） | - |
+| `job-mv`（募集要項詳細のMV）・`heading-typeD`（左に青い縦線の見出し） | 募集要項の詳細だけで使う。CSS は assets/pages/job.css | single-job.php | - |
+| `article-mv-typeE`（インタビュー詳細のMV）・一覧のカードの見た目 | CSS は assets/pages/interview.css（TOPのカードには影響しない）。目次は article の data-index を優先（main.js） | single-interview.php / archive-interview.php | main.js 目次 |
 
 ## 修正履歴
 
