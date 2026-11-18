@@ -184,31 +184,7 @@
     line-height: 1.6;
 }
 
-/* ===================================================================
-   詳細：見出し（heading-typeD：左に青い縦線。上半分が濃紺、下半分が青）
-   =================================================================== */
-.heading-typeD {
-    position: relative;
-    display: flex;
-    align-items: center;
-    min-height: 8rem;
-    margin-bottom: 4.4rem;
-    padding-left: 3.3rem;
-    font-size: 2.4rem;
-    font-weight: 700;
-    line-height: 1.6;
-    color: var(--text-blue);
-}
-
-.heading-typeD::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: .8rem;
-    background: linear-gradient(var(--secondary) 50%, var(--primary) 50%);
-}
+/* 見出し（heading-typeD）と表（table-typeB--info）は add.css に共通化した */
 
 /* ===================================================================
    詳細：紹介文・募集要項
@@ -216,40 +192,6 @@
 .job-intro__text {
     font-size: 1.6rem;
     line-height: 1.8;
-}
-
-.job-table {
-    background: #fff;
-    border: 1px solid #d9d9d9;
-}
-
-.job-table .table__header,
-.job-table .table__data {
-    border-bottom: 1px solid #d9d9d9;
-    font-size: 1.4rem;
-}
-
-.job-table .table__item:last-child .table__header,
-.job-table .table__item:last-child .table__data {
-    border-bottom: 0;
-}
-
-.job-table .table__header {
-    width: 16.7rem;
-    padding: 1rem 2rem;
-    background: var(--tertiary);
-    font-weight: 500;
-    line-height: 1.5;
-    letter-spacing: .05em;
-    text-align: center;
-}
-
-.job-table .table__data {
-    width: auto;
-    height: 6.9rem;
-    padding: 1rem 4rem;
-    line-height: 1.72;
-    color: #000;
 }
 
 .job-entry {
@@ -359,39 +301,6 @@
 
     .job-mv-typeA .job-mv__text {
         font-size: 1.4rem;
-    }
-
-    /* 見出し */
-    .heading-typeD {
-        min-height: 0;
-        margin-bottom: 3rem;
-        padding-left: 2.3rem;
-        font-size: 2rem;
-    }
-
-    /* 表 */
-    .job-table .table__header {
-        width: 8.5rem;
-        padding: 1rem .5rem;
-        font-size: 1.3rem;
-    }
-
-    /* SP は tr が flex になるので、高さは min-height で */
-    .job-table .table__header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    }
-
-    .job-table .table__data {
-        flex: 1;
-        width: auto;
-        height: auto;
-        min-height: 6.9rem;
-        padding: 1.2rem 1rem;
-        font-size: 1.3rem;
-        line-height: 1.6;
     }
 
     .job-entry {

@@ -94,7 +94,7 @@ $entry_main  = array_pop($entry_lines);
         <div class="job-inner">
             <?php $job_heading(theme_field('job_req_heading')); ?>
             <?php if ($req_rows) : ?>
-                <div class="table table-typeB table-sp-nowrap job-table js-fade">
+                <div class="table table-typeB table-typeB--info table-sp-nowrap js-fade">
                     <table class="table__content">
                         <?php foreach ($req_rows as $row) : ?>
                             <tr class="table__item">

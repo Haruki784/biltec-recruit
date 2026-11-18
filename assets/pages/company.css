@@ -1,0 +1,408 @@
+/* 会社概要（page-company.php）だけのスタイル
+   レイアウトは Figma 156:1249（他社サイトの流用）。色はビルテックのトークンに置き換えている */
+
+.cp-main {
+    background: var(--site-background-sub);
+    overflow-x: clip;
+}
+
+.cp-inner {
+    position: relative;
+    max-width: 94rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.cp-inner--wide {
+    max-width: 122rem;
+}
+
+/* 見出し（英字の小見出し＋大きい和文＋「／ 小さい文字」＋下線 70rem） */
+.cp-heading {
+    position: relative;
+    max-width: 70rem;
+    padding-bottom: 2.4rem;
+    margin-bottom: 4.8rem;
+    color: var(--text-blue);
+}
+
+.cp-heading::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    opacity: .6;
+}
+
+.cp-heading__en {
+    display: block;
+    margin-bottom: 1.2rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: .05em;
+}
+
+.cp-heading__main {
+    font-size: 3.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: .05em;
+}
+
+.cp-heading__sub {
+    margin-left: 1.6rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+}
+
+.cp-heading--white {
+    color: #fff;
+}
+
+/* TOP MESSAGE：左に縦書きの大きな英字（装飾）、キャッチ＋会社名・代表名＋写真、下に本文 */
+.cp-message {
+    position: relative;
+    padding: 16rem 0 10rem;
+    overflow: hidden;
+}
+
+.cp-message__deco {
+    position: absolute;
+    left: 18.8rem;
+    top: 1.2rem;
+    font-size: 13rem;
+    font-weight: 800;
+    font-style: italic;
+    line-height: 1;
+    letter-spacing: .02em;
+    color: #E3E9F1;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    pointer-events: none;
+}
+
+.cp-message__head {
+    display: grid;
+    grid-template-columns: 1fr 40rem;
+    align-items: center;
+    gap: 4rem;
+    margin-bottom: 4rem;
+}
+
+.cp-message__catch {
+    margin-bottom: 1.6rem;
+    font-size: 2.2rem;
+    font-weight: 500;
+    line-height: 1.8;
+}
+
+.cp-message__name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.8;
+    color: var(--text-blue);
+}
+
+.cp-message__img img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.cp-message__text {
+    font-size: 1.5rem;
+    line-height: 2;
+}
+
+/* 事業紹介：青背景に、白いカード（左：番号＋事業名＋説明＋ボタン／右：写真）を3枚 */
+.cp-business {
+    padding: 8rem 0 10rem;
+    background: var(--primary);
+}
+
+.cp-business__items {
+    display: grid;
+    gap: 3rem;
+}
+
+.cp-business__item {
+    display: grid;
+    grid-template-columns: 1fr 59rem;
+    min-height: 24rem;
+    background: #fff;
+}
+
+.cp-business__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.6rem;
+    padding: 4rem 6rem;
+}
+
+.cp-business__title {
+    position: relative;
+    padding-left: 2.4rem;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* 左の縦線（上が青、下が濃紺） */
+.cp-business__title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1rem;
+    background: linear-gradient(var(--line-color) 50%, var(--primary) 50%);
+}
+
+.cp-business__num {
+    display: block;
+    margin-bottom: .4rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.cp-business__text {
+    font-size: 1.4rem;
+    line-height: 1.8;
+}
+
+.cp-business__btn {
+    align-self: flex-start;
+    min-width: 47rem;
+    color: var(--text-blue);
+}
+
+.cp-business__img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 会社概要の表 */
+.cp-table {
+    padding: 10rem 0;
+}
+
+/* 採用情報：大きいバナー1枚＋その下に2枚 */
+.cp-recruit {
+    padding: 2rem 0 12rem;
+}
+
+.cp-recruit__lead {
+    max-width: 72rem;
+    margin-bottom: 7rem;
+    font-size: 1.6rem;
+    line-height: 1.9;
+    color: var(--text-blue);
+}
+
+.cp-recruit__links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.cp-recruit__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 21rem;
+    color: #fff;
+    background: var(--primary);
+    transition: background .3s, opacity .3s;
+}
+
+.cp-recruit__link:hover {
+    color: #fff;
+    opacity: .85;
+}
+
+.cp-recruit__link--main {
+    grid-column: 1 / -1;
+    justify-content: space-between;
+    gap: 4rem;
+    padding: 3rem 6rem 3rem 14rem;
+    background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+}
+
+.cp-recruit__link--light {
+    background: #3E7BC4;
+}
+
+.cp-recruit__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 3.2rem;
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+}
+
+.cp-recruit__label .icon-chevron {
+    width: 1rem;
+    height: 1.6rem;
+}
+
+.cp-recruit__img {
+    width: 50rem;
+    flex-shrink: 0;
+}
+
+.cp-recruit__img img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 500 / 150;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 991px) {
+    .cp-message__deco {
+        left: 0;
+        opacity: .6;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .cp-inner {
+        padding: 0 1.5rem;
+    }
+
+    .cp-heading {
+        margin-bottom: 3.2rem;
+        padding-bottom: 1.6rem;
+    }
+
+    .cp-heading__en {
+        font-size: 1.4rem;
+    }
+
+    .cp-heading__main {
+        font-size: 3rem;
+    }
+
+    .cp-heading__sub {
+        display: block;
+        margin: 1.2rem 0 0;
+        font-size: 1.5rem;
+    }
+
+    .cp-message {
+        padding: 6rem 0;
+    }
+
+    .cp-message__deco {
+        left: -1.2rem;
+        top: 4rem;
+        font-size: 8rem;
+    }
+
+    .cp-message__head {
+        grid-template-columns: 1fr;
+        gap: 2.4rem;
+        margin-bottom: 3.2rem;
+    }
+
+    .cp-message__catch {
+        font-size: 2rem;
+    }
+
+    /* SP は改行せずに流す（js-lines が行ごとに span で包むので、span を inline に戻す） */
+    .cp-message__catch br {
+        display: none;
+    }
+
+    .cp-message__catch .js-lines__line {
+        display: inline;
+    }
+
+    .cp-message__text {
+        line-height: 1.9;
+    }
+
+    .cp-business {
+        padding: 6rem 0;
+    }
+
+    .cp-business__items {
+        gap: 2rem;
+    }
+
+    .cp-business__item {
+        grid-template-columns: 1fr;
+    }
+
+    .cp-business__img {
+        order: -1;
+        aspect-ratio: 345 / 160;
+    }
+
+    .cp-business__body {
+        padding: 2.4rem 2rem 3.2rem;
+    }
+
+    .cp-business__title {
+        font-size: 2.2rem;
+    }
+
+    .cp-business__num {
+        font-size: 1.6rem;
+    }
+
+    .cp-business__btn {
+        min-width: 0;
+        align-self: stretch;
+    }
+
+    .cp-table {
+        padding: 6rem 0;
+    }
+
+    .cp-recruit {
+        padding: 0 0 6rem;
+    }
+
+    .cp-recruit__lead {
+        margin-bottom: 4rem;
+        font-size: 1.5rem;
+    }
+
+    .cp-recruit__lead br {
+        display: none;
+    }
+
+    .cp-recruit__links {
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+    }
+
+    .cp-recruit__link {
+        min-height: 10rem;
+    }
+
+    .cp-recruit__link--main {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 3.2rem 2rem;
+    }
+
+    .cp-recruit__img {
+        width: 100%;
+    }
+
+    .cp-recruit__label {
+        gap: 2rem;
+        font-size: 2rem;
+    }
+}
