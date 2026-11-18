@@ -1,0 +1,320 @@
+@charset "UTF-8";
+
+/* ============================================================
+   わたしたちの想い（page-philosophy.php）
+   president-message-typeC / mvv-typeC は今回このファイルに書いている。
+   ほかのページでも使うことになったら add.css に移す。
+   ============================================================ */
+
+/* 改行ごとのかたまり（PC は入る分だけ1行につなげ、SP は <br class="small-hide"> で改行する） */
+.ph-line {
+    display: inline-block;
+}
+
+/* ---------- なぜ今「第2創業」なのか ---------- */
+.ph-intro__inner {
+    max-width: calc(90rem + 4rem);
+    text-align: center;
+}
+
+.ph-intro__title {
+    color: var(--text-color);
+}
+
+.ph-intro__lead {
+    margin-top: 4rem;
+    color: #004399;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: .02em;
+}
+
+.ph-intro__text {
+    margin-top: 4rem;
+    color: #231815;
+    font-size: 1.6rem;
+    line-height: 1.8;
+    text-align: left;
+}
+
+/* ---------- 流れる英文（loop-typeA） ---------- */
+.ph-loop .loop__content {
+    animation-duration: 40s;
+}
+
+.ph-loop .loop__item {
+    padding-right: 1.8rem;
+    color: #000;
+    font-size: 9rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: .02em;
+}
+
+/* ---------- president-message-typeC（濃紺背景：左寄せの見出し＋短い線＋本文 → 中央に写真 → 代表名） ---------- */
+.president-message-typeC {
+    padding: 8rem 2rem;
+    margin-top: 2rem;
+}
+
+.president-message-typeC .president-message__inner {
+    max-width: 82rem;
+    margin: 0 auto;
+}
+
+.president-message-typeC .president-message__heading {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.president-message-typeC .president-message__line {
+    display: block;
+    width: 6.2rem;
+    height: 1px;
+    margin-top: 2rem;
+    background: var(--line-color);
+}
+
+.president-message-typeC .president-message__text {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    line-height: 2;
+}
+
+.president-message-typeC .president-message__img {
+    width: 44rem;
+    margin: 3.2rem auto 0;
+}
+
+.president-message-typeC .president-message__img img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 440 / 300;
+    object-fit: cover;
+}
+
+.president-message-typeC .president-message__name {
+    margin-top: 3.2rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* ---------- mvv-typeC（全幅の背景写真に MISSION / VISION / VALUES を重ねる） ---------- */
+.mvv-typeC {
+    padding-top: 4rem;
+}
+
+.mvv-typeC .heading-typeC {
+    margin-bottom: 4rem;
+}
+
+.mvv-typeC .mvv__block {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+}
+
+.mvv-typeC .mvv__bg img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mvv-typeC .mvv__inner {
+    position: relative;
+    max-width: 90rem;
+    margin: 0 auto;
+    padding: 12rem 0;
+}
+
+.mvv-typeC .mvv__head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+}
+
+.mvv-typeC .mvv__en {
+    font-size: 7rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: .05em;
+}
+
+.mvv-typeC .mvv__sub {
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.mvv-typeC .mvv__catch {
+    max-width: 72rem;
+    margin: 3.2rem auto 0;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: .02em;
+}
+
+.mvv-typeC .mvv__lead {
+    margin-top: .4rem;
+    font-size: 1.6rem;
+    line-height: 1.6;
+}
+
+.mvv-typeC .mvv__box {
+    margin-top: 2.4rem;
+    padding: 4rem 9rem;
+    background: rgba(255, 255, 255, .9);
+    color: #000;
+    text-align: left;
+}
+
+.mvv-typeC .mvv__text {
+    font-size: 1.6rem;
+    line-height: 1.8;
+}
+
+/* VALUES：白パネルの中に丸写真のカードを 3＋2（中央寄せ） */
+.mvv-typeC .mvv__box--values {
+    margin-top: 4.4rem;
+    padding: 4rem 9rem;
+}
+
+.mvv-typeC .mvv__values {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4rem 3rem;
+}
+
+.mvv-typeC .mvv__value {
+    width: 22rem;
+}
+
+.mvv-typeC .mvv__value-img img {
+    display: block;
+    width: 22rem;
+    height: 22rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.mvv-typeC .mvv__value-no {
+    margin-top: 1rem;
+    color: #004399;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.mvv-typeC .mvv__value-title {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #141414;
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.mvv-typeC .mvv__value-text {
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    line-height: 1.6;
+}
+
+/* ---------- SP ---------- */
+@media screen and (max-width: 768px) {
+    .ph-intro__inner {
+        text-align: left;
+    }
+
+    .ph-intro__title {
+        font-size: 2.4rem;
+    }
+
+    .ph-intro__lead {
+        margin-top: 3.2rem;
+        font-size: 2rem;
+    }
+
+    .ph-intro__text {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .ph-loop .loop__item {
+        font-size: 8rem;
+        padding-right: 1.6rem;
+    }
+
+    .president-message-typeC {
+        padding: 7rem 1.5rem;
+        margin-top: 0;
+    }
+
+    .president-message-typeC .president-message__img {
+        width: 30rem;
+        max-width: 100%;
+        margin-top: 3rem;
+    }
+
+    .president-message-typeC .president-message__img img {
+        aspect-ratio: 300 / 205;
+    }
+
+    .president-message-typeC .president-message__name {
+        margin-top: 2rem;
+    }
+
+    .mvv-typeC {
+        padding-top: 2rem;
+    }
+
+    .mvv-typeC .mvv__inner {
+        padding: 7rem 1.5rem;
+    }
+
+    .mvv-typeC .mvv__head {
+        gap: 1rem;
+    }
+
+    .mvv-typeC .mvv__en {
+        font-size: 5rem;
+    }
+
+    .mvv-typeC .mvv__sub {
+        font-size: 1.4rem;
+    }
+
+    .mvv-typeC .mvv__catch {
+        margin-top: 2.4rem;
+        font-size: 2.4rem;
+    }
+
+    .mvv-typeC .mvv__lead {
+        margin-top: .8rem;
+        font-size: 1.4rem;
+    }
+
+    .mvv-typeC .mvv__box {
+        margin-top: 2rem;
+        padding: 4rem 1.5rem;
+    }
+
+    .mvv-typeC .mvv__text {
+        font-size: 1.4rem;
+    }
+
+    .mvv-typeC .mvv__box--values {
+        margin-top: 3.2rem;
+        padding: 4rem 1.5rem;
+    }
+}
