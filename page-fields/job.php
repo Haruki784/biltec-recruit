@@ -7,9 +7,9 @@
 
 $detail_block = function ($label) {
     return array('label' => $label, 'type' => 'group', 'sub_fields' => array(
-        'heading' => array('label' => '見出し', 'type' => 'text'),
+        'heading' => array('label' => '見出し', 'type' => 'text', 'default' => $label),
         'lead'    => array('label' => 'リード（太字）', 'type' => 'textarea', 'rows' => 2),
-        'list'    => array('label' => '箇条書き（1行1項目）', 'type' => 'textarea', 'rows' => 5),
+        'list'    => array('label' => '箇条書き（1行1項目）', 'type' => 'textarea', 'rows' => 5, 'instructions' => '行頭の「〇」は自動で付きます。「項目名｜説明」と書くと、項目名の後ろで改行します。'),
         'image'   => array('label' => '画像', 'type' => 'image'),
     ));
 };
@@ -39,6 +39,8 @@ return array(
         'job_intro_text' => array('label' => '本文', 'type' => 'textarea', 'rows' => 8),
 
         'tab_job_table' => array('label' => '詳細：募集要項', 'type' => 'tab'),
+        'job_req_heading' => array('label' => '見出し', 'type' => 'text', 'default' => '募集要項'),
+        'job_req_note' => array('label' => '', 'type' => 'message', 'message' => '表の左の項目名は、下の各項目のラベルがそのまま出ます。空欄の行は表示しません。'),
         'req_title' => array('label' => '職種名', 'type' => 'textarea', 'rows' => 2),
         'req_work' => array('label' => '仕事内容', 'type' => 'textarea', 'rows' => 3),
         'req_condition' => array('label' => '応募条件', 'type' => 'textarea', 'rows' => 4),
@@ -56,9 +58,12 @@ return array(
             'value' => array('label' => '内容', 'type' => 'textarea', 'rows' => 2),
         )),
 
+        'job_entry_btn' => array('label' => '表の下の応募ボタン（1行目は小さく出ます）', 'type' => 'textarea', 'rows' => 2, 'default' => "最速1分\n直応募エントリーフォーム"),
+
         'tab_job_detail' => array('label' => '詳細：仕事の中身', 'type' => 'tab'),
         'job_fit' => $detail_block('こんな方にピッタリ'),
+        'job_person' => $detail_block('求める人物像'),
         'job_duties' => $detail_block('主な業務内容'),
-        'job_appeal' => $detail_block('この仕事の魅力・働きやすさ'),
+        'job_appeal' => $detail_block('この仕事の魅力・やりがい'),
     ),
 );

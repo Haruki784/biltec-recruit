@@ -1,0 +1,415 @@
+/* 募集要項（archive-job.php / single-job.php）だけのスタイル */
+
+.job-main {
+    background: var(--site-background-sub);
+    overflow-x: clip;
+}
+
+/* 本文幅 90rem の中央寄せ */
+.job-inner {
+    max-width: 94rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.job-section {
+    padding-top: 12rem;
+}
+
+/* ===================================================================
+   一覧：職種ボタン（job-nav）
+   =================================================================== */
+.job-archive__body {
+    padding: 10rem 0 12rem;
+}
+
+.job-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6rem 4rem;
+}
+
+.job-nav__item {
+    width: 31.9rem;
+}
+
+.job-nav__link {
+    display: flex;
+    align-items: center;
+    gap: 2.4rem;
+    min-height: 11.7rem;
+    height: 100%;
+    padding: 1.6rem 2.4rem;
+    border: 2px solid currentColor;
+    background: #fff;
+    color: #000;
+    transition: color .3s;
+}
+
+.job-nav__link:hover {
+    color: var(--primary);
+}
+
+.job-nav__text {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-weight: 600;
+    line-height: 1.8;
+    letter-spacing: .05rem;
+}
+
+.job-nav__title {
+    font-size: 2rem;
+}
+
+.job-nav__sub {
+    font-size: 1.6rem;
+}
+
+.job-nav__line {
+    flex-shrink: 0;
+    width: 2px;
+    height: 3.2rem;
+    border-radius: 1px;
+    background: currentColor;
+}
+
+.job-nav__arrow {
+    flex-shrink: 0;
+    width: 3.2rem;
+    height: 3.2rem;
+    transition: transform .3s var(--ease-out);
+}
+
+.job-nav__link:hover .job-nav__arrow {
+    transform: translateX(.4rem);
+}
+
+/* ===================================================================
+   詳細：MV（job-mv-typeA：左テキスト／右写真）
+   =================================================================== */
+.job-mv-typeA {
+    padding-top: var(--header-height);
+    background: #fff;
+}
+
+.job-mv-typeA .job-mv__breadcrumb {
+    padding: 1.4rem 0;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    background: #fff;
+}
+
+.job-mv-typeA .breadcrumb.container {
+    max-width: 100%;
+    padding: 0 2rem;
+}
+
+.job-mv-typeA .breadcrumb__current {
+    color: var(--primary);
+}
+
+.job-mv-typeA .job-mv__inner {
+    display: grid;
+    grid-template-columns: 50% 1fr;
+    column-gap: 3rem;
+    min-height: 50rem;
+}
+
+.job-mv-typeA .job-mv__content {
+    grid-row: 1;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding: 4rem 3rem 4rem 13rem;
+}
+
+.job-mv-typeA .job-mv__img {
+    grid-row: 1;
+    grid-column: 2;
+    position: relative;
+}
+
+.job-mv-typeA .job-mv__img img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.job-mv-typeA .job-mv__img::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .2);
+}
+
+.job-mv-typeA .job-mv__catch {
+    max-width: 56rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #111;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #111;
+}
+
+.job-mv-typeA .job-mv__title {
+    font-size: 3.6rem;
+    font-weight: 700;
+    line-height: 1.6;
+    color: #111;
+}
+
+.job-mv-typeA .job-mv__tags {
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2;
+    color: var(--text-blue);
+}
+
+.job-mv-typeA .job-mv__text {
+    max-width: 56rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+/* ===================================================================
+   詳細：見出し（heading-typeD：左に青い縦線。上半分が濃紺、下半分が青）
+   =================================================================== */
+.heading-typeD {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 8rem;
+    margin-bottom: 4.4rem;
+    padding-left: 3.3rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.6;
+    color: var(--text-blue);
+}
+
+.heading-typeD::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: .8rem;
+    background: linear-gradient(var(--secondary) 50%, var(--primary) 50%);
+}
+
+/* ===================================================================
+   詳細：紹介文・募集要項
+   =================================================================== */
+.job-intro__text {
+    font-size: 1.6rem;
+    line-height: 1.8;
+}
+
+.job-table {
+    background: #fff;
+    border: 1px solid #d9d9d9;
+}
+
+.job-table .table__header,
+.job-table .table__data {
+    border-bottom: 1px solid #d9d9d9;
+    font-size: 1.4rem;
+}
+
+.job-table .table__item:last-child .table__header,
+.job-table .table__item:last-child .table__data {
+    border-bottom: 0;
+}
+
+.job-table .table__header {
+    width: 16.7rem;
+    padding: 1rem 2rem;
+    background: var(--tertiary);
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: .05em;
+    text-align: center;
+}
+
+.job-table .table__data {
+    width: auto;
+    height: 6.9rem;
+    padding: 1rem 4rem;
+    line-height: 1.72;
+    color: #000;
+}
+
+.job-entry {
+    margin-top: 6rem;
+    text-align: center;
+}
+
+.job-entry__btn {
+    min-width: 43rem;
+    min-height: 7rem;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+/* ===================================================================
+   詳細：こんな方に／主な業務内容／魅力（media-typeA の中身）
+   =================================================================== */
+.job-points__lead {
+    margin-top: -1rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.8;
+}
+
+.job-points__list {
+    display: grid;
+    gap: 1rem;
+}
+
+.job-points__item {
+    padding-left: 1em;
+    text-indent: -1em;
+}
+
+.job-points__item::before {
+    content: "〇";
+}
+
+@media screen and (max-width: 768px) {
+    .job-inner {
+        padding: 0 1.5rem;
+    }
+
+    .job-section {
+        padding-top: 6rem;
+    }
+
+    /* 一覧 */
+    .job-archive__body {
+        padding: 5.6rem 0 8rem;
+    }
+
+    .job-nav {
+        gap: 3.6rem;
+    }
+
+    .job-nav__item {
+        width: 100%;
+    }
+
+    .job-nav__link {
+        min-height: 9.6rem;
+    }
+
+    .job-nav__title {
+        font-size: 1.8rem;
+    }
+
+    .job-nav__sub {
+        font-size: 1.4rem;
+    }
+
+    /* MV：写真が上 */
+    .job-mv-typeA .breadcrumb.container {
+        padding: 0 1.5rem;
+    }
+
+    .job-mv-typeA .job-mv__inner {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .job-mv-typeA .job-mv__img {
+        grid-column: 1;
+        aspect-ratio: 375 / 240;
+    }
+
+    .job-mv-typeA .job-mv__content {
+        grid-row: 2;
+        grid-column: 1;
+        padding: 1.5rem 1.5rem 2rem;
+    }
+
+    .job-mv-typeA .job-mv__catch {
+        font-size: 1.4rem;
+    }
+
+    .job-mv-typeA .job-mv__title {
+        font-size: 2.4rem;
+        line-height: 1.3;
+    }
+
+    .job-mv-typeA .job-mv__tags {
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+
+    .job-mv-typeA .job-mv__text {
+        font-size: 1.4rem;
+    }
+
+    /* 見出し */
+    .heading-typeD {
+        min-height: 0;
+        margin-bottom: 3rem;
+        padding-left: 2.3rem;
+        font-size: 2rem;
+    }
+
+    /* 表 */
+    .job-table .table__header {
+        width: 8.5rem;
+        padding: 1rem .5rem;
+        font-size: 1.3rem;
+    }
+
+    /* SP は tr が flex になるので、高さは min-height で */
+    .job-table .table__header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .job-table .table__data {
+        flex: 1;
+        width: auto;
+        height: auto;
+        min-height: 6.9rem;
+        padding: 1.2rem 1rem;
+        font-size: 1.3rem;
+        line-height: 1.6;
+    }
+
+    .job-entry {
+        margin-top: 4rem;
+    }
+
+    .job-entry__btn {
+        min-width: 0;
+        width: 100%;
+        font-size: 1.8rem;
+    }
+
+    /* こんな方に／主な業務内容／魅力 */
+    .job-points .media-typeA {
+        gap: 7rem;
+    }
+
+    .job-points__lead {
+        font-size: 1.6rem;
+    }
+}
