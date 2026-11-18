@@ -169,6 +169,26 @@ function theme_img($path)
 }
 
 /**
+ * テーマ内の CSS / JS の URL。更新日時を ?ver= に付けて、ブラウザのキャッシュで古いファイルが残らないようにする。
+ * 例：theme_asset('add.css')、theme_asset('assets/pages/top.css')
+ */
+function theme_asset($path)
+{
+    $path = ltrim($path, '/');
+    $file = get_stylesheet_directory() . '/' . $path;
+    $url  = get_stylesheet_directory_uri() . '/' . $path;
+    return file_exists($file) ? add_query_arg('ver', filemtime($file), $url) : $url;
+}
+
+/**
+ * テキストエリアの値を、エスケープして改行を <br> にして返す（前後の空白は取る）
+ */
+function theme_text($value)
+{
+    return nl2br(esc_html(trim((string) $value)));
+}
+
+/**
  * ナビゲーション（ヘッダー・ドロワー・フッターで共用）
  * 募集職種の子は CPT job から自動で作る。
  */

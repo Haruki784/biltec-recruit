@@ -6,21 +6,16 @@
  * スタイルは assets/pages/job.css。
  */
 
-/** テキストエリアの値を改行つきで出す */
-$job_text = function ($value) {
-    return nl2br(esc_html(trim((string) $value)));
-};
-
 /** 1行1項目のテキストエリアを配列に（空行は除く） */
 $job_lines = function ($value) {
     return array_values(array_filter(array_map('trim', preg_split('/\R/u', (string) $value)), 'strlen'));
 };
 
 /** 左に縦線の見出し（heading-typeD） */
-$job_heading = function ($text) use ($job_text) {
+$job_heading = function ($text) {
     ?>
     <h2 class="heading-wrap heading-typeD">
-        <span class="heading-main js-lines"><?php echo $job_text($text); ?></span>
+        <span class="heading-main js-lines"><?php echo theme_text($text); ?></span>
     </h2>
     <?php
 };
@@ -66,14 +61,14 @@ $entry_main  = array_pop($entry_lines);
             </div>
             <div class="job-mv__content">
                 <?php if (trim((string) theme_field('job_mv_catch')) !== '') : ?>
-                    <p class="job-mv__catch"><?php echo $job_text(theme_field('job_mv_catch')); ?></p>
+                    <p class="job-mv__catch"><?php echo theme_text(theme_field('job_mv_catch')); ?></p>
                 <?php endif; ?>
                 <h1 class="job-mv__title"><?php the_title(); ?></h1>
                 <?php if (theme_field('job_mv_tags')) : ?>
                     <p class="job-mv__tags"><?php echo esc_html(theme_field('job_mv_tags')); ?></p>
                 <?php endif; ?>
                 <?php if (trim((string) theme_field('job_mv_text')) !== '') : ?>
-                    <p class="job-mv__text"><?php echo $job_text(theme_field('job_mv_text')); ?></p>
+                    <p class="job-mv__text"><?php echo theme_text(theme_field('job_mv_text')); ?></p>
                 <?php endif; ?>
             </div>
         </div>
@@ -84,7 +79,7 @@ $entry_main  = array_pop($entry_lines);
         <section class="job-section job-intro">
             <div class="job-inner">
                 <?php $job_heading(theme_field('job_intro_heading')); ?>
-                <p class="job-intro__text js-fade"><?php echo $job_text(theme_field('job_intro_text')); ?></p>
+                <p class="job-intro__text js-fade"><?php echo theme_text(theme_field('job_intro_text')); ?></p>
             </div>
         </section>
     <?php endif; ?>
@@ -99,7 +94,7 @@ $entry_main  = array_pop($entry_lines);
                         <?php foreach ($req_rows as $row) : ?>
                             <tr class="table__item">
                                 <th class="table__header"><?php echo esc_html($row['label']); ?></th>
-                                <td class="table__data"><?php echo $job_text($row['value']); ?></td>
+                                <td class="table__data"><?php echo theme_text($row['value']); ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </table>
@@ -127,7 +122,7 @@ $entry_main  = array_pop($entry_lines);
                     <div class="media__body js-fade">
                         <h3 class="media__title"><?php echo esc_html($block['heading']); ?></h3>
                         <?php if (trim((string) $block['lead']) !== '') : ?>
-                            <p class="job-points__lead"><?php echo $job_text($block['lead']); ?></p>
+                            <p class="job-points__lead"><?php echo theme_text($block['lead']); ?></p>
                         <?php endif; ?>
                         <?php if ($items) : ?>
                             <ul class="job-points__list media__text">

@@ -23,7 +23,7 @@
 | `base.css` | header・nav・faq・table・loop・form・chart・number | 必要なときだけ |
 | `add.css` | ページ用セクションパーツ | 新しいパーツを追加 |
 | `article/*.css` | 記事本文・スケジュール・目次 | 必要なときだけ |
-| `assets/pages/<slug>.css` | そのページだけのスタイル。`head.php` に `<link>` を追加して読み込む | 必要なときだけ |
+| `assets/pages/<slug>.css` | そのページだけのスタイル。`head.php` の `$page_css` に「名前 => 条件」を1行足して読み込む | 必要なときだけ |
 | `assets/device.css` | PC / SP の出し分け | 触らない |
 | `assets/main.js` | jQuery。ドロワー、gnav、`.toggle`、タブ、目次、グラフ、カウントアップ | 必要なときだけ |
 | `add.js` | 案件で追加するJS（Splideなど）。`initXxx()` 単位で書く。career-typeC のスライダーもここにある | 追加する |
@@ -83,7 +83,7 @@ CSSの読み込み順（head.php）：destyle → splide → settings → settin
 - TOP（front-page.php）では under-mv を使わず、TOP用のMVを置く。パンくずは TOP では自動的に出ない。
 - 画像は `<picture><source srcset="…_sp.webp" media="(max-width: 768px)"><img src="…" alt="…" width height loading="lazy"></picture>`。パスは `<?php echo get_stylesheet_directory_uri(); ?>/img/<page>/xxx.webp`。FV以外は `loading="lazy"` を付ける。
 - テーマ内のリンクは `<?php echo esc_url(home_url('/recruitment/')); ?>` の形で書く（`href=""` を残さない）。
-- インタビュー一覧は WP_Query で出す（見本：page-introduction.php:342-407）。投稿のアーカイブURLは `/interview/`、お知らせは `/news/`（カスタム投稿 `news`）。
+- インタビュー一覧は WP_Query で出す（見本：_samples/page-introduction.php:342-407）。投稿のアーカイブURLは `/interview/`、お知らせは `/news/`（カスタム投稿 `news`）。
 - 固定ページでは wpautop が無効。固定ページはテンプレート（PHP）側で組み、エディタ本文に頼らない。
 - `style=""` の直書きは、ループの色指定などの最小限にとどめる。ページ固有のスタイルは `assets/pages/<slug>.css` に書く。
 - PHPでの出力は `esc_html` / `esc_url` / `esc_attr` でエスケープする。
@@ -96,12 +96,13 @@ CSSの読み込み順（head.php）：destyle → splide → settings → settin
 - 無料版なのでリピーターは使わない。繰り返しは固定数の group（例：`iv_section_1`〜`8`）か、1行1項目のテキストエリアにする。
 - 項目名はテーマ全体で重ならないようにする（初期値の一覧を共有するため）。
 - 会社情報は `theme_company()`、応募ボタンの飛び先は `theme_entry_url()`、チョク採フォームの iframe の src は `theme_form_src()`。
+- 文字の出力は `theme_text($value)`（エスケープ＋改行を br）、テーマ内の CSS/JS の URL は `theme_asset()`（更新日時を ?ver= に付けてキャッシュ対策）、画像は `theme_img()`。
 
 ## 並行作業（別セッション）のルール
 
 - 1セッション＝1ページ。そのページのファイル（`page-<slug>.php`、`assets/pages/<slug>.css`、`page-fields/<slug>.php`、`img/<slug>/`）だけを触る。
 - 共通ファイル（`add.css`、`header.php`、`footer.php`、`functions.php`、`function/*`、`assets/settings.css`）を変えたいときは、自分では変えずに必要な変更をまとめて報告する（親のセッションでまとめて入れる）。
-- ページ用の CSS は `assets/pages/<slug>.css` に書き、`head.php` には `is_page('<slug>')` の条件付きで読み込む行を1行だけ足す。
+- ページ用の CSS は `assets/pages/<slug>.css` に書き、`head.php` の `$page_css` に `'<slug>' => is_page('<slug>'),` を1行だけ足す。
 - 案件の進め方・確認事項は `_design/coding-guide.md`、進捗は `_design/sitemap.md`。
 
 ## やらないこと
@@ -109,7 +110,7 @@ CSSの読み込み順（head.php）：destyle → splide → settings → settin
 - `assets/base.css` / `base-full.css` のユーティリティを案件のために書き換えない
 - 既存パーツのCSSを、別の見た目にするために上書きしない（新しいtypeを作る）
 - Figma MCP の一時的なアセットURLや placehold.jp を納品コードに残さない
-- `.claude/` と `docs/` を本番サーバーにアップしない（納品時は除外する）
+- `.claude/`・`docs/`・`_design/`・`_samples/`・`page-capture/` を本番サーバーにアップしない（納品時は除外する）。使っていない見本テンプレートは `_samples/` にある
 
 ## 既知の不具合・修正履歴
 

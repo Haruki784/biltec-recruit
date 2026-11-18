@@ -59,18 +59,19 @@ function theme_enqueue_scripts()
         null,
         true
     );
+    // 更新日時をバージョンにして、修正後にブラウザのキャッシュが残らないようにする
     wp_enqueue_script(
         'theme-main',
         get_stylesheet_directory_uri() . '/assets/main.js',
         ['jquery'],
-        null,
+        filemtime(get_stylesheet_directory() . '/assets/main.js'),
         true
     );
     wp_enqueue_script(
         'theme-add',
         get_stylesheet_directory_uri() . '/add.js',
         ['jquery', 'splide'],
-        null,
+        filemtime(get_stylesheet_directory() . '/add.js'),
         true
     );
 }

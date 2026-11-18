@@ -6,11 +6,6 @@
  * ページ固有のスタイル：assets/pages/philosophy.css
  */
 
-/** テキストエリアの値を改行つきで出す */
-$ph_text = function ($value) {
-    return nl2br(esc_html((string) $value));
-};
-
 /**
  * 「改行ごとに1行」の値を出す。各行は折り返さないかたまりにして、改行は SP だけで効かせる
  * （PC では入る分だけ1行につなげる）。
@@ -47,8 +42,8 @@ $values  = theme_field('ph_values');
         <section class="under-message ph-intro">
             <div class="container ph-intro__inner">
                 <h2 class="ph-intro__title heading-2 js-lines"><?php echo $ph_lines(theme_field('ph_intro_title')); ?></h2>
-                <p class="ph-intro__lead js-fade"><?php echo $ph_text(theme_field('ph_intro_lead')); ?></p>
-                <p class="ph-intro__text js-fade"><?php echo $ph_text(theme_field('ph_intro_text')); ?></p>
+                <p class="ph-intro__lead js-fade"><?php echo theme_text(theme_field('ph_intro_lead')); ?></p>
+                <p class="ph-intro__text js-fade"><?php echo theme_text(theme_field('ph_intro_text')); ?></p>
             </div>
         </section>
     </div>
@@ -72,7 +67,7 @@ $values  = theme_field('ph_values');
         <div class="president-message__inner">
             <h2 class="president-message__heading js-fade"><?php echo esc_html(theme_field('ph_message_heading')); ?></h2>
             <span class="president-message__line" aria-hidden="true"></span>
-            <p class="president-message__text js-fade"><?php echo $ph_text(theme_field('ph_message_text')); ?></p>
+            <p class="president-message__text js-fade"><?php echo theme_text(theme_field('ph_message_text')); ?></p>
             <div class="president-message__img js-fade">
                 <?php echo theme_image(theme_field('ph_message_image'), 'philosophy/1_1_01.webp', array('width' => 440, 'height' => 300)); ?>
             </div>
@@ -104,7 +99,7 @@ $values  = theme_field('ph_values');
                     </h3>
                     <p class="mvv__catch js-lines"><?php echo $ph_lines($b['catch']); ?></p>
                     <div class="mvv__box js-fade">
-                        <p class="mvv__text"><?php echo $ph_text($b['text']); ?></p>
+                        <p class="mvv__text"><?php echo theme_text($b['text']); ?></p>
                     </div>
                 </div>
             </div>
@@ -128,7 +123,7 @@ $values  = theme_field('ph_values');
                                 <div class="mvv__value-img"><?php echo theme_image($v['image'], 'philosophy/1_1_0' . ($i + 4) . '.webp', array('width' => 220, 'height' => 220)); ?></div>
                                 <p class="mvv__value-no en">VALUE <?php echo esc_html(sprintf('%02d', $i)); ?></p>
                                 <h4 class="mvv__value-title"><?php echo esc_html($v['title']); ?></h4>
-                                <p class="mvv__value-text"><?php echo $ph_text($v['text']); ?></p>
+                                <p class="mvv__value-text"><?php echo theme_text($v['text']); ?></p>
                             </li>
                         <?php endfor; ?>
                     </ul>

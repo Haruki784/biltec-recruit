@@ -13,46 +13,46 @@ CSSの置き場所：
 
 | class | 用途 | 見本 | CSS | JS |
 |---|---|---|---|---|
-| `under-mv under-mv-typeA pb-5` | 下層MV。全幅画像＋英字H1＋和文サブ＋パンくず | page-about.php:13-25 | add.css:46 | - |
-| `under-message` | MV直下のリード文（H2 heading-4＋本文）。専用CSSなし | page-about.php:26-57 | - | - |
-| `loop loop-typeA` | 横に無限ループする大きな英文。色はinline style | page-about.php:41-56 | base.css:556 | CSSのみ |
+| `under-mv under-mv-typeA pb-5` | 下層MV。全幅画像＋英字H1＋和文サブ＋パンくず | _samples/page-about.php:13-25 | add.css:46 | - |
+| `under-message` | MV直下のリード文（H2 heading-4＋本文）。専用CSSなし | _samples/page-about.php:26-57 | - | - |
+| `loop loop-typeA` | 横に無限ループする大きな英文。色はinline style | _samples/page-about.php:41-56 | base.css:556 | CSSのみ |
 | `loop loop-typeB` | 帯状のループテキスト（フッター上の「Join Our Team」） | footer.php:1-24 | base.css:594 | CSSのみ |
 | `loop loop-typeC` | 袋文字（stroke）ループ。見本なし | - | base.css:607 | CSSのみ |
-| `heading-wrap heading-typeB` | セクション見出し。英字 main＋和文 sub | page-about.php:62-65 | add.css:130 | - |
+| `heading-wrap heading-typeB` | セクション見出し。英字 main＋和文 sub | _samples/page-about.php:62-65 | add.css:130 | - |
 
 ## 会社・メッセージ系
 
 | class | 用途 | 見本 | CSS | JS |
 |---|---|---|---|---|
-| `president-message president-message-typeA` | 代表メッセージ。左画像／右テキスト＋役職・氏名 | page-recruitment.php:307-335 | add.css:1115 | - |
-| `president-message president-message-typeB` | 全幅画像の下に左キャッチ／右本文＋代表名 | page-about.php:60-99 | add.css:56 | - |
-| `mvv mvv-typeB` | Mission / Vision / Value の3行リスト | page-about.php:100-183 | add.css:71 | - |
-| `table table-typeB` | 会社概要・募集要項の th / td 表 | page-about.php:191-225 | add.css:226, base.css:370 | - |
-| `menu menu-typeD` | 番号「( 01 )」付きの2列事業カード＋タグ | page-about.php:226-295 | add.css:234 | - |
-| `history history-typeC` | 中央の軸から左右交互に並ぶ沿革タイムライン | page-about.php:296-435 | add.css:335 | - |
-| `map map-typeA` | Googleマップ＋拠点名＋住所・TEL | page-about.php:436-507 | add.css:440 | - |
-| `future future-typeA` | 背景画像の上に中央寄せのメッセージ | page-about.php:508-521 | add.css:533（`__text` のみ） | - |
+| `president-message president-message-typeA` | 代表メッセージ。左画像／右テキスト＋役職・氏名 | _samples/page-recruitment.php:307-335 | add.css:1115 | - |
+| `president-message president-message-typeB` | 全幅画像の下に左キャッチ／右本文＋代表名 | _samples/page-about.php:60-99 | add.css:56 | - |
+| `mvv mvv-typeB` | Mission / Vision / Value の3行リスト | _samples/page-about.php:100-183 | add.css:71 | - |
+| `table table-typeB` | 会社概要・募集要項の th / td 表 | _samples/page-about.php:191-225 | add.css:226, base.css:370 | - |
+| `menu menu-typeD` | 番号「( 01 )」付きの2列事業カード＋タグ | _samples/page-about.php:226-295 | add.css:234 | - |
+| `history history-typeC` | 中央の軸から左右交互に並ぶ沿革タイムライン | _samples/page-about.php:296-435 | add.css:335 | - |
+| `map map-typeA` | Googleマップ＋拠点名＋住所・TEL | _samples/page-about.php:436-507 | add.css:440 | - |
+| `future future-typeA` | 背景画像の上に中央寄せのメッセージ | _samples/page-about.php:508-521 | add.css:533（`__text` のみ） | - |
 
 ## 仕事・人・環境系
 
 | class | 用途 | 見本 | CSS | JS |
 |---|---|---|---|---|
-| `demand demand-typeB` | 3列。アイコン＋見出し＋箇条書き（求める人物像など） | page-recruitment.php:53-110 | add.css:629 | - |
-| `demand demand-typeC` | 3列の枠線カード。SVGアイコン＋見出し＋本文 | page-introduction.php:54-192 | add.css:544 | - |
-| `description description-typeA` | 左にタイトル／右にユニット群（研修制度など） | page-work.php:266-389 | add.css:1129 | - |
-| `description description-typeB` | 左画像／右に「・見出し＋本文」のリスト | page-environment.php:362-399 | add.css:943 | - |
-| `description description-typeC` | 3列の画像カード（タグ付き）。専用CSSなし | page-work.php:37-126 | - | - |
-| `description description-typeD` | 番号＋見出し＋本文の縦リスト | page-recruitment.php:111-159 | add.css:1019 | - |
-| `benefits benefits-typeA` | 福利厚生。4列（SPは2列）のアイコンカード | page-environment.php:37-116 | add.css:689 | - |
+| `demand demand-typeB` | 3列。アイコン＋見出し＋箇条書き（求める人物像など） | _samples/page-recruitment.php:53-110 | add.css:629 | - |
+| `demand demand-typeC` | 3列の枠線カード。SVGアイコン＋見出し＋本文 | _samples/page-introduction.php:54-192 | add.css:544 | - |
+| `description description-typeA` | 左にタイトル／右にユニット群（研修制度など） | _samples/page-work.php:266-389 | add.css:1129 | - |
+| `description description-typeB` | 左画像／右に「・見出し＋本文」のリスト | _samples/page-environment.php:362-399 | add.css:943 | - |
+| `description description-typeC` | 3列の画像カード（タグ付き）。専用CSSなし | _samples/page-work.php:37-126 | - | - |
+| `description description-typeD` | 番号＋見出し＋本文の縦リスト | _samples/page-recruitment.php:111-159 | add.css:1019 | - |
+| `benefits benefits-typeA` | 福利厚生。4列（SPは2列）のアイコンカード | _samples/page-environment.php:37-116 | add.css:689 | - |
 | `career career-typeA` | キャリアステップの縦カード＋矢印。CSSなし | article/article.html:404-466 | - | - |
-| `career career-typeB` | キャリアステップ。5段階＋帯 | page-environment.php:117-175 | add.css:699 | - |
-| `career career-typeC` | 社員のキャリア事例スライダー | page-environment.php:176-365 | add.css:847 | add.js `initCareerSlider()`（Splide） |
-| `flow flow-typeA` | 選考フロー。横5列のステップ＋矢印（SPは縦） | page-recruitment.php:195-268 | add.css:1032 | - |
-| `flow flow-typeD` | 縦リスト型のフロー（STEP＋線＋本文） | page-introduction.php:193-272 | add.css:599 | - |
-| `faq faq-typeB` | details / summary のQ&Aアコーディオン | page-recruitment.php:269-306 | add.css:1099, base.css:335 | main.js `.toggle` |
-| `interview interview-typeA` | 社員インタビューの3列カード（WP_Queryで出力） | page-introduction.php:342-407 | add.css:639 | - |
+| `career career-typeB` | キャリアステップ。5段階＋帯 | _samples/page-environment.php:117-175 | add.css:699 | - |
+| `career career-typeC` | 社員のキャリア事例スライダー | _samples/page-environment.php:176-365 | add.css:847 | add.js `initCareerSlider()`（Splide） |
+| `flow flow-typeA` | 選考フロー。横5列のステップ＋矢印（SPは縦） | _samples/page-recruitment.php:195-268 | add.css:1032 | - |
+| `flow flow-typeD` | 縦リスト型のフロー（STEP＋線＋本文） | _samples/page-introduction.php:193-272 | add.css:599 | - |
+| `faq faq-typeB` | details / summary のQ&Aアコーディオン | _samples/page-recruitment.php:269-306 | add.css:1099, base.css:335 | main.js `.toggle` |
+| `interview interview-typeA` | 社員インタビューの3列カード（WP_Queryで出力） | _samples/page-introduction.php:342-407 | add.css:639 | - |
 | `interview interview-typeE` | 関連記事カード（ACF `related_post`）。CSSなし | single.php:56-102 | - | - |
-| `count__item number-typeA` | 数字で見る。アイコン＋カウントアップする数字 | page-number.php:21-102 | base.css:1315 | main.js カウントアップ |
+| `count__item number-typeA` | 数字で見る。アイコン＋カウントアップする数字 | _samples/page-number.php:21-102 | base.css:1315 | main.js カウントアップ |
 | `number-typeB` | 数字カード群。見本なし | - | base.css:1224 | 同上 |
 | `chart-typeA`〜`D` | 円グラフ／4分割円／ドーナツ／横棒。値は `--target`。見本なし | - | base.css:1160-1313 | main.js |
 | `scroll scroll-typeA` / `scroll-typeB` | 画像の横／縦無限スクロール。見本なし | - | base.css:426 / 468 | CSSのみ |
@@ -72,13 +72,13 @@ CSSの置き場所：
 
 | class | 用途 | 見本 | CSS | JS |
 |---|---|---|---|---|
-| `news news-typeA` | お知らせ一覧。CSSなし | archive-news.php:21-37 | - | - |
+| `news news-typeA` | お知らせ一覧。CSSなし | _samples/archive-news.php:21-37 | - | - |
 | `pagenation pagenation-typeA` | ページ送り | archive.php:90-122 | base.css:683 | - |
 | `article-mv article-mv-typeE` | インタビュー記事のMV（ACF使用） | single.php:4-37 | - | - |
 | `index-container index-typeA` | 記事目次（自動生成＋スクロールスパイ） | single.php:40-42 | article/index.css:24 | main.js:91 |
 | `article` | 記事本文のQ&Aブロック（ブロックパターンあり） | functions.php:181 | article/article.css | - |
 | `schedule schedule-typeA` / `B` / `C` | 一日の流れ。横並び／縦タイムライン／表形式 | functions.php:187-198 のパターン | article/schedule.css | - |
-| `contactForm` | CF7のフォームマークアップ | index.html | base.css:736-1158 | page-contact.php のinline JS |
+| `contactForm` | CF7のフォームマークアップ | _samples/index.html | base.css:736-1158 | page-contact.php のinline JS |
 | `privacy` / `thanks` / `error404` | ページ固有のレイアウト | 各テンプレート | assets/pages/*.css, 404はinline | - |
 
 ## そのほかの部品

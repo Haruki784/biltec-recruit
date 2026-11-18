@@ -7,9 +7,6 @@
  * 目次の文言は見出しの【】の中（article の data-index）。main.js が data-index を優先して目次を作る。
  * ページ固有のスタイル：assets/pages/interview.css
  */
-$text = function ($value) {
-    return nl2br(esc_html(trim((string) $value)));
-};
 ?>
 
 <?php while (have_posts()) : the_post(); ?>
@@ -78,7 +75,7 @@ $text = function ($value) {
             <div class="index__main">
                 <div class="index__main-container" id="js-article-content">
                     <?php if (theme_field('iv_lead')) : ?>
-                        <p class="iv-lead js-fade"><?php echo $text(theme_field('iv_lead')); ?></p>
+                        <p class="iv-lead js-fade"><?php echo theme_text(theme_field('iv_lead')); ?></p>
                     <?php endif; ?>
 
                     <?php foreach ($sections as $n => $s) : ?>
@@ -86,10 +83,10 @@ $text = function ($value) {
                             <h2 class="article__heading iv-article__heading js-lines"><?php echo implode('<br>', array_map('esc_html', $s['lines'])); ?></h2>
                             <div class="article__content iv-article__content js-fade">
                                 <?php if (trim($s['question']) !== '') : ?>
-                                    <p class="iv-article__question"><?php echo $text($s['question']); ?></p>
+                                    <p class="iv-article__question"><?php echo theme_text($s['question']); ?></p>
                                 <?php endif; ?>
                                 <?php if (trim($s['answer']) !== '') : ?>
-                                    <p class="iv-article__answer"><span class="iv-article__speaker"><?php echo esc_html($name); ?>：</span><?php echo $text($s['answer']); ?></p>
+                                    <p class="iv-article__answer"><span class="iv-article__speaker"><?php echo esc_html($name); ?>：</span><?php echo theme_text($s['answer']); ?></p>
                                 <?php endif; ?>
                             </div>
                             <?php if ($s['image']) : ?>

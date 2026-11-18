@@ -94,32 +94,39 @@ if (!function_exists('theme_get_canonical_url')) {
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@3.0.2/destyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/settings.css">
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/settings-full.css">
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/base.css">
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/base-full.css">
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/base.css">
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/article/article.css">
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/article/schedule.css">
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/article/index.css">
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/style.css">
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/add.css">
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/option/option.css">
-    <!-- 各ページcss -->
+    <?php
+    // テーマの CSS（この順で読む）。theme_asset() が更新日時を ?ver= に付けるので、修正後にキャッシュが残らない
+    $theme_css = array(
+        'assets/settings.css', 'assets/settings-full.css', 'assets/base.css', 'assets/base-full.css',
+        'base.css', 'article/article.css', 'article/schedule.css', 'article/index.css',
+        'style.css', 'add.css', 'option/option.css',
+    );
+    // ページだけの CSS（assets/pages/<名前>.css）。ページを足したらここに1行足す
+    $page_css = array(
+        'top'        => is_front_page(),
+        'philosophy' => is_page('philosophy'),
+        'business'   => is_page('business'),
+        'company'    => is_page('company'),
+        'process'    => is_page('process'),
+        'job'        => is_post_type_archive('job') || is_singular('job'),
+        'interview'  => is_post_type_archive('interview') || is_singular('interview'),
+        'privacy'    => is_page('privacy'),
+        'thanks'     => is_page('thanks'),
+    );
+    foreach ($theme_css as $css) {
+        echo '<link rel="stylesheet" href="' . esc_url(theme_asset($css)) . '">' . "\n    ";
+    }
+    foreach ($page_css as $name => $active) {
+        if ($active) {
+            echo '<link rel="stylesheet" href="' . esc_url(theme_asset('assets/pages/' . $name . '.css')) . '">' . "\n    ";
+        }
+    }
+    ?>
     <?php if (is_front_page()) : ?>
-        <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/top.css">
         <link rel="preload" as="image" href="<?php echo esc_url(theme_img('top/main01.webp')); ?>" media="(min-width: 769px)">
         <link rel="preload" as="image" href="<?php echo esc_url(theme_img('top/main01_sp.webp')); ?>" media="(max-width: 768px)">
     <?php endif; ?>
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/privacy.css">
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/thanks.css">
-    <?php if (is_page('process')) : ?><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/process.css"><?php endif; ?>
-    <?php if (is_page('business')) : ?><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/business.css"><?php endif; ?>
-    <?php if (is_page('philosophy')) : ?><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/philosophy.css"><?php endif; ?>
-    <?php if (is_page('company')) : ?><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/company.css"><?php endif; ?>
-    <?php if (is_post_type_archive('job') || is_singular('job')) : ?><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/job.css"><?php endif; ?>
-    <?php if (is_post_type_archive('interview') || is_singular('interview')) : ?><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/pages/interview.css"><?php endif; ?>
-    <!-- デバイス別出し分け用css -->
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/device.css">
+    <!-- デバイス別出し分け用css（最後に読む） -->
+    <link rel="stylesheet" href="<?php echo esc_url(theme_asset('assets/device.css')); ?>">
     <?php wp_head(); ?>
 </head>
