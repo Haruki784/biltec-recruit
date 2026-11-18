@@ -5,12 +5,14 @@
 
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
-    <header class="header header-typeD fixed" id="header">
+    <?php // TOP は MV の上で透明（.is-clear）。スクロールで MV を過ぎたら add.js が外す ?>
+    <header class="header header-typeD fixed<?php echo is_front_page() ? ' is-clear' : ''; ?>" id="header">
         <div class="header__container">
             <?php $logo_tag = is_front_page() ? 'h1' : 'p'; ?>
             <<?php echo $logo_tag; ?> class="logo header__logo">
                 <a href="<?php echo esc_url(home_url('/')); ?>" class="logo__link">
-                    <img src="<?php echo esc_url(theme_img('logo.svg')); ?>" alt="BILTEC ビルテック株式会社" width="136" height="26" class="logo__img">
+                    <img src="<?php echo esc_url(theme_img('logo.svg')); ?>" alt="BILTEC ビルテック株式会社" width="136" height="26" class="logo__img logo__img--color">
+                    <img src="<?php echo esc_url(theme_img('logo_w.svg')); ?>" alt="" width="136" height="26" class="logo__img logo__img--white" aria-hidden="true">
                     <span class="logo__sub">中途採用サイト</span>
                 </a>
             </<?php echo $logo_tag; ?>>

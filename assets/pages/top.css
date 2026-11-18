@@ -176,6 +176,7 @@ body.home {
 /* Scroll Down：縦線が上から下へ流れ続ける */
 .top-mv__scroll {
     position: absolute;
+    color: #fff;
     left: 50%;
     bottom: 0;
     z-index: 2;
@@ -298,6 +299,7 @@ body.home {
 
 .top-intro__label {
     display: inline-flex;
+    color: var(--text-blue);
     align-items: center;
     gap: 2.4rem;
     margin-top: 1.6rem;

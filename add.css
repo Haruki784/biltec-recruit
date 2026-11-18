@@ -1231,15 +1231,15 @@
 .btn--xl { min-height: 7rem; min-width: 43rem; font-size: 2rem; }
 
 .btn--black { background: #000; color: #fff; }
-.btn--black:hover { background: var(--primary); }
+.btn--black:hover { background: var(--primary); color: #fff; }
 .btn--primary { background: var(--primary); color: #fff; }
-.btn--primary:hover { background: var(--secondary); }
+.btn--primary:hover { background: var(--secondary); color: #fff; }
 .btn--white { background: #fff; color: var(--text-blue); }
-.btn--white:hover { background: var(--tertiary); }
+.btn--white:hover { background: var(--tertiary); color: var(--text-blue); }
 .btn--outline { background: #fff; color: var(--text-color); border: 1px solid currentColor; }
 .btn--outline:hover { background: var(--text-color); color: #fff; }
 .btn--gradient { background: var(--gradient); color: #fff; }
-.btn--gradient:hover { opacity: .85; }
+.btn--gradient:hover { opacity: .85; color: #fff; }
 
 @media screen and (max-width: 768px) {
     .btn--m, .btn--l, .btn--xl { min-width: 0; width: 100%; }
@@ -1391,6 +1391,42 @@ a.img-zoom:hover img {
 .header-typeD .logo__img {
     width: 13.6rem;
     height: auto;
+}
+
+/* 白抜きロゴは透明ヘッダーのときだけ出す */
+.header-typeD .logo__img--white {
+    display: none;
+}
+
+/* 透明ヘッダー（TOP の MV の上にいる間。add.js initHeaderState が .is-clear を付ける） */
+.header-typeD {
+    transition: background .4s ease, color .4s ease;
+}
+
+.header-typeD.is-clear {
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    color: #fff;
+}
+
+.header-typeD.is-clear .logo__img--color { display: none; }
+.header-typeD.is-clear .logo__img--white { display: block; }
+
+.header-typeD.is-clear .header__gnav > .gnav__items > .gnav__item > .gnav__link,
+.header-typeD.is-clear .logo__link {
+    color: #fff;
+}
+
+.header-typeD.is-clear .header__gnav > .gnav__items > .gnav__item > .gnav__link:hover,
+.header-typeD.is-clear .gnav__item.active > .gnav__link {
+    color: #fff;
+    opacity: .7;
+}
+
+/* ドロップダウンの中は白背景なので黒文字のまま */
+.header-typeD .nav__link {
+    color: var(--text-color);
 }
 
 .header-typeD .logo__sub {
@@ -1673,8 +1709,8 @@ a.img-zoom:hover img {
 }
 
 .entry-typeB .entry__text {
-    font-size: 1.5rem;
-    line-height: 2.2;
+    font-size: 1.6rem;
+    line-height: 2.4;
     margin-bottom: 4rem;
 }
 
@@ -2030,8 +2066,9 @@ a.img-zoom:hover img {
 }
 
 .interview-typeF .interview__lead {
-    font-size: 1.5rem;
-    line-height: 2.6;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2.4;
     margin-bottom: 5rem;
 }
 
@@ -2162,8 +2199,9 @@ a.img-zoom:hover img {
 }
 
 .strength-typeA .strength__lead {
-    font-size: 1.4rem;
-    line-height: 2.2;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 2;
     text-align: center;
     margin-bottom: 4rem;
 }
@@ -2316,4 +2354,17 @@ a.img-zoom:hover img {
     .under-mv-typeB .under-mv__title { font-size: 2.6rem; }
     .under-mv-typeB .under-mv__sub { font-size: 1.8rem; }
     .under-mv-typeB .under-mv__lead { font-size: 1.3rem; }
+}
+
+/* heading-typeC：強みセクションのサブコピーは英字フォントの SemiBold（Figma 17px） */
+.strength-typeA .heading-typeC .heading-sub {
+    font-family: var(--english-font-family);
+    font-size: 1.7rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+}
+
+/* インタビューカードはホバーで文字色を変えない（a:hover の全体指定を打ち消す） */
+.interview-card__link:hover {
+    color: inherit;
 }

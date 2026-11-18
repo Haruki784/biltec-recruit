@@ -156,7 +156,7 @@
         initOpening(function () {
             mv.classList.add('is-start');
             setBar(0);
-            if (slider && !reduceMotion) slider.Components.Autoplay.play();
+            if (slider) slider.Components.Autoplay.play();
         });
     }
 
@@ -175,7 +175,7 @@
             perMove: 1,
             gap: '6rem',
             speed: 1000,
-            autoplay: !reduceMotion,
+            autoplay: true,
             interval: 3000,
             pauseOnHover: false,
             pauseOnFocus: false,
@@ -205,9 +205,10 @@
             perMove: 1,
             gap: 0,
             speed: 1000,
-            autoplay: !reduceMotion,
+            autoplay: true,
             interval: 3000,
-            pauseOnHover: true,
+            pauseOnHover: false,
+            pauseOnFocus: false,
             arrows: false,
             pagination: false,
             breakpoints: {
@@ -267,7 +268,29 @@
         });
     }
 
+    /**
+     * TOP：MV の上にいる間はヘッダーを透明（.is-clear）にする。SPメニューを開いている間は白に戻す。
+     */
+    function initHeaderState() {
+        var header = document.getElementById('header');
+        var mv = document.getElementById('top-mv');
+        if (!header || !mv) return;
+
+        var update = function () {
+            var menuOpen = !!document.querySelector('.drawer.active');
+            var overMv = window.scrollY < mv.offsetHeight - header.offsetHeight;
+            header.classList.toggle('is-clear', overMv && !menuOpen);
+        };
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        document.querySelectorAll('.menu').forEach(function (btn) {
+            btn.addEventListener('click', function () { setTimeout(update, 0); });
+        });
+        update();
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
+        initHeaderState();
         initCareerSlider();
         initLines();
         initInview();
