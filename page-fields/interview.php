@@ -24,7 +24,7 @@ $fields = array(
 
 for ($i = 1; $i <= 8; $i++) {
     $fields['iv_section_' . $i] = array('label' => 'セクション' . $i, 'type' => 'group', 'sub_fields' => array(
-        'heading'  => array('label' => '見出し（目次にも出ます）', 'type' => 'textarea', 'rows' => 2),
+        'heading'  => array('label' => '見出し（2行まで。行頭の【】の中が目次に出ます）', 'type' => 'textarea', 'rows' => 2),
         'question' => array('label' => '質問', 'type' => 'textarea', 'rows' => 2),
         'answer'   => array('label' => '回答', 'type' => 'textarea', 'rows' => 5),
         'image'    => array('label' => '写真（任意）', 'type' => 'image'),
