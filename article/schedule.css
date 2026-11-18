@@ -1,0 +1,102 @@
+.schedule-typeA .schedule__item {
+    border-bottom: 1px solid currentColor;
+    flex-wrap: nowrap;
+}
+
+.schedule-typeA .schedule__time {
+    flex-shrink: 0;
+}
+
+.schedule-typeB .schedule__item {
+    flex-wrap: nowrap;
+}
+
+
+.schedule-typeB .schedule__icon {
+    position: relative;
+    width: 1.6rem;
+    padding-top: 1.2rem;
+    align-self: stretch;
+}
+
+.schedule-typeB .schedule__icon::after {
+    position: absolute;
+    content: "";
+    top: calc(var(--spacing-2) + 1.6rem);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    background: var(--secondary);
+    height: 100%;
+}
+
+.schedule-typeB .schedule__item:not(:first-of-type) .schedule__icon::after {
+    top: calc(var(--spacing-2) + 1.6rem);
+}
+
+.schedule-typeB .schedule__item:last-of-type .schedule__icon::after {
+    display: none;
+}
+
+.schedule-typeB .schedule__circle {
+    display: flex;
+    background: var(--secondary);
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+}
+
+@media (max-width : 768px) {
+    .schedule-typeB .schedule__icon {
+        padding-top: .8rem;
+    }
+
+    .schedule-typeB .schedule__icon::after {
+        top: calc(var(--spacing-2) + .8rem);
+    }
+
+    .schedule-typeB .schedule__item:not(:first-of-type) .schedule__icon::after {
+        top: calc(var(--spacing-2) + .8rem);
+    }
+}
+
+.schedule-typeC .schedule__item {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: var(--spacing-4);
+    align-items: start;
+}
+
+.schedule-typeC .schedule__time {
+    position: relative;
+    justify-self: start;
+    align-self: stretch;
+}
+
+.schedule-typeC .schedule__time>span {
+    background: var(--black);
+    color: var(--white);
+    padding-block: .4rem;
+    display: block;
+}
+
+.schedule-typeC .schedule__time::before {
+    position: absolute;
+    content: "";
+    background: var(--black);
+    width: 1px;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+.schedule-typeC .schedule__item:last-of-type .schedule__time::before {
+    display: none;
+}
+
+.schedule-typeC .schedule__item:nth-last-of-type(1) .schedule__body {
+    padding-bottom: 0;
+}

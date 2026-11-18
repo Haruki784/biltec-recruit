@@ -1,0 +1,36 @@
+.show-pc {
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .show-pc {
+        display: none;
+    }
+}
+
+.small-hide {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .small-hide {
+        display: block;
+    }
+}
+
+/* タブレットのみ（769px〜991px）で出し分け */
+.show-md-only {
+    display: none;
+}
+
+
+
+@media screen and (max-width: 991px) {
+    .show-md-only {
+        display: block;
+    }
+
+    .hide-md-only {
+        display: none;
+    }
+}

@@ -1,0 +1,48 @@
+.privacy {
+    background: var(--primary);
+}
+
+.privacy .container {
+    max-width: 104rem;
+    width: 100%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+    .privacy .container {
+        max-width: 100%;
+    }
+}
+
+.privacy__heading {
+    text-align: center;
+}
+
+.privacy__title {
+    color: var(--secondary);
+}
+
+.privacy__item {
+    position: relative;
+    padding-left: calc(5px + var(--spacing-1));
+}
+
+.privacy__item::before {
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 5px;
+    background: var(--text-color);
+    border-radius: 50%;
+    top: 1.2rem;
+    left: 0;
+}
+
+.privacy__contact {
+    border: 2px solid var(--secondary);
+    background: var(--white);
+    border-radius: var(--border-radius01);
+    max-width: 80rem;
+    width: 100%;
+    margin: 0 auto;
+}

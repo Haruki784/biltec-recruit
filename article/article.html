@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- ↓最初に読み込みたいリセットCSSを先に読み込みます-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@3.0.2/destyle.css">
+    <!-- ↓次に制作者のCSSファイル名を入れて下さい-->
+    <link rel="stylesheet" href="../assets/settings.css">
+    <link rel="stylesheet" href="../assets/base.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../add.css">
+    <!-- <link rel="stylesheet" href="../about/about.css"> -->
+    <!-- aboutフォルダが存在しないためコメントアウト -->
+    <link rel="stylesheet" href="../button/button.css">
+    <link rel="stylesheet" href="../contact/contact.css">
+    <link rel="stylesheet" href="../faq/faq.css">
+    <link rel="stylesheet" href="../flow/flow.css">
+    <link rel="stylesheet" href="../footer/footer.css">
+    <link rel="stylesheet" href="../header/header.css">
+    <link rel="stylesheet" href="../heading/heading.css">
+    <link rel="stylesheet" href="../history/history.css">
+    <link rel="stylesheet" href="../index/index.css">
+    <link rel="stylesheet" href="../interview/interview.css">
+    <link rel="stylesheet" href="../option/option.css">
+    <link rel="stylesheet" href="./article.css">
+    <link rel="stylesheet" href="./schedule.css">
+    <link rel="stylesheet" href="../career/career.css">
+    <link rel="stylesheet" href="../assets/device.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../assets/main.js"></script>
+    <script src="../flow/flow.js"></script>
+    <script src="../index/index.js"></script>
+    <script src="../interview/interview.js"></script>
+</head>
+
+<body>
+    <header class="header header-typeB" id="header">
+        <div class="container full-container header__container">
+            <h1 class="logo header__logo">
+                <a href="" class="logo__link">
+                    <picture>
+                        <img src="../img/logo.svg" alt="ロゴ">
+                        <source srcset="../img/logo.svg" media="(max-width: 768px;)">
+                    </picture>
+                </a>
+            </h1>
+            <div class="header__box">
+                <nav class="gnav header-gnav show-pc">
+                    <ul class="gnav__items gap-5">
+                        <li class="gnav__item">
+                            <a href="" class="gnav__link flex gap-x-1 toggle">カテゴリー<span
+                                    class="toggle-icon-arrow"></span></a>
+                            <ul class="nav nav__items py-2 px-5 gap-y-1">
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="gnav__item">
+                            <a href="" class="gnav__link flex gap-x-1 toggle">カテゴリー<span
+                                    class="toggle-icon-arrow"></span></a>
+                            <ul class="nav nav__items py-2 px-5 gap-y-1">
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="gnav__item">
+                            <a href="" class="gnav__link flex gap-x-1 toggle">カテゴリー<span
+                                    class="toggle-icon-arrow"></span></a>
+                            <ul class="nav nav__items py-2 px-5 gap-y-1">
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="gnav__item">
+                            <a href="" class="gnav__link flex gap-x-1 toggle">カテゴリー<span
+                                    class="toggle-icon-arrow"></span></a>
+                            <ul class="nav nav__items py-2 px-5 gap-y-1">
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">子カテゴリー</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="header__entry">
+                            <a href="" class="px-6 py-1">エントリー</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="menu header__menu small-hide">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="drawer py-3">
+            <div class="container">
+                <nav class="gnav gnav-typeB drawer-nav small-hide">
+                    <ul class="gnav__items">
+                        <li class="gnav__item">
+                            <a href="" class="gnav__link">カテゴリー</a>
+                            <ul class="nav nav__items py-2 px-5" style="display: none;">
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="gnav__item">
+                            <a href="" class="gnav__link">カテゴリー</a>
+                            <ul class="nav nav-typeA nav__items py-2 px-5" style="display: none;">
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="gnav__item">
+                            <a href="" class="gnav__link">カテゴリー</a>
+                            <ul class="nav nav-typeA nav__items py-2 px-5" style="display: none;">
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="gnav__item">
+                            <a href="" class="gnav__link">カテゴリー</a>
+                            <ul class="nav nav-typeA nav__items py-2 px-5" style="display: none;">
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="">子カテゴリー</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="header__entry">
+                            <a href="" class="px-3 py-2">エントリー</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main class="mt-8 index">
+        <aside class="index__side">
+            <div class="index-container">
+                <ul class="index__items pl-6 pr-4 py-6 grid grid-1 gap-y-2">
+                    <li class="index__item">
+                        <a href="#index01" class="index__link">自己紹介</a>
+                    </li>
+                    <li class="index__item">
+                        <a href="#index02" class="index__link">キャリアのきっかけ</a>
+                    </li>
+                    <li class="index__item">
+                        <a href="#index03" class="index__link">一日の流れ</a>
+                    </li>
+                    <li class="index__item">
+                        <a href="#index04" class="index__link">今後の目標</a>
+                    </li>
+                    <li class="index__item">
+                        <a href="#index05" class="index__link">やりがいを感じる瞬間</a>
+                    </li>
+                    <li class="index__item">
+                        <a href="#index06" class="index__link">これからチャレンジしたいこと</a>
+                    </li>
+                    <li class="index__item">
+                        <a href="#index07" class="index__link">読者へのメッセージ</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <div class="index__main">
+            <div class="index__main-container">
+                <article class="mb-8 article" id="index02">
+                    <div class="container">
+                        <h2 class="heading-4 article__title pb-1 px-2 mb-4">興味を持ったきっかけ</h2>
+                        <h3 class="article__heading text-lg pb-1 px-2 mb-3">興味を持ったきっかけ</h3>
+                        <div class="article__content grid grid-1 gap-y-2">
+                            <p class="article__question bold">
+                                現在のお仕事の内容について教えてください。
+                            </p>
+                            <p class="article__answer">
+                                Kさん：私は現在、ソフトウェア開発部門でプロジェクトリーダーを担当しています。主な業務はクライアントとの要件調整や、エンジニアチームへのタスク割り振り、進捗管理などです。週に一度はチームミーティングを実施し、メンバー全員が安心して仕事できる環境づくりを心掛けています。また、自分自身もプログラミング業務に携わりながら、若手メンバーの指導にも力を入れています。
+                            </p>
+                            <div class="article__img">
+                                <img src="https://placehold.jp/800x600.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <article class="mb-8 article" id="index03">
+                    <div class="schedule schedule-typeA">
+                        <div class="container">
+                            <h2 class="heading-4 article__heading mb-4 pb-2">一日のスケジュール</h2>
+                            <ul class="schedule__items flex flex-1 gap-x-4">
+                                <li class="schedule__item flex pb-4 col">
+                                    <span class="schedule__time">10:00</span>
+                                    <div class="schedule__box">
+                                        <h2 class="schedule__title heading-4 mb-1">開始</h2>
+                                        <p class="schedule__text">
+                                            システム開発のコンサルティングシステム開発のコンサルティングシステム開発のコンサルティングシステム開発のコンサルティングシステム開発のコンサルティングシステム開発のコンサルティング
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="schedule__item flex pb-4 col">
+                                    <span class="schedule__time">10:00</span>
+                                    <div class="schedule__box">
+                                        <h2 class="schedule__title heading-4 mb-1">開始</h2>
+                                        <p class="schedule__text">
+                                            システム開発のコンサルティング
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="schedule__item flex pb-4 col">
+                                    <span class="schedule__time">10:00</span>
+                                    <div class="schedule__box">
+                                        <h2 class="schedule__title heading-4 mb-1">開始</h2>
+                                        <p class="schedule__text">
+                                            システム開発のコンサルティング
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="schedule__item flex pb-4 col">
+                                    <span class="schedule__time">10:00</span>
+                                    <div class="schedule__box">
+                                        <h2 class="schedule__title heading-4 mb-1">開始</h2>
+                                        <p class="schedule__text">
+                                            システム開発のコンサルティング
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+                <article class="mb-8 article" id="index03">
+                    <div class="schedule schedule-typeB">
+                        <div class="container">
+                            <h2 class="heading-4 article__heading mb-4 pb-2">一日のスケジュール</h2>
+                            <ul class="schedule__items">
+                                <li class="schedule__item flex">
+                                    <div class="schedule__time heading-4">08:45</div>
+                                    <div class="schedule__icon">
+                                        <span class="schedule__circle"></span>
+                                    </div>
+                                    <div class="schedule__content pb-4">
+                                        <h2 class="schedule__title heading-4 mb-2">出社</h2>
+                                        <p class="schedule__text">
+                                            子供を保育園に送ってから出社し、１日のスケジュールを確認します。 状況に応じて、在宅勤務を取り入れ柔軟に対応しています。
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="schedule__item flex">
+                                    <div class="schedule__time heading-4">08:45</div>
+                                    <div class="schedule__icon">
+                                        <span class="schedule__circle"></span>
+                                    </div>
+                                    <div class="schedule__content pb-4">
+                                        <h2 class="schedule__title heading-4 mb-2">出社</h2>
+                                        <p class="schedule__text">
+                                            子供を保育園に送ってから出社し、１日のスケジュールを確認します。 状況に応じて、在宅勤務を取り入れ柔軟に対応しています。
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="schedule__item flex">
+                                    <div class="schedule__time heading-4">08:45</div>
+                                    <div class="schedule__icon">
+                                        <span class="schedule__circle"></span>
+                                    </div>
+                                    <div class="schedule__content pb-4">
+                                        <h2 class="schedule__title heading-4 mb-2">出社</h2>
+                                        <p class="schedule__text">
+                                            子供を保育園に送ってから出社し、１日のスケジュールを確認します。 状況に応じて、在宅勤務を取り入れ柔軟に対応しています。
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="schedule__item flex">
+                                    <div class="schedule__time heading-4">08:45</div>
+                                    <div class="schedule__icon">
+                                        <span class="schedule__circle"></span>
+                                    </div>
+                                    <div class="schedule__content pb-4">
+                                        <h2 class="schedule__title heading-4 mb-2">出社</h2>
+                                        <p class="schedule__text">
+                                            子供を保育園に送ってから出社し、１日のスケジュールを確認します。 状況に応じて、在宅勤務を取り入れ柔軟に対応しています。
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="schedule__item flex">
+                                    <div class="schedule__time heading-4">08:45</div>
+                                    <div class="schedule__icon">
+                                        <span class="schedule__circle"></span>
+                                    </div>
+                                    <div class="schedule__content">
+                                        <h2 class="schedule__title heading-4 mb-2">出社</h2>
+                                        <p class="schedule__text">
+                                            子供を保育園に送ってから出社し、１日のスケジュールを確認します。 状況に応じて、在宅勤務を取り入れ柔軟に対応しています。
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+                <article class="mb-8 article" id="index04">
+                    <div class="career career-typeA">
+                        <div class="container">
+                            <h2 class="heading-4 article__heading mb-4 pb-2">キャリアステップ</h2>
+                            <ul class="career__items flex flex-1 gap-y-4 gap-y-3-sp">
+                                <li class="career__item col">
+                                    <h2 class="career__title heading-4 py-2 px-4">入社前</h2>
+                                    <p class="career__text py-3 px-4">
+                                        IT業界について自分なりに調べ、希望する業種や企業を検討します。自身のスキルや適性を見直しながら、将来やりたいことを明確にしていきます。IT業界について自分なりに調べ、希望する業種や企業を検討します。自身のスキルや適性を見直しながら、将来やりたいことを明確にしていきます。
+                                    </p>
+                                </li>
+                                <li class="career__arrow col">
+                                    <svg width="32" height="15" viewBox="0 0 32 15" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16 15L9.53703e-07 -9.8558e-07L32 2.86102e-06L16 15Z" />
+                                    </svg>
+                                </li>
+
+                                <li class="career__item col">
+                                    <h2 class="career__title heading-4 py-2 px-4">入社前</h2>
+                                    <p class="career__text py-3 px-4">
+                                        IT業界について自分なりに調べ、希望する業種や企業を検討します。自身のスキルや適性を見直しながら、将来やりたいことを明確にしていきます。IT業界について自分なりに調べ、希望する業種や企業を検討します。自身のスキルや適性を見直しながら、将来やりたいことを明確にしていきます。
+                                    </p>
+                                </li>
+                                <li class="career__arrow col">
+                                    <svg width="32" height="15" viewBox="0 0 32 15" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16 15L9.53703e-07 -9.8558e-07L32 2.86102e-06L16 15Z" />
+                                    </svg>
+                                </li>
+                                <li class="career__item col">
+                                    <h2 class="career__title heading-4 py-2 px-4">入社前</h2>
+                                    <p class="career__text py-3 px-4">
+                                        IT業界について自分なりに調べ、希望する業種や企業を検討します。自身のスキルや適性を見直しながら、将来やりたいことを明確にしていきます。IT業界について自分なりに調べ、希望する業種や企業を検討します。自身のスキルや適性を見直しながら、将来やりたいことを明確にしていきます。
+                                    </p>
+                                </li>
+                                <li class="career__arrow col">
+                                    <svg width="32" height="15" viewBox="0 0 32 15" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16 15L9.53703e-07 -9.8558e-07L32 2.86102e-06L16 15Z" />
+                                    </svg>
+                                </li>
+                                <li class="career__item col">
+                                    <h2 class="career__title heading-4 py-2 px-4">入社前</h2>
+                                    <p class="career__text py-3 px-4">
+                                        IT業界について自分なりに調べ、希望する業種や企業を検討します。自身のスキルや適性を見直しながら、将来やりたいことを明確にしていきます。IT業界について自分なりに調べ、希望する業種や企業を検討します。自身のスキルや適性を見直しながら、将来やりたいことを明確にしていきます。
+                                    </p>
+                                </li>
+                                <li class="career__arrow col">
+                                    <svg width="32" height="15" viewBox="0 0 32 15" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16 15L9.53703e-07 -9.8558e-07L32 2.86102e-06L16 15Z" />
+                                    </svg>
+                                </li>
+                                <li class="career__item col">
+                                    <h2 class="career__title heading-4 py-2 px-4">入社前</h2>
+                                    <p class="career__text py-3 px-4">
+                                        IT業界について自分なりに調べ、希望する業種や企業を検討します。自身のスキルや適性を見直しながら、将来やりたいことを明確にしていきます。IT業界について自分なりに調べ、希望する業種や企業を検討します。自身のスキルや適性を見直しながら、将来やりたいことを明確にしていきます。
+                                    </p>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+    <footer class="footer footer-typeB" id="footer">
+        <div class="container">
+            <div class="footer__box flex">
+                <div class="footer__info col-20 col-1-sp">
+                    <div class="logo footer__logo mb-4">
+                        <a href="">
+                            <picture>
+                                <source srcset="../img/logo.svg" media="(max-width: 768px)">
+                                <img src="../img/logo.svg" alt="ロゴ画像">
+                            </picture>
+                        </a>
+                    </div>
+                    <div class="sns">
+                        <ul class="sns__items flex gap-3">
+                            <li class="sns__item">
+                                <a href="" class="sns__link target-blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
+                                        fill="none">
+                                        <path
+                                            d="M20.35 1.875H3.85001C3.25327 1.875 2.68097 2.11205 2.25902 2.53401C1.83706 2.95597 1.60001 3.52826 1.60001 4.125L1.60001 20.625C1.60001 21.2217 1.83706 21.794 2.25902 22.216C2.68097 22.6379 3.25327 22.875 3.85001 22.875H10.2836V15.7355H7.33047V12.375H10.2836V9.81375C10.2836 6.90047 12.018 5.29125 14.6744 5.29125C15.9466 5.29125 17.2769 5.51813 17.2769 5.51813V8.3775H15.8111C14.3669 8.3775 13.9164 9.27375 13.9164 10.193V12.375H17.1405L16.6248 15.7355H13.9164V22.875H20.35C20.9467 22.875 21.519 22.6379 21.941 22.216C22.363 21.794 22.6 21.2217 22.6 20.625V4.125C22.6 3.52826 22.363 2.95597 21.941 2.53401C21.519 2.11205 20.9467 1.875 20.35 1.875Z"
+                                            fill="black"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="sns__item">
+                                <a href="" class="sns__link target-blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
+                                        fill="none">
+                                        <path
+                                            d="M12.1047 6.98437C9.12344 6.98437 6.71876 9.38905 6.71876 12.3703C6.71876 15.3516 9.12344 17.7562 12.1047 17.7562C15.0859 17.7562 17.4906 15.3516 17.4906 12.3703C17.4906 9.38905 15.0859 6.98437 12.1047 6.98437ZM12.1047 15.8719C10.1781 15.8719 8.60313 14.3016 8.60313 12.3703C8.60313 10.4391 10.1734 8.86874 12.1047 8.86874C14.0359 8.86874 15.6062 10.4391 15.6062 12.3703C15.6062 14.3016 14.0312 15.8719 12.1047 15.8719ZM18.9672 6.76406C18.9672 7.46249 18.4047 8.02031 17.7109 8.02031C17.0125 8.02031 16.4547 7.45781 16.4547 6.76406C16.4547 6.07031 17.0172 5.50781 17.7109 5.50781C18.4047 5.50781 18.9672 6.07031 18.9672 6.76406ZM22.5344 8.03905C22.4547 6.35624 22.0703 4.86562 20.8375 3.63749C19.6094 2.40937 18.1187 2.02499 16.4359 1.94062C14.7016 1.84218 9.50313 1.84218 7.76876 1.94062C6.09063 2.02031 4.60001 2.40468 3.3672 3.63281C2.13439 4.86093 1.7547 6.35156 1.67032 8.03437C1.57189 9.76874 1.57189 14.9672 1.67032 16.7016C1.75001 18.3844 2.13439 19.875 3.3672 21.1031C4.60001 22.3312 6.08595 22.7156 7.76876 22.8C9.50313 22.8984 14.7016 22.8984 16.4359 22.8C18.1187 22.7203 19.6094 22.3359 20.8375 21.1031C22.0656 19.875 22.45 18.3844 22.5344 16.7016C22.6328 14.9672 22.6328 9.77343 22.5344 8.03905ZM20.2937 18.5625C19.9281 19.4812 19.2203 20.1891 18.2969 20.5594C16.9141 21.1078 13.6328 20.9812 12.1047 20.9812C10.5766 20.9812 7.29063 21.1031 5.91251 20.5594C4.99376 20.1937 4.28595 19.4859 3.91563 18.5625C3.3672 17.1797 3.49376 13.8984 3.49376 12.3703C3.49376 10.8422 3.37189 7.55624 3.91563 6.17812C4.28126 5.25937 4.98907 4.55156 5.91251 4.18124C7.29532 3.63281 10.5766 3.75937 12.1047 3.75937C13.6328 3.75937 16.9187 3.63749 18.2969 4.18124C19.2156 4.54687 19.9234 5.25468 20.2937 6.17812C20.8422 7.56093 20.7156 10.8422 20.7156 12.3703C20.7156 13.8984 20.8422 17.1844 20.2937 18.5625Z"
+                                            fill="black"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="sns__item">
+                                <a href="" class="sns__link target-blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
+                                        fill="none">
+                                        <path
+                                            d="M14.3547 9.94688V13.2797C14.3547 13.3641 14.2891 13.4297 14.2047 13.4297H13.6703C13.6188 13.4297 13.5719 13.4016 13.5485 13.3688L12.0203 11.3063V13.2844C12.0203 13.3688 11.9547 13.4344 11.8703 13.4344H11.336C11.2516 13.4344 11.186 13.3688 11.186 13.2844V9.95157C11.186 9.8672 11.2516 9.80157 11.336 9.80157H11.8656C11.9125 9.80157 11.9641 9.82501 11.9875 9.8672L13.5156 11.9297V9.95157C13.5156 9.8672 13.5813 9.80157 13.6656 9.80157H14.2C14.2844 9.79688 14.3547 9.8672 14.3547 9.94688ZM10.511 9.79688H9.97658C9.89221 9.79688 9.82658 9.86251 9.82658 9.94688V13.2797C9.82658 13.3641 9.89221 13.4297 9.97658 13.4297H10.511C10.5953 13.4297 10.661 13.3641 10.661 13.2797V9.94688C10.661 9.8672 10.5953 9.79688 10.511 9.79688ZM9.22189 12.5906H7.76408V9.94688C7.76408 9.86251 7.69845 9.79688 7.61408 9.79688H7.0797C6.99533 9.79688 6.9297 9.86251 6.9297 9.94688V13.2797C6.9297 13.3219 6.94377 13.3547 6.97189 13.3828C7.00002 13.4063 7.03283 13.425 7.07502 13.425H9.21721C9.30158 13.425 9.3672 13.3594 9.3672 13.275V12.7406C9.3672 12.6609 9.30158 12.5906 9.22189 12.5906ZM17.1672 9.79688H15.025C14.9453 9.79688 14.875 9.86251 14.875 9.94688V13.2797C14.875 13.3594 14.9406 13.4297 15.025 13.4297H17.1672C17.2516 13.4297 17.3172 13.3641 17.3172 13.2797V12.7453C17.3172 12.6609 17.2516 12.5953 17.1672 12.5953H15.7094V12.0328H17.1672C17.2516 12.0328 17.3172 11.9672 17.3172 11.8828V11.3438C17.3172 11.2594 17.2516 11.1938 17.1672 11.1938H15.7094V10.6313H17.1672C17.2516 10.6313 17.3172 10.5656 17.3172 10.4813V9.94688C17.3125 9.8672 17.2469 9.79688 17.1672 9.79688ZM22.6 5.7047V19.0781C22.5953 21.1781 20.875 22.8797 18.7703 22.875H5.39689C3.29689 22.8703 1.59533 21.1453 1.60002 19.0453V5.67188C1.6047 3.57188 3.3297 1.87032 5.4297 1.87501H18.8031C20.9031 1.8797 22.6047 3.60001 22.6 5.7047ZM19.7125 11.4516C19.7125 8.0297 16.2813 5.24532 12.0672 5.24532C7.85314 5.24532 4.42189 8.0297 4.42189 11.4516C4.42189 14.5172 7.14064 17.0859 10.8156 17.5734C11.711 17.7656 11.6078 18.0938 11.4063 19.2984C11.3735 19.4906 11.2516 20.0531 12.0672 19.7109C12.8828 19.3688 16.4688 17.1188 18.0766 15.2719C19.1828 14.0531 19.7125 12.8203 19.7125 11.4516Z"
+                                            fill="black"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="sns__item">
+                                <a href="" class="sns__link target-blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
+                                        fill="none">
+                                        <path
+                                            d="M20.3555 1.375C21.0041 1.375 21.6533 1.375 22.3019 1.375C22.2794 1.40321 22.2578 1.43189 22.2343 1.45914C21.7635 1.99365 21.2927 2.52816 20.8214 3.06267C18.6262 5.55402 16.4309 8.04538 14.2357 10.5367C14.1921 10.5864 14.149 10.6366 14.1024 10.6897C14.1264 10.7251 14.148 10.7571 14.17 10.7887C16.5906 14.2281 19.0112 17.667 21.4318 21.1064C21.9394 21.8279 22.4474 22.5489 22.9539 23.2713C22.975 23.3018 22.9848 23.3396 23 23.3745C20.8209 23.3745 18.6413 23.3745 16.4623 23.3745C16.2639 23.091 16.0664 22.807 15.867 22.5245C14.0809 19.9863 12.2942 17.4476 10.508 14.9094C10.4909 14.8855 10.4722 14.8625 10.4512 14.8358C10.4257 14.863 10.4051 14.8845 10.385 14.907C10.1215 15.2058 9.85791 15.5051 9.59483 15.8039C7.63718 18.0261 5.67905 20.2478 3.72189 22.47C3.45686 22.7712 3.1928 23.0733 2.92825 23.375C2.2855 23.375 1.64275 23.375 1 23.375C1.01764 23.3477 1.03184 23.3176 1.05291 23.2937C1.25377 23.0642 1.45561 22.8362 1.65745 22.6072C3.18643 20.8722 4.71492 19.1372 6.2439 17.4022C7.33981 16.1586 8.43523 14.9151 9.53065 13.6716C9.55025 13.6496 9.56739 13.6257 9.58601 13.6027C9.56544 13.5721 9.54927 13.5468 9.53212 13.5224C8.46316 12.0035 7.3937 10.4846 6.32474 8.96523C4.56354 6.46336 2.80333 3.96197 1.0436 1.4601C1.02498 1.43428 1.01421 1.40369 1 1.375C3.18545 1.375 5.3709 1.375 7.55586 1.375C7.57203 1.40321 7.58623 1.43285 7.60485 1.45962C9.46354 4.10157 11.3222 6.74305 13.1814 9.38404C13.1985 9.40842 13.2167 9.43185 13.2377 9.46054C13.2666 9.4285 13.2911 9.40173 13.3151 9.37496C15.6422 6.73444 17.9687 4.09392 20.2957 1.45293C20.3173 1.42855 20.3359 1.4013 20.3555 1.375ZM20.3619 22.0048C20.3242 21.9512 20.2987 21.9154 20.2732 21.88C16.3868 16.4522 12.5004 11.0244 8.61356 5.59658C7.96493 4.69059 7.3163 3.78507 6.66816 2.87861C6.63681 2.83462 6.60741 2.80689 6.5447 2.80689C5.59919 2.80928 4.65319 2.80833 3.70768 2.80881C3.68858 2.80881 3.66898 2.81311 3.63763 2.81646C3.67437 2.86809 3.70328 2.90921 3.73267 2.95032C5.21413 5.01904 6.69559 7.08775 8.17705 9.15647C11.2238 13.4115 14.2709 17.6665 17.3162 21.9225C17.3598 21.9837 17.4043 22.0062 17.4803 22.0062C18.4013 22.0038 19.3228 22.0048 20.2438 22.0048C20.2757 22.0048 20.3085 22.0048 20.3619 22.0048Z"
+                                            fill="black"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="sns__item">
+                                <a href="" class="sns__link target-blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
+                                        fill="none">
+                                        <path
+                                            d="M22.9023 6.19139C22.6406 5.0828 21.8695 4.2097 20.8905 3.91341C19.1159 3.375 12 3.375 12 3.375C12 3.375 4.88418 3.375 3.10956 3.91341C2.13051 4.20975 1.35943 5.0828 1.09772 6.19139C0.622223 8.20078 0.622223 12.3932 0.622223 12.3932C0.622223 12.3932 0.622223 16.5856 1.09772 18.595C1.35943 19.7036 2.13051 20.5403 3.10956 20.8366C4.88418 21.375 12 21.375 12 21.375C12 21.375 19.1158 21.375 20.8905 20.8366C21.8695 20.5403 22.6406 19.7036 22.9023 18.595C23.3778 16.5856 23.3778 12.3932 23.3778 12.3932C23.3778 12.3932 23.3778 8.20078 22.9023 6.19139ZM9.67272 16.1996V8.5868L15.6202 12.3933L9.67272 16.1996Z"
+                                            fill="black"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <nav class="gnav footer-gnav gnav-typeB mb-4 col-80 col-1-sp">
+                    <ul class="gnav__items flex flex-4 flex-1-sp">
+                        <li class="gnav__item col">
+                            <a href="" class="gnav__link flex gap-x-1 text-lg pb-1 mb-1">私たちについて</a>
+                            <ul class="nav nav__items gap-y-1">
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">会社概要</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">事業内容</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">働く環境</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="gnav__item col">
+                            <a href="" class="gnav__link flex pb-1 mb-1">仕事内容</a>
+                            <ul class="nav nav__items gap-y-1">
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">募集職種</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">社員インタビュー</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="gnav__item col">
+                            <a href="" class="gnav__link flex pb-1 mb-1">カルチャー</a>
+                            <ul class="nav nav__items gap-y-1">
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">研修・成長支援</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="" class="nav__link">イベント</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="header__entry col">
+                            <a href="" class="px-4 py-1">エントリー</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="footer__copy">
+            <div class="container caption py-1">
+                © 2026 会社名. All rights Reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

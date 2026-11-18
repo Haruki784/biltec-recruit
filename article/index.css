@@ -1,0 +1,92 @@
+.index {
+    display: flex;
+}
+
+.index__side {
+    flex-shrink: 0;
+    margin-right: 15rem;
+}
+
+.index-container {
+    position: sticky;
+    top: calc(var(--header-height) + 30px);
+}
+
+.index__main {
+    width: 100%;
+    height: 100%;
+}
+
+.index__main-container {
+    max-width: 104rem;
+}
+
+.index-typeA .index__items {
+    border: 1px solid var(--text-color);
+    border-left: 0;
+    max-width: 30rem;
+    min-width: 30rem;
+    width: 100%;
+}
+
+.index-typeA .index__link {
+    position: relative;
+    display: block;
+    transition: .1s ease;
+}
+
+
+.index-typeA .index__link.active {
+    font-weight: var(--bold);
+    text-decoration: underline;
+    color: var(--secondary);
+}
+
+@media (max-width: 1600px) {
+    .index__side {
+        margin-right: var(--spacing-7);
+    }
+
+}
+
+@media (max-width: 768px) {
+    .index__side {
+        display: none;
+    }
+
+    .index__main-container {
+        max-width: 190%;
+    }
+}
+
+.index-typeB .index__items {
+    max-width: 30rem;
+    min-width: 30rem;
+    width: 100%;
+}
+
+.index-typeB .index__item {
+    border-bottom: 2px solid var(--border-color);
+}
+
+.index-typeB .index__link {
+    padding-left: var(--spacing-4);
+    position: relative;
+}
+
+.index-typeB .index__link.active {
+    color: var(--secondary);
+    font-weight: var(--bold);
+}
+
+.index-typeB .index__link.active::before {
+    position: absolute;
+    content: "";
+    width: .8rem;
+    height: .8rem;
+    background: var(--secondary);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    left: var(--spacing-1);
+}

@@ -1,0 +1,71 @@
+:root {
+  /* 基準単位 (1440px時 = 10px / 375px時 = 10px) */
+  --unit-full: 0.6944444vw;
+  --unit-sp-full: 2.66667vw;
+
+  /* 見出しサイズ */
+  --heading01-full: calc(7.2 * var(--unit-full));
+  --heading01-sp-full: calc(4.8 * var(--unit-sp-full));
+  --heading02-full: calc(4.8 * var(--unit-full));
+  --heading02-sp-full: calc(3.2 * var(--unit-sp-full));
+  --heading03-full: calc(3.2 * var(--unit-full));
+  --heading03-sp-full: calc(2.4 * var(--unit-sp-full));
+  --heading04-full: calc(2.4 * var(--unit-full));
+  --heading04-sp-full: calc(2 * var(--unit-sp-full));
+
+  /* テキストサイズ */
+  --text-lg-full: calc(2 * var(--unit-full));
+  --text-lg-sp-full: calc(1.6 * var(--unit-sp-full));
+  --text-base-full: calc(1.4 * var(--unit-full));
+  --text-base-sp-full: calc(1.4 * var(--unit-sp-full));
+  --caption-full: calc(1.2 * var(--unit-full));
+  --caption-sp-full: calc(1.2 * var(--unit-sp-full));
+
+  /* 余白 */
+  --spacing-1-full: calc(0.8 * var(--unit-full));
+  --spacing-1-sp-full: calc(0.8 * var(--unit-sp-full));
+  --spacing-2-full: calc(1.2 * var(--unit-full));
+  --spacing-2-sp-full: calc(1.2 * var(--unit-sp-full));
+  --spacing-3-full: calc(1.6 * var(--unit-full));
+  --spacing-3-sp-full: calc(1.6 * var(--unit-sp-full));
+  --spacing-4-full: calc(2.4 * var(--unit-full));
+  --spacing-4-sp-full: calc(2.0 * var(--unit-sp-full));
+  --spacing-5-full: calc(3.2 * var(--unit-full));
+  --spacing-5-sp-full: calc(2.4 * var(--unit-sp-full));
+  --spacing-6-full: calc(4 * var(--unit-full));
+  --spacing-6-sp-full: calc(3.2 * var(--unit-sp-full));
+  --spacing-7-full: calc(5.6 * var(--unit-full));
+  --spacing-7-sp-full: calc(4 * var(--unit-sp-full));
+  --spacing-8-full: calc(8 * var(--unit-full));
+  --spacing-8-sp-full: calc(6 * var(--unit-sp-full));
+  --spacing-9-full: calc(12 * var(--unit-full));
+  --spacing-9-sp-full: calc(10 * var(--unit-sp-full));
+
+  /* カード gap */
+  --gap-x-full: calc(4 * var(--unit-full));
+  --gap-y-full: calc(3.2 * var(--unit-full));
+  --gap-x-sp-full: calc(1.6 * var(--unit-sp-full));
+  --gap-y-sp-full: calc(1.6 * var(--unit-sp-full));
+
+  /* コンテンツ幅・余白 */
+  --content-width-full: calc(120 * var(--unit-full));
+  --content-full-full: calc(144 * var(--unit-full));
+  --content-padding-full: 0 calc(2 * var(--unit-full));
+  --content-padding-sp-full: 0 calc(1.5 * var(--unit-sp-full));
+
+  /* 角丸 */
+  --border-radius-full: calc(1.2 * var(--unit-full));
+  --border-radius-sp-full: calc(0.8 * var(--unit-sp-full));
+
+  /* ボタン角丸 */
+  --button-border-radius-full: calc(0.4 * var(--unit-full));
+  --button-border-radius02-full: calc(0.4 * var(--unit-full));
+
+  /* ヘッダー高さ */
+  --header-height-full: calc(7 * var(--unit-full));
+  --header-height-sp-full: calc(6 * var(--unit-sp-full));
+
+  /* ロゴ幅 */
+  --logo-max-width-full: calc(20 * var(--unit-full));
+  --logo-max-width-sp-full: calc(15 * var(--unit-sp-full));
+}

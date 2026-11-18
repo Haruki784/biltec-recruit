@@ -1,0 +1,74 @@
+/* トグルの共通スタイル */
+.toggle{
+    cursor: pointer;
+    position: relative;
+}
+
+/* 矢印アイコン */
+.toggle-icon-arrow{
+    position: relative;
+    top: 0%;
+    right: 0;
+    width: 1.5rem;
+}
+
+.toggle-icon-arrow::before{
+    content: "";
+    display: block;
+    position: absolute;
+    top: 1.2rem;
+    left: 50%;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: translate(-50%, -50%) rotate(135deg);
+    transition: transform 0.3s ease;
+}
+
+/* active時の矢印アイコンのアニメーション */
+.toggle.active .toggle-icon-arrow::before{
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* 十字アイコン */
+.toggle-icon-cross{
+    position: relative;
+    top: 0%;
+    right: 0;
+    width: 1.5rem;
+}
+
+.toggle-icon-cross::before,
+.toggle-icon-cross::after{
+    content: "";
+    position: absolute;
+    top: 1.2rem;
+    left: 50%;
+    width: 1.2rem;
+    height: 2px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
+}
+
+.toggle-icon-cross::after{
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.header .gnav__link .toggle-icon-cross::before {
+    top: 50%;
+}
+
+.header .gnav__link .toggle-icon-cross::after {
+    top: 50%;
+}
+
+.header .gnav__link .toggle-icon-arrow::before {
+    top: 50%;
+}
+
+/* active時の十字アイコンのアニメーション */
+.toggle.active .toggle-icon-cross::after{
+    transform: translate(-50%, -50%) rotate(0deg);
+}

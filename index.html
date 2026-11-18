@@ -1,0 +1,116 @@
+<div class="container contactForm">
+    <div class="form__item mt-4">
+        <div class="form__label-wrap">
+            <span class="form__label bold text-lg">お名前</span>
+            <span class="form__required caption bold">必須</span>
+        </div>
+        <div class="form__input-wrap mt-2">
+            [text your-name autocomplete:name placeholder "山田　太郎"]
+        </div>
+    </div>
+
+
+
+    <div class="flex flex-2">
+        <div class="col form__item mt-4">
+            <div class="form__label-wrap">
+                <span class="form__label bold text-lg">フリガナ</span>
+                <span class="form__optional caption bold py-1 px-3">任意</span>
+            </div>
+            <div class="form__input-wrap mt-2">
+                [text your-name-kana class:form__kana autocomplete:name placeholder "ヤマダ　タロウ"]
+            </div>
+        </div>
+
+        <div class="col form__item mt-4">
+            <div class="form__label-wrap">
+                <span class="form__label bold text-lg">フリガナ</span>
+                <span class="form__optional caption bold py-1 px-3">任意</span>
+            </div>
+            <div class="form__input-wrap mt-2">
+                [email email autocomplete:email placeholder "アドレス"]
+            </div>
+        </div>
+    </div>
+
+    <div class="form__item mt-4">
+        <div class="form__label-wrap">
+            <span class="form__label bold text-lg">フリガナ</span>
+            <span class="form__optional caption bold py-1 px-3">任意</span>
+        </div>
+        <div class="form__input-wrap mt-2">
+            [textarea textarea placeholder] テキストエリア [/textarea]
+        </div>
+    </div>
+
+    <div class="form__item mt-4">
+        <div class="form__label-wrap">
+            <span class="form__label bold text-lg">日付</span>
+            <span class="form__optional caption bold py-1 px-3">任意</span>
+        </div>
+        <div class="form__input-wrap mt-2">
+            [date date]
+        </div>
+    </div>
+
+    <div class="form__item mt-4">
+        <div class="form__label-wrap">
+            <span class="form__label bold text-lg">セレクト</span>
+            <span class="form__optional caption bold py-1 px-3">任意</span>
+        </div>
+        <div class="form__input-wrap mt-2">
+            [select select "選択肢 1" "選択肢 2" "選択肢 3"]
+        </div>
+    </div>
+
+    <div class="form__item mt-4">
+        <div class="form__label-wrap">
+            <span class="form__label bold text-lg">チェックボックス</span>
+            <span class="form__optional caption bold py-1 px-3">任意</span>
+        </div>
+        <div class="form__input-wrap mt-2">
+            [checkbox checkbox use_label_element "選択肢 1" "選択肢 2" "選択肢 3"]
+        </div>
+    </div>
+
+    <div class="form__item mt-4">
+        <div class="form__label-wrap">
+            <span class="form__label bold text-lg">ラジオ</span>
+            <span class="form__optional caption bold py-1 px-3">任意</span>
+        </div>
+        <div class="form__input-wrap mt-2">
+            [radio radio use_label_element "選択肢 1" "選択肢 2" "選択肢 3"]
+        </div>
+    </div>
+
+    <div class="form__item mt-4">
+        <div class="form__label-wrap">
+            <span class="form__label bold text-lg">ファイル</span>
+            <span class="form__optional caption bold py-1 px-3">任意</span>
+        </div>
+        <div class="form__input-wrap mt-2">
+            [file file filetypes:audio/*|video/*|image/* limit:1mb]
+        </div>
+    </div>
+
+    <div class="form__item mt-4 form__privacy">
+        <div class="form__label-wrap">
+            <span class="form__label bold text-lg">同意事項</span>
+            <span class="form__optional caption bold py-1 px-3">任意</span>
+        </div>
+        <div>
+            <a href="/privacy">プライバシーポリシー</a>をご確認の上、<br>
+            「同意する」にチェックをしてから「送信する」ボタンを押してください
+        </div>
+        <div class="form__input-wrap mt-2 text-lg">
+            [acceptance acceptance-292] 個人情報の取り扱いに同意する [/acceptance]
+        </div>
+    </div>
+
+
+    <div class="form__item mt-4">
+        <div class="form__input-wrap mt-2">
+            [submit "送信"]
+        </div>
+    </div>
+</div>

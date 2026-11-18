@@ -1,0 +1,274 @@
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+/* google fonts */
+
+/* フォントの設定 */
+:root {
+    /* ベースのフォント種類 */
+    --base-font-family: 'Noto Sans JP',
+        '游ゴシック',
+        YuGothic,
+        'ヒラギノ角ゴ Pro',
+        'Hiragino Kaku Gothic Pro',
+        'メイリオ',
+        'Meiryo',
+        Osaka,
+        'ＭＳ Ｐゴシック',
+        'MS PGothic',
+        sans-serif;
+}
+
+:root {
+    /* 英語フォント */
+    --english-font-family: 'Figtree', 'Noto Sans JP', sans-serif;
+}
+
+:root {
+    /* 見出しのフォント種類 */
+    --heading-font-family: 'Noto Sans JP',
+        '游ゴシック',
+        YuGothic,
+        'ヒラギノ角ゴ Pro',
+        'Hiragino Kaku Gothic Pro',
+        'メイリオ',
+        'Meiryo',
+        Osaka,
+        'ＭＳ Ｐゴシック',
+        'MS PGothic',
+        sans-serif;
+}
+
+/* フォントの設定 */
+
+:root {
+    /* フォントの太さ設定 */
+    --semibold: 600;
+    --bold: 800;
+}
+ 
+
+/* フォントサイズ・行間・字間の設定 */
+:root {
+    /* heading01（特大見出し）- メインビジュアルやトップコピーに使用 */
+    --heading01: 7rem;
+    --heading01-sp: 4.4rem;
+    --heading01-line-height: 120%;
+    --heading01-letter-spacing: 0.04em;
+    --heading01-weight: 700;
+
+    /* heading02（見出し1）- ページタイトルに使用 */
+    --heading02: 3.4rem;
+    --heading02-sp: 2.4rem;
+    --heading02-line-height: 160%;
+    --heading02-letter-spacing: 0.05em;
+    --heading02-weight: 700;
+
+    /* heading03（見出し2）- セクション見出しに使用 */
+    --heading03: 3rem;
+    --heading03-sp: 2.2rem;
+    --heading03-line-height: 160%;
+    --heading03-letter-spacing: 0.05em;
+    --heading03-weight: 700;
+
+    /* heading04（見出し3）- サブタイトルやカードタイトルに使用 */
+    --heading04: 2.4rem;
+    --heading04-sp: 2rem;
+    --heading04-line-height: 160%;
+    --heading04-letter-spacing: 0.02em;
+    --heading04-weight: 700;
+
+    /* text-lg（本文ラージ）- 本文よりやや大きい標準テキストに使用 */
+    --text-lg: 1.8rem;
+    --text-lg-sp: 1.6rem;
+    --text-lg-line-height: 180%;
+    --text-lg-letter-spacing: 0.01em;
+    --text-lg-weight: 500;
+
+    /* text-base（本文）- 本文に使用 */
+    --text-base: 1.6rem;
+    --text-base-sp: 1.5rem;
+    --text-base-line-height: 200%;
+    --text-base-letter-spacing: 0.01em;
+    --text-base-weight: 400;
+
+
+    --caption: 1.2rem;
+    --caption-sp: 1.2rem;
+    --caption-line-height: 150%;
+    --caption-letter-spacing: 0.01em;
+    --caption-weight: 400;
+}
+
+/* 余白の設定 */
+:root {
+    /* 1 - アイコンと文字の間、非常に狭い隙間 */
+    --spacing-1: .8rem;
+    /* 2 - 小さな要素同士の間隔（カード内の要素など） */
+    --spacing-2: 1.2rem;
+    /* 3 - 最もよく使う標準的な余白 【基準】 */
+    --spacing-3: 1.6rem;
+    /* 4 - 関連するグループ同士の間隔 */
+    --spacing-4: 2.4rem;
+    --spacing-4-sp: 2rem;
+    /* 5 - コンポーネント同士の間隔 */
+    --spacing-5: 3.2rem;
+    --spacing-5-sp: 2.4rem;
+    /* 6 - セクションの区切り（小） */
+    --spacing-6: 4rem;
+    --spacing-6-sp: 3.2rem;
+    /* 7 - セクションの区切り（大） */
+    --spacing-7: 5.6rem;
+    --spacing-7-sp: 4rem;
+    /* 8 - セクションの区切り（超大） */
+    --spacing-8: 8rem;
+    --spacing-8-sp: 6rem;
+    /* 9 - ページ全体の余白など最大単位 */
+    --spacing-9: 12rem;
+    --spacing-9-sp: 6rem;
+}
+
+/* 余白の設定 */
+
+/* カートタイプの余白 */
+:root {
+    --gap-x: 4rem;
+    --gap-y: 3.2rem;
+    --gap-x-sp: 1.6rem;
+    --gap-y-sp: 2rem;
+}
+
+/* カラー設定 */
+:root {
+    /* テキストカラーを設定 */
+    --text-color: #141414;
+    /* リンクテキストのホバー時の色 */
+    --link-text-hover: #0D4C94;
+
+    --white: #ffffff;
+    --black: #0A0A0A;
+
+
+    /* サイトの背景色を設定 */
+    --site-background: #ffffff;
+
+    /* メインカラー背景色と文字色を設定 */
+    --primary: #0D4C94;
+    --primary-text: #ffffff;
+    --primary-background-hover: #083467;
+    --primary-text-hover: #ffffff;
+
+    /* サブカラー背景色と文字色を設定 */
+    --secondary: #083467;
+    --secondary-text: #ffffff;
+    --secondary-hover: #0D4C94;
+    --secondary-text-hover: #ffffff;
+
+    /* ターシャリーカラー背景色と文字色を設定 */
+    --tertiary: #D7E4F5;
+    --tertiary-text: #003C88;
+    --tertiary-hover: #BCD3EF;
+    --tertiary-text-hover: #003C88;
+}
+
+/* カラー設定 */
+
+/* 線の色 */
+:root {
+    --border-color: #D9DEE5;
+}
+
+
+:root {
+    /* コンテンツ幅を設定 */
+    --content-width: 124rem;
+    --content-full: 144rem;
+    --content-width-sp: 100%;
+
+    /* コンテンツ幅余白を設定 */
+    --content-padding: 0 2rem;
+    --content-padding-sp: 0 1.5rem;
+}
+
+
+/* 角丸の設定 */
+:root {
+    --border-radius: 0;
+    --border-radius-sp: 0;
+}
+
+/* 記事投稿のサムネイルの設定 */
+:root {
+    --article-thumbnail-aspect-ratio: 1 / 1;
+}
+
+/* ボタンの設定 */
+:root {
+    /* ボタン01（アウトライン） */
+    --button-background: #ffffff;
+    --button-text: #0A0A0A;
+    --button-border-color: #0A0A0A;
+    --button-border-radius: 8px;
+
+    /* ボタン02（塗りつぶし） */
+    --button-background02: #0033ff;
+    --button-text02: #ffffff;
+    --button-border-color02: #0033ff;
+    --button-border-radius02: 4px;
+
+    /* 共通 */
+    --button-border-width: 2px;
+}
+
+/* ボタンホバー設定 */
+:root {
+    /* ボタン01 ホバー */
+    --button-hover-background: #0033ff;
+    --button-hover-text: #ffffff;
+    --button-hover-border-color: #0033ff;
+
+    /* ボタン02 ホバー */
+    --button-hover-background02: #fff;
+    --button-hover-text02: #0A0A0A;
+    --button-hover-border-color02: #0A0A0A;
+}
+
+
+/* ヘッダーの高さ設定 */
+:root {
+    --header-height: 7.2rem;
+    --header-height-sp: 6rem;
+}
+
+/* ロゴ設定 */
+:root {
+    --logo-max-width: 24.1rem;
+    --logo-max-width-sp: 18rem;
+}
+
+/* アニメーションの動きの設定 */
+:root {
+    --transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+:root {
+    --border-radius01: 4px;
+    --border-radius02: 12px;
+    --border-radius03: 60px;
+}
+/* 案件カラー（ビルテック） */
+:root {
+    /* 見出し・本文の青（Figma #003C88） */
+    --text-blue: #003C88;
+    /* 強調（「新しい仲間」） */
+    --accent: #E55E40;
+    /* 見出し下の短い線 */
+    --line-color: #88BADD;
+    /* 下層ページの背景 */
+    --site-background-sub: #F8FAFA;
+    /* 「まずは話を聞いてみる」「直応募エントリーフォーム」ボタン */
+    --gradient: linear-gradient(90deg, #6897FE 0%, #1E4AB8 100%);
+    /* ヘッダー背景（白・透過80%） */
+    --header-background: rgba(255, 255, 255, .8);
+    /* 動きの速さ */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}

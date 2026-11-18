@@ -1,0 +1,454 @@
+/* TOP（front-page.php）だけのスタイル */
+
+body.home {
+    background: #fff;
+}
+
+.top-main {
+    overflow-x: clip;
+}
+
+/* opening：白い画面にロゴとコピー → 画像が出てロゴが消える（add.js initOpening） */
+.opening {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    transition: opacity 1.2s ease, visibility 1.2s ease;
+}
+
+.js-ready .opening {
+    display: flex;
+}
+
+.opening__inner {
+    text-align: center;
+    color: var(--text-blue);
+    opacity: 0;
+    transform: translateY(3rem);
+    animation: opening-in 1s ease forwards .2s;
+}
+
+.opening__logo {
+    width: 20rem;
+    height: auto;
+    margin: 0 auto 2rem;
+}
+
+.opening__text {
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: .05em;
+}
+
+.opening.is-done {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.opening.is-done .opening__inner {
+    transition: opacity .8s ease;
+    opacity: 0;
+}
+
+.opening.is-skip {
+    display: none;
+}
+
+@keyframes opening-in {
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* top-mv-typeA：フェードで切り替わる3枚の背景＋キャッチ */
+.top-mv {
+    position: relative;
+    height: 78rem;
+    min-height: 60rem;
+    color: #fff;
+    overflow: hidden;
+    background: var(--primary);
+}
+
+.top-mv__slider,
+.top-mv__slider .splide__track,
+.top-mv__slider .splide__list,
+.top-mv__slide {
+    height: 100%;
+}
+
+.top-mv__slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 8s linear;
+}
+
+.top-mv__slide.is-active img {
+    transform: scale(1.08);
+}
+
+.top-mv__content {
+    position: absolute;
+    left: 18rem;
+    top: 18.2rem;
+    z-index: 2;
+}
+
+.top-mv__title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 7rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: .02em;
+    margin-bottom: 2.8rem;
+}
+
+/* 1行ずつ、青い帯が左から伸びて右へ抜け、文字が現れる */
+.top-mv__line {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.top-mv__line::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--primary);
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+.js-ready .top-mv__line-text {
+    opacity: 0;
+}
+
+.top-mv.is-start .top-mv__line::after {
+    animation: mv-bar .9s cubic-bezier(.77, 0, .175, 1) forwards;
+    animation-delay: calc(var(--i, 0) * .25s);
+}
+
+.top-mv.is-start .top-mv__line-text {
+    animation: mv-text .01s linear forwards;
+    animation-delay: calc(var(--i, 0) * .25s + .45s);
+}
+
+@keyframes mv-bar {
+    0% { transform: scaleX(0); transform-origin: left center; }
+    50% { transform: scaleX(1); transform-origin: left center; }
+    50.1% { transform: scaleX(1); transform-origin: right center; }
+    100% { transform: scaleX(0); transform-origin: right center; }
+}
+
+@keyframes mv-text {
+    to { opacity: 1; }
+}
+
+.top-mv__lead {
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 2;
+    letter-spacing: .05em;
+    text-shadow: 0 0 1.2rem rgba(0, 40, 100, .25);
+}
+
+.js-ready .top-mv__lead {
+    opacity: 0;
+    transform: translateY(1.6rem);
+    transition: opacity 1s ease 1s, transform 1s var(--ease-out) 1s;
+}
+
+.top-mv.is-start .top-mv__lead {
+    opacity: 1;
+    transform: none;
+}
+
+/* Scroll Down：縦線が上から下へ流れ続ける */
+.top-mv__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .8rem;
+    transform: translateX(-50%);
+    font-size: 1.3rem;
+}
+
+.top-mv__scroll-line {
+    position: relative;
+    display: block;
+    width: 1px;
+    height: 4rem;
+    background: rgba(255, 255, 255, .4);
+    overflow: hidden;
+}
+
+.top-mv__scroll-line::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    transform-origin: top;
+    animation: mv-scroll 1.8s ease-in-out infinite;
+}
+
+@keyframes mv-scroll {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    50.1% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* 右下の3本のバー：表示中のスライドのバーが伸びる */
+.top-mv__progress {
+    position: absolute;
+    right: 13rem;
+    bottom: 2rem;
+    z-index: 2;
+    display: flex;
+    gap: 1.2rem;
+}
+
+.top-mv__bar {
+    position: relative;
+    width: 8rem;
+    height: 3px;
+    background: rgba(255, 255, 255, .4);
+}
+
+.top-mv__bar span {
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.top-mv__bar.is-active span {
+    transform: scaleX(1);
+    transition: transform var(--mv-interval, 6s) linear;
+}
+
+/* top-intro：「ビルテックは今、」＋3職種の画像リンク */
+.top-intro {
+    position: relative;
+    padding: 10rem 0 12rem;
+    text-align: center;
+    color: var(--text-blue);
+}
+
+.top-intro__bg {
+    position: absolute;
+    left: 0;
+    top: 24rem;
+    width: 61rem;
+    height: auto;
+    pointer-events: none;
+}
+
+.top-intro__inner {
+    position: relative;
+}
+
+.top-intro__title {
+    font-size: 3.4rem;
+    line-height: 1.6;
+    letter-spacing: .05em;
+    margin-bottom: 2.4rem;
+}
+
+.top-intro__title em {
+    font-style: normal;
+    color: var(--accent);
+}
+
+.top-intro__text {
+    font-size: 1.6rem;
+    line-height: 2.2;
+    margin-bottom: 6rem;
+}
+
+.top-intro__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6rem;
+    max-width: 120rem;
+    margin: 0 auto;
+}
+
+.top-intro__img img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 360 / 130;
+    object-fit: cover;
+}
+
+.top-intro__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 2.4rem;
+    margin-top: 1.6rem;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+}
+
+.top-intro__label .icon-chevron {
+    width: 1rem;
+    height: 1.6rem;
+    transition: transform .3s var(--ease-out);
+}
+
+.top-intro__link:hover .icon-chevron {
+    transform: translateX(.4rem);
+}
+
+/* top-recruit */
+.top-recruit {
+    padding-top: 12rem;
+}
+
+.top-recruit__more {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+/* interview-typeF の上余白 */
+.top-main .interview-typeF {
+    padding-top: 12rem;
+}
+
+/* 流れる英文 */
+.top-loop {
+    margin: 8rem 0 0;
+}
+
+.top-loop .loop__content {
+    animation-duration: 60s;
+}
+
+.top-loop .loop__item {
+    padding-right: 6rem;
+    color: #000;
+    font-size: 9rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: .05em;
+}
+
+@media screen and (max-width: 991px) {
+    .top-mv__content {
+        left: 8rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .top-mv {
+        height: 68rem;
+        min-height: 0;
+    }
+
+    .top-mv__content {
+        left: 1.5rem;
+        right: 1.5rem;
+        top: 19rem;
+    }
+
+    .top-mv__title {
+        font-size: 4.8rem;
+    }
+
+    .top-mv__lead {
+        font-size: 1.5rem;
+    }
+
+    .top-mv__lead br {
+        display: none;
+    }
+
+    .top-mv__progress {
+        right: 0;
+        bottom: 2.4rem;
+        gap: 1.2rem;
+    }
+
+    .top-mv__bar {
+        width: 4rem;
+    }
+
+    .top-intro {
+        padding: 6rem 0;
+        text-align: left;
+    }
+
+    .top-intro__bg {
+        top: auto;
+        bottom: 40rem;
+        width: 100%;
+        opacity: .5;
+    }
+
+    .top-intro__title {
+        font-size: 2.6rem;
+    }
+
+    /* SP は赤い言葉の前で改行（デザインどおり） */
+    .top-intro__title em::before {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .top-intro__text {
+        font-size: 1.5rem;
+        line-height: 2;
+        margin-bottom: 4rem;
+    }
+
+    .top-intro__text br {
+        display: none;
+    }
+
+    .top-intro__cards {
+        grid-template-columns: 1fr;
+        gap: 3.2rem;
+    }
+
+    .top-intro__card {
+        text-align: center;
+    }
+
+    .top-intro__label {
+        font-size: 1.8rem;
+    }
+
+    .top-recruit {
+        padding-top: 6rem;
+    }
+
+    .top-main .interview-typeF {
+        padding-top: 6rem;
+    }
+
+    .top-loop {
+        margin-top: 4rem;
+    }
+
+    .top-loop .loop__item {
+        font-size: 5rem;
+        padding-right: 3rem;
+    }
+}
