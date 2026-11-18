@@ -68,5 +68,9 @@ return array(
         'company_zip' => array('label' => '郵便番号', 'type' => 'text', 'default' => '〒260-0028'),
         'company_address' => array('label' => '住所', 'type' => 'text', 'default' => '千葉県千葉市中央区新町18-10'),
         'company_building' => array('label' => '建物名', 'type' => 'text', 'default' => '千葉第一生命ビルディング2F'),
+        'company_ceo' => array('label' => '代表者（役職と名前）', 'type' => 'text', 'default' => '代表取締役 大吉 弘', 'instructions' => 'プライバシーポリシーに表示します。'),
+        'company_tel' => array('label' => 'お問い合わせ窓口の電話番号', 'type' => 'text', 'default' => '', 'instructions' => 'プライバシーポリシーの窓口に表示します。空欄なら表示しません。'),
+        'company_mail' => array('label' => 'お問い合わせ窓口のメールアドレス', 'type' => 'text', 'default' => '', 'instructions' => '空欄なら表示しません。'),
+        'privacy_date' => array('label' => 'プライバシーポリシーの施行日', 'type' => 'text', 'default' => '2026年12月1日', 'instructions' => '公開日に合わせて変更してください。'),
     ),
 );

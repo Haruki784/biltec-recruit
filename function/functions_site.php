@@ -132,6 +132,9 @@ function theme_company()
         'zip'       => theme_option('company_zip'),
         'address'   => theme_option('company_address'),
         'building'  => theme_option('company_building'),
+        'ceo'       => theme_option('company_ceo'),
+        'tel'       => theme_option('company_tel'),
+        'mail'      => theme_option('company_mail'),
     );
 }
 

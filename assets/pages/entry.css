@@ -1,0 +1,56 @@
+/* エントリーフォーム（page-entry.php）だけのスタイル。プライバシーポリシーと同じ素のレイアウト */
+
+.entry-form__lead {
+    font-size: 1.6rem;
+    line-height: 1.9;
+}
+
+.entry-form__body {
+    max-width: 90rem;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* チョク採フォームの高さはフォーム側で変わるので、十分な高さを取る */
+.entry-form__iframe {
+    display: block;
+    width: 100%;
+    height: 160rem;
+    border: 0;
+    background: #fff;
+}
+
+.entry-form__empty {
+    padding: 6rem 2rem;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.entry-form__privacy {
+    text-align: center;
+}
+
+.entry-form__privacy a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+    .entry-form__lead {
+        font-size: 1.5rem;
+    }
+
+    .entry-form__iframe {
+        height: 200rem;
+    }
+
+    .entry-form__privacy {
+        text-align: left;
+    }
+}
+
+/* 背景はプライバシーポリシーと同じ */
+.entry-form {
+    background: var(--site-background-sub);
+}

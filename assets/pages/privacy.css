@@ -1,5 +1,5 @@
 .privacy {
-    background: var(--primary);
+    background: var(--site-background-sub); /* テンプレートでは --primary（薄いグレー）。この案件の --primary は青なので下層ページの背景色に */
 }
 
 .privacy .container {

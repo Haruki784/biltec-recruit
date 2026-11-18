@@ -110,6 +110,7 @@ if (!function_exists('theme_get_canonical_url')) {
         'process'    => is_page('process'),
         'job'        => is_post_type_archive('job') || is_singular('job'),
         'interview'  => is_post_type_archive('interview') || is_singular('interview'),
+        'entry'      => is_page('entry'),
         'privacy'    => is_page('privacy'),
         'thanks'     => is_page('thanks'),
     );

@@ -1,21 +1,23 @@
 <?php
 get_header();
+// 会社名・代表者・住所・施行日は TOP の「共通：会社情報」タブ（theme_company() / theme_option()）
+$company = theme_company();
 ?>
 
 <main>
     <section class="privacy py-9">
         <div class="container grid grid-1 gap-y-8">
             <?php get_template_part('snippet/breadcrumb'); ?>
-            <h2 class="privacy__heading heading-3">
+            <h1 class="privacy__heading heading-3">
                 採用活動におけるプライバシーポリシー
-            </h2>
+            </h1>
             <div class="privacy__head">
                 <div class="privacy__description">
-                    借り物(以下「当社」といいます。)は、採用活動において応募者の皆様からご提供いただく個人情報の重要性を認識し、<br>
+                    <?php echo esc_html($company['name']); ?>(以下「当社」といいます。)は、採用活動において応募者の皆様からご提供いただく個人情報の重要性を認識し、<br>
                     個人情報の保護に関する法律その他関連法令を遵守するとともに、以下の方針に基づき個人情報を適切に取り扱い、保護に努めます。<br>
                 </div>
                 <div class="privacy__companyInfo mt-2">
-                    借り物<br>代表取締役 山田太郎<br>東京都新宿区西新宿1-2-3
+                    <?php echo esc_html($company['name']); ?><br><?php echo esc_html($company['ceo']); ?><br><?php echo esc_html($company['address'] . ' ' . $company['building']); ?>
                 </div>
             </div>
             <div class="privacy__body grid grid-1 gap-y-6">
@@ -26,7 +28,7 @@ get_header();
                     </p>
                     <ul class="privacy__items flex flex-1 gap-y-1">
                         <li class="privacy__item col">
-                            基本情報(氏名、生年月日、性別、住所、電話番号、メールアドレス等)基本情報(氏名、生年月日、性別、住所、電話番号、メールアドレス等)基本情報(氏名、生年月日、性別、住所、電話番号、メールアドレス等)基本情報(氏名、生年月日、性別、住所、電話番号、メールアドレス等)基本情報(氏名、生年月日、性別、住所、電話番号、メールアドレス等)基本情報(氏名、生年月日、性別、住所、電話番号、メールアドレス等)
+                            基本情報(氏名、生年月日、性別、住所、電話番号、メールアドレス等)
                         </li>
                         <li class="privacy__item col">
                             学歴・職歴情報(最終学歴、学校名、卒業年月、職歴、勤務先名、勤務期間等)
@@ -44,6 +46,12 @@ get_header();
                     <p class="privacy__text">
                         当社は、取得した個人情報を以下の目的で利用いたします。<br>
                     </p>
+                    <ul class="privacy__items flex flex-1 gap-y-1">
+                        <li class="privacy__item col">応募者への連絡、採用選考に関する情報のご案内</li>
+                        <li class="privacy__item col">採用選考の実施および合否の判断</li>
+                        <li class="privacy__item col">内定者・入社予定者への入社手続きに関するご連絡</li>
+                        <li class="privacy__item col">採用活動の改善を目的とした統計データの作成（個人を特定できない形に加工したもの）</li>
+                    </ul>
                 </div>
                 <div class="privacy__box grid grid-1 gap-y-1">
                     <h3 class="privacy__title heading-4">3.個人情報の管理</h3>
@@ -62,7 +70,7 @@ get_header();
                 <?php get_template_part('snippet/contact-address'); ?>
                 <div class="privacy__box grid grid-1 gap-y-1">
                     <p class="privacy__text">
-                        以附則<br>本ポリシーは、2026年3月1日より施行します。
+                        附則<br>本ポリシーは、<?php echo esc_html(theme_option('privacy_date')); ?>より施行します。
                     </p>
                 </div>
             </div>
