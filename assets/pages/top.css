@@ -301,11 +301,12 @@ body.home {
     display: inline-flex;
     color: var(--text-blue);
     align-items: center;
-    gap: 2.4rem;
+    gap: 1.6rem;
     margin-top: 1.6rem;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 600;
-    letter-spacing: .1em;
+    letter-spacing: .05em;
+    white-space: nowrap;
 }
 
 .top-intro__label .icon-chevron {

@@ -21,7 +21,7 @@ return array(
     'fields'         => array(
 
         'tab_job_card' => array('label' => 'カード・ナビ', 'type' => 'tab'),
-        'job_note' => array('label' => '', 'type' => 'message', 'message' => 'タイトルには職種名（例：意匠設計部）を入れてください。カードの写真は「アイキャッチ画像」を使います。'),
+        'job_note' => array('label' => '', 'type' => 'message', 'message' => 'タイトルには職種名（募集要項の原稿の表記。例：意匠設計）を入れ、後ろの（リーダー候補）などは下の欄に入れてください。カードの写真は「アイキャッチ画像」を使います。'),
         'card_title_sub' => array('label' => '職種名の後ろ（例：（リーダー候補））', 'type' => 'text'),
         'nav_label' => array('label' => 'メニューでの表示名', 'type' => 'text', 'instructions' => '空欄ならタイトルを使います。'),
         'catch' => array('label' => 'キャッチ', 'type' => 'text'),

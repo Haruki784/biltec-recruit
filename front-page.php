@@ -80,15 +80,17 @@ $text = function ($name) use ($top_id) {
             <p class="top-intro__text js-fade"><?php echo $text('intro_text'); ?></p>
             <ul class="top-intro__cards">
                 <?php
-                // 3職種の画像リンク（リンク先は募集要項のスラッグ）
+                // 3職種の画像リンク（リンク先と表示名は募集要項の投稿。表示名は投稿のタイトル）
                 $intro_cards = array(
-                    array('slug' => 'ishou', 'label' => '設計部', 'img' => 'sec1_bnr01.webp'),
-                    array('slug' => 'kouzu', 'label' => '工図部', 'img' => 'sec1_bnr02.webp'),
-                    array('slug' => 'factory', 'label' => '工場長候補', 'img' => 'sec1_bnr03.webp'),
+                    array('slug' => 'ishou', 'img' => 'sec1_bnr01.webp'),
+                    array('slug' => 'kouzu', 'img' => 'sec1_bnr02.webp'),
+                    array('slug' => 'factory', 'img' => 'sec1_bnr03.webp'),
                 );
                 foreach ($intro_cards as $card) :
                     $job = get_page_by_path($card['slug'], OBJECT, 'job');
-                    $url = $job ? get_permalink($job) : home_url('/job/');
+                    if (!$job) continue;
+                    $url = get_permalink($job);
+                    $card['label'] = get_the_title($job);
                 ?>
                     <li class="top-intro__card js-fade">
                         <a href="<?php echo esc_url($url); ?>" class="top-intro__link">
