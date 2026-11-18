@@ -1,0 +1,195 @@
+/* 事業紹介（page-business.php）だけのスタイル */
+
+.bz-main {
+    background: var(--site-background-sub);
+    overflow-x: clip;
+}
+
+.bz-section {
+    padding-top: 12rem;
+}
+
+.bz-about {
+    padding-top: 7rem;
+}
+
+/* 本文幅 90rem の中央寄せ */
+.bz-inner {
+    max-width: 94rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* heading-typeC に英字の小見出しを足す */
+.bz-heading {
+    margin-bottom: 3.2rem;
+}
+
+.bz-heading__en {
+    display: block;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: -.2rem;
+}
+
+.bz-heading__small {
+    font-size: .6em;
+    letter-spacing: .02em;
+}
+
+/* 青のリード＋本文 */
+.bz-lead {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.6;
+    color: var(--text-blue);
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.bz-text {
+    font-size: 1.6rem;
+    line-height: 1.8;
+}
+
+/* 街並み（全幅・高さ 24.7rem） */
+.bz-city {
+    margin-top: 7rem;
+}
+
+.bz-city img {
+    display: block;
+    width: 100%;
+    height: 24.7rem;
+    object-fit: cover;
+}
+
+/* ミッションの画像2枚 */
+.bz-mission__images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    margin-top: 7rem;
+}
+
+.bz-mission__img img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 420 / 330;
+    object-fit: cover;
+}
+
+/* 製品カード（2列） */
+.bz-product__items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem 6rem;
+    margin-top: 5rem;
+}
+
+.bz-product__img img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 420 / 330;
+    object-fit: cover;
+}
+
+.bz-product__title {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #000;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.bz-product__text {
+    margin-top: 1.5rem;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .bz-section {
+        padding-top: 7rem;
+    }
+
+    .bz-about {
+        padding-top: 5rem;
+    }
+
+    .bz-inner {
+        padding: 0 1.5rem;
+    }
+
+    .bz-heading {
+        margin-bottom: 2.4rem;
+    }
+
+    .bz-heading__en {
+        font-size: 1.8rem;
+    }
+
+    .bz-heading .heading-main {
+        font-size: 2.4rem;
+    }
+
+    .bz-lead {
+        font-size: 2rem;
+        text-align: left;
+        margin-bottom: 3rem;
+    }
+
+    .bz-text {
+        font-size: 1.4rem;
+    }
+
+    .bz-city {
+        margin-top: 3rem;
+    }
+
+    /* SP は2枚を左右にずらして縦に並べる */
+    .bz-mission__images {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin: 3rem -1.5rem 0;
+    }
+
+    .bz-mission__img {
+        width: 64.5%;
+    }
+
+    .bz-mission__img:nth-child(2) {
+        margin-left: auto;
+    }
+
+    .bz-mission__img img {
+        aspect-ratio: 242 / 190;
+    }
+
+    .bz-product__items {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        margin-top: 3rem;
+    }
+
+    .bz-product__item {
+        padding: 0 1.5rem;
+    }
+
+    .bz-product__img img {
+        aspect-ratio: 315 / 248;
+    }
+
+    .bz-product__title {
+        padding: 1rem 0 1.5rem;
+        font-size: 1.6rem;
+    }
+
+    .bz-product__text {
+        margin: 2rem -1.5rem 0;
+        font-size: 1.4rem;
+    }
+}
