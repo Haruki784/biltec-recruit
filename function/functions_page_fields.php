@@ -14,6 +14,9 @@
  *   'tab_mv'   => array('label' => 'MV', 'type' => 'tab'),
  *   'item_1'   => array('label' => '項目1', 'type' => 'group', 'sub_fields' => array(...)),
  * type：text / textarea / url / image / number / tab / group / message
+ *
+ * 固定ページ用は 'location' の代わりに 'page_slug' => '<スラッグ>' と書ける。
+ * 例：return array('title' => '事業紹介の内容', 'page_slug' => 'business', 'hide_on_screen' => array('the_content'), 'fields' => array(...));
  * 項目名はテーマ全体で重ならないようにする（初期値の一覧を共有するため）。
  */
 
@@ -125,6 +128,11 @@ add_action('acf/include_fields', function () {
         return;
     }
     foreach (theme_field_groups() as $key => $group) {
+        // 'page_slug' => 'business' と書けば、そのスラッグの固定ページに表示する
+        if (!empty($group['page_slug'])) {
+            $page = get_page_by_path($group['page_slug']);
+            $group['location'] = array(array(array('param' => 'page', 'operator' => '==', 'value' => $page ? (string) $page->ID : '0')));
+        }
         $fields = array();
         foreach ($group['fields'] as $name => $field) {
             $fields[] = theme_acf_field($key, $name, $field);
