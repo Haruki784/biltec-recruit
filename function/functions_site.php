@@ -213,7 +213,8 @@ function theme_nav()
             array('label' => '手すりができるまで', 'url' => home_url('/process/')),
             array('label' => '教育・キャリアパス', 'url' => home_url('/career/')),
         )),
-        array('label' => '募集職種', 'children' => $jobs),
+        // 'index'：ヘッダーとSPメニューでは子の先頭に一覧ページへのリンクを出す（フッターには出さない）
+        array('label' => '募集職種', 'index' => array('label' => '募集職種一覧', 'url' => home_url('/job/')), 'children' => $jobs),
     );
 }
 

@@ -26,6 +26,9 @@
                             <li class="gnav__item">
                                 <span class="gnav__link toggle" tabindex="0"><?php echo esc_html($item['label']); ?><span class="gnav__plus" aria-hidden="true"></span></span>
                                 <ul class="nav nav__items">
+                                    <?php if (!empty($item['index'])) : ?>
+                                        <li class="nav__item"><a href="<?php echo esc_url($item['index']['url']); ?>" class="nav__link"><?php echo esc_html($item['index']['label']); ?></a></li>
+                                    <?php endif; ?>
                                     <?php foreach ($item['children'] as $child) : ?>
                                         <li class="nav__item"><a href="<?php echo esc_url($child['url']); ?>" class="nav__link"><?php echo esc_html($child['label']); ?></a></li>
                                     <?php endforeach; ?>
@@ -58,8 +61,11 @@
                             <li class="drawer__item">
                                 <button type="button" class="drawer__toggle toggle" aria-expanded="false"><?php echo esc_html($item['label']); ?><span class="gnav__plus" aria-hidden="true"></span></button>
                                 <ul class="drawer__children toggle__content">
+                                    <?php if (!empty($item['index'])) : ?>
+                                        <li><a href="<?php echo esc_url($item['index']['url']); ?>" class="drawer__child-link drawer__link"><span class="drawer__dash">－</span><?php echo esc_html($item['index']['label']); ?></a></li>
+                                    <?php endif; ?>
                                     <?php foreach ($item['children'] as $child) : ?>
-                                        <li><a href="<?php echo esc_url($child['url']); ?>" class="drawer__child-link drawer__link">－<?php echo esc_html($child['label']); ?></a></li>
+                                        <li><a href="<?php echo esc_url($child['url']); ?>" class="drawer__child-link drawer__link"><span class="drawer__dash">－</span><?php echo esc_html($child['label']); ?></a></li>
                                     <?php endforeach; ?>
                                 </ul>
                             </li>

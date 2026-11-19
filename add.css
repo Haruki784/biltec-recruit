@@ -1482,20 +1482,56 @@ a.img-zoom:hover img {
     transform: translate(-50%, -50%) rotate(0);
 }
 
+/* ドロップダウン（デザイン：白い箱、各項目の前に青い「＞」、項目の間は広め）。
+   箱の左端は親メニューの左端にそろえる */
 .header-typeD .nav {
-    min-width: 20rem;
-    padding: 1.6rem 2.4rem;
-    gap: .8rem;
+    left: 0;
+    transform: none;
+    min-width: 34rem;
+    padding: 3.2rem 4rem;
+    gap: 2rem;
     background: #fff;
-    box-shadow: 0 .8rem 2.4rem rgba(0, 0, 0, .08);
+    box-shadow: 0 .8rem 2.4rem rgba(0, 0, 0, .06);
+}
+
+/* 一番右の「募集職種」は職種名が長く画面の右端からはみ出すので、箱の右端を親メニューの右端にそろえる */
+.header-typeD .gnav__item:last-child .nav {
+    left: auto;
+    right: 0;
 }
 
 .header-typeD .nav__link {
-    font-size: 1.4rem;
+    position: relative;
+    display: block;
+    padding-left: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 500;
+    line-height: 1.4;
+}
+
+.header-typeD .nav__link::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: .8rem;
+    height: .8rem;
+    border-top: 1.5px solid var(--primary);
+    border-right: 1.5px solid var(--primary);
+    transform: translateY(-50%) rotate(45deg);
+    transition: left .3s var(--ease-out);
 }
 
 .header-typeD .nav__link:hover {
+    color: var(--primary);
+}
+
+.header-typeD .nav__link:hover::before {
+    left: .3rem;
+}
+
+/* SPメニューの子リンクの「－」は青（フッターと同じ） */
+.drawer-typeD .drawer__dash {
     color: var(--primary);
 }
 
@@ -1902,18 +1938,17 @@ a.img-zoom:hover img {
    行の上から 3rem、写真側に 1.7rem だけはみ出す */
 .job-typeA .job__badge {
     position: absolute;
-    top: 3rem;
+    top: 2rem;
     left: -1.7rem;
     z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 16rem;
-    height: 16rem;
+    width: 13rem;
+    height: 13rem;
     border: 1px solid var(--line-color);
     border-radius: 50%;
-    background: #fff;
     color: var(--line-color);
     font-size: 1.4rem;
     font-weight: 500;
@@ -1924,7 +1959,7 @@ a.img-zoom:hover img {
 
 .job-typeA .job__item--reverse .job__badge {
     left: auto;
-    right: -1.7rem;
+    right: -2.7rem;
 }
 
 .job-typeA .job__badge strong {
@@ -2683,4 +2718,14 @@ a.img-zoom:hover img {
    白い箱（やりがい・カードなど）がグレーの上に乗るようにする。フッターまわりは site-loop / footer-typeC で白 */
 body:not(.home) {
     background: var(--site-background-sub);
+}
+
+/* スライダーの「戻り」対策（2026-11-19）
+   base.css の * { transition: var(--transition) } がスライダーの列（.splide__list）にも効いていた。
+   Splide のループは、最後の1枚から先へ進むとき「インラインの transition を外して一瞬で先頭側へ位置を戻す」ので、
+   そこに 0.7秒の transition が残ると、3 → 2 → 1 と左から右へ戻るアニメーションに見えてしまう。
+   動かす transition は Splide がインラインで付けるので、CSS 側は none にしておく */
+.splide__list,
+.splide__slide {
+    transition: none;
 }

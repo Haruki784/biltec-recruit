@@ -85,7 +85,7 @@
      *   2. .is-logo-out：白い画面のまま、ロゴとコピーが約1.8秒かけてゆっくり消える
      *   3. onReveal：白い画面を外し、MV の写真を白からフェードイン（.is-bg-in）。切り替えとバーも開始
      *   4. onFinish：写真が出てきたら MV のキャッチが流れる（.is-start）
-     * 同じタブで2回目以降に TOP を開いたときはオープニングを飛ばす。
+     * TOP を開くたびに毎回出す（参考サイト recruit.agb.co.jp と同じ）。
      */
     function initOpening(onReveal, onFinish) {
         var opening = document.getElementById('opening');
@@ -95,18 +95,6 @@
             return;
         }
 
-        var seen = false;
-        try { seen = sessionStorage.getItem('biltec_opening') === '1'; } catch (e) { /* 使えない環境は毎回出す */ }
-
-        if (seen) {
-            // 2回目以降はロゴを飛ばして、MV の写真のフェードイン → キャッチ から
-            opening.classList.add('is-skip');
-            onReveal();
-            setTimeout(onFinish, 1400);
-            return;
-        }
-
-        try { sessionStorage.setItem('biltec_opening', '1'); } catch (e) { /* noop */ }
         document.documentElement.classList.add('is-opening'); // オープニング中はスクロールさせない
 
         var wait = function (ms) { return new Promise(function (resolve) { setTimeout(resolve, ms); }); };
@@ -203,6 +191,7 @@
         new Splide(root, Object.assign(motion(1000), {
             type: 'loop',
             focus: 'center',
+            clones: 6,
             perPage: 3,
             perMove: 1,
             gap: '6rem',
@@ -234,6 +223,7 @@
         var slider = new Splide(root, Object.assign(motion(1000), {
             type: 'loop',
             perPage: 2.5,
+            clones: 6,
             perMove: 1,
             gap: 0,
             speed: 1000,
