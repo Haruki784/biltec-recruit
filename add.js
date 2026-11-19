@@ -5,7 +5,13 @@
 (function () {
     'use strict';
 
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    /*
+     * Splide は OS の「視差効果を減らす」（Windows の「アニメーション効果」オフ）を検知すると
+     * 自動再生を止め、切り替えを一瞬にしてしまう。デザインどおりに動かすため、その上書きを打ち消す。
+     */
+    function motion(speed) {
+        return { reducedMotion: { speed: speed, rewindSpeed: speed, autoplay: true } };
+    }
 
     /**
      * career-typeC：社員キャリア事例のスライダー（Splide）
@@ -51,13 +57,13 @@
     }
 
     /**
-     * 画面に入ったら .is-inview を付ける（js-lines / js-fade / js-slide）
+     * 画面に入ったら .is-inview を付ける（js-lines / js-fade / js-slide / js-city）
      */
     function initInview() {
-        var targets = document.querySelectorAll('.js-lines, .js-fade, .js-slide');
+        var targets = document.querySelectorAll('.js-lines, .js-fade, .js-slide, .js-city');
         if (!targets.length) return;
 
-        if (!('IntersectionObserver' in window) || reduceMotion) {
+        if (!('IntersectionObserver' in window)) {
             targets.forEach(function (el) { el.classList.add('is-inview'); });
             return;
         }
@@ -74,12 +80,18 @@
     }
 
     /**
-     * TOP：オープニング → MV のキャッチを表示
+     * TOP：オープニング（デザインの指示：最初にロゴとコピーだけが中央に出る → 画像が出てくる →
+     * ロゴがだんだん消える → そのあとテキストが流れる）
+     *   1. 白い画面にロゴとコピーが下からふわっと出る（CSS、約1.2秒）
+     *   2. .is-reveal：白い背景が 1.8秒かけて消えて MV の写真が見えてくる。ロゴは白に切り替わって残る
+     *   3. .is-logo-out：ロゴとコピーが 1.6秒かけてゆっくり消える
+     *   4. onFinish：MV のキャッチが流れる
      * 同じタブで2回目以降に TOP を開いたときはオープニングを飛ばす。
      */
-    function initOpening(onFinish) {
+    function initOpening(onReveal, onFinish) {
         var opening = document.getElementById('opening');
         if (!opening) {
+            onReveal();
             onFinish();
             return;
         }
@@ -87,27 +99,41 @@
         var seen = false;
         try { seen = sessionStorage.getItem('biltec_opening') === '1'; } catch (e) { /* 使えない環境は毎回出す */ }
 
-        if (seen || reduceMotion) {
+        if (seen) {
             opening.classList.add('is-skip');
+            onReveal();
             onFinish();
             return;
         }
 
         try { sessionStorage.setItem('biltec_opening', '1'); } catch (e) { /* noop */ }
+        document.documentElement.classList.add('is-opening'); // オープニング中はスクロールさせない
 
-        var minTime = new Promise(function (resolve) { setTimeout(resolve, 2000); });
+        var wait = function (ms) { return new Promise(function (resolve) { setTimeout(resolve, ms); }); };
         var loaded = new Promise(function (resolve) {
             if (document.readyState === 'complete') resolve();
             else window.addEventListener('load', resolve);
         });
-        // 読み込みが遅くても 4 秒で必ず抜ける
-        var timeout = new Promise(function (resolve) { setTimeout(resolve, 4000); });
 
-        Promise.race([Promise.all([minTime, loaded]), timeout]).then(function () {
-            opening.classList.add('is-done');
-            setTimeout(onFinish, 700);
-            setTimeout(function () { opening.classList.add('is-skip'); }, 1400);
-        });
+        // ロゴを最低 2.4秒は見せる。読み込みが遅くても 5秒で先へ進む
+        Promise.race([Promise.all([wait(2400), loaded]), wait(5000)])
+            .then(function () {
+                opening.classList.add('is-reveal');
+                onReveal();
+                return wait(2000);
+            })
+            .then(function () {
+                opening.classList.add('is-logo-out');
+                return wait(1400);
+            })
+            .then(function () {
+                document.documentElement.classList.remove('is-opening');
+                onFinish();
+                return wait(800);
+            })
+            .then(function () {
+                opening.classList.add('is-skip');
+            });
     }
 
     /**
@@ -137,7 +163,7 @@
         }
 
         if (typeof Splide !== 'undefined') {
-            slider = new Splide(mv.querySelector('.top-mv__slider'), {
+            slider = new Splide(mv.querySelector('.top-mv__slider'), Object.assign(motion(2000), {
                 type: 'fade',
                 rewind: true,
                 speed: 2000,
@@ -148,16 +174,22 @@
                 drag: false,
                 pauseOnHover: false,
                 pauseOnFocus: false
-            });
+            }));
             slider.on('move', function (index) { setBar(index); });
             slider.mount();
         }
 
-        initOpening(function () {
-            mv.classList.add('is-start');
-            setBar(0);
-            if (slider) slider.Components.Autoplay.play();
-        });
+        initOpening(
+            function () {
+                // 写真が見えてきたら背景の切り替え（とバー）を始める
+                setBar(0);
+                if (slider) slider.Components.Autoplay.play();
+            },
+            function () {
+                // ロゴが消えたらキャッチを流す
+                mv.classList.add('is-start');
+            }
+        );
     }
 
     /**
@@ -168,7 +200,7 @@
         var root = document.querySelector('.strength__slider');
         if (!root) return;
 
-        new Splide(root, {
+        new Splide(root, Object.assign(motion(1000), {
             type: 'loop',
             focus: 'center',
             perPage: 3,
@@ -183,7 +215,7 @@
             breakpoints: {
                 768: { perPage: 1.5, gap: '3rem' }
             }
-        }).mount();
+        })).mount();
     }
 
     /**
@@ -199,7 +231,7 @@
         // 左の「1」は固定、右は総数。間の線が進み具合に合わせて伸びる
         var bar = section.querySelector('.interview__progress-bar');
 
-        var slider = new Splide(root, {
+        var slider = new Splide(root, Object.assign(motion(1000), {
             type: 'loop',
             perPage: 2.5,
             perMove: 1,
@@ -214,7 +246,7 @@
             breakpoints: {
                 768: { perPage: 1.3 }
             }
-        });
+        }));
 
         slider.on('mounted move', function () {
             var total = slider.length;

@@ -8,7 +8,15 @@ body.home {
     overflow-x: clip;
 }
 
-/* opening：白い画面にロゴとコピー → 画像が出てロゴが消える（add.js initOpening） */
+/* opening（add.js initOpening）
+   1. 白い画面にロゴとコピーが下からふわっと出る
+   2. .is-reveal：白い背景（::before）が消えて MV の写真が見えてくる。ロゴとコピーは白に切り替わって残る
+   3. .is-logo-out：ロゴとコピーがゆっくり消える
+   4. .is-skip：要素ごと消す */
+html.is-opening {
+    overflow: hidden;
+}
+
 .opening {
     position: fixed;
     inset: 0;
@@ -16,8 +24,14 @@ body.home {
     display: none;
     align-items: center;
     justify-content: center;
+}
+
+.opening::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     background: #fff;
-    transition: opacity 1.2s ease, visibility 1.2s ease;
+    transition: opacity 1.8s ease;
 }
 
 .js-ready .opening {
@@ -25,17 +39,32 @@ body.home {
 }
 
 .opening__inner {
+    position: relative;
     text-align: center;
     color: var(--text-blue);
     opacity: 0;
     transform: translateY(3rem);
-    animation: opening-in 1s ease forwards .2s;
+    animation: opening-in 1.2s ease forwards .3s;
+    transition: color 1.2s ease;
+}
+
+.opening__logos {
+    position: relative;
+    width: 20rem;
+    margin: 0 auto 2rem;
 }
 
 .opening__logo {
-    width: 20rem;
+    display: block;
+    width: 100%;
     height: auto;
-    margin: 0 auto 2rem;
+    transition: opacity 1.2s ease;
+}
+
+.opening__logo--white {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
 }
 
 .opening__text {
@@ -45,18 +74,34 @@ body.home {
     letter-spacing: .05em;
 }
 
-.opening.is-done {
-    opacity: 0;
-    visibility: hidden;
+.opening.is-reveal {
+    pointer-events: none;
 }
 
-.opening.is-done .opening__inner {
-    transition: opacity .8s ease;
+.opening.is-reveal::before {
     opacity: 0;
+}
+
+.opening.is-reveal .opening__inner {
+    color: #fff;
+    text-shadow: 0 0 1.6rem rgba(0, 40, 100, .35);
+}
+
+.opening.is-reveal .opening__logo--color { opacity: 0; }
+.opening.is-reveal .opening__logo--white { opacity: 1; }
+
+/* ロゴは少しだけ広がりながら、ゆっくり消える */
+.opening.is-logo-out .opening__inner {
+    animation: opening-out 1.6s ease forwards;
 }
 
 .opening.is-skip {
     display: none;
+}
+
+@keyframes opening-out {
+    from { opacity: 1; transform: none; filter: blur(0); }
+    to { opacity: 0; transform: scale(1.04); filter: blur(4px); }
 }
 
 @keyframes opening-in {
@@ -67,10 +112,12 @@ body.home {
 }
 
 /* top-mv-typeA：フェードで切り替わる3枚の背景＋キャッチ */
+/* 高さは画面の高さまで（最初の画面で Scroll Down が必ず見えるように）。デザインの 780px が上限 */
 .top-mv {
     position: relative;
-    height: 78rem;
-    min-height: 60rem;
+    height: min(78rem, 100vh);
+    height: min(78rem, 100svh);
+    min-height: 56rem;
     color: #fff;
     overflow: hidden;
     background: var(--primary);
@@ -361,8 +408,9 @@ body.home {
 
 @media screen and (max-width: 768px) {
     .top-mv {
-        height: 68rem;
-        min-height: 0;
+        height: min(68rem, 100vh);
+        height: min(68rem, 100svh);
+        min-height: 52rem;
     }
 
     .top-mv__content {

@@ -28,9 +28,19 @@ if (!$jobs) return;
                     ?>
                     <p class="job__badge"><span><?php echo implode('<br>', array_map('esc_html', $badge_lines)); ?></span><strong><?php echo esc_html($badge_last); ?></strong></p>
                 <?php endif; ?>
-                <h3 class="job__title"><a href="<?php echo esc_url($url); ?>"><?php echo esc_html($title . $sub); ?></a></h3>
+                <h3 class="job__title"><?php echo esc_html($title . $sub); ?></h3>
                 <p class="job__catch"><?php echo esc_html(theme_field('catch', '', $job->ID)); ?></p>
-                <p class="job__tags"><?php echo nl2br(esc_html(theme_field('tags', '', $job->ID))); ?></p>
+                <?php
+                // 特徴は「 / 」区切りのかたまりごとに改行させない（SP で「未経験 / OK」のように途中で切れないように）
+                $tag_lines = array();
+                foreach (preg_split('/\R/u', trim((string) theme_field('tags', '', $job->ID))) as $line) {
+                    $parts = array_map(function ($part) {
+                        return '<span class="job__tag">' . esc_html(trim($part)) . '</span>';
+                    }, preg_split('#\s*/\s*#u', $line));
+                    $tag_lines[] = implode(' / ', $parts);
+                }
+                ?>
+                <p class="job__tags"><?php echo implode('<br>', $tag_lines); ?></p>
                 <a href="<?php echo esc_url($url); ?>" class="btn btn--primary btn--l job__btn"><span class="btn__text"><span class="job__btn-prefix"><?php echo esc_html($title); ?>の</span>詳細・募集要項を見る</span><?php echo theme_chevron(); ?></a>
             </div>
         </li>

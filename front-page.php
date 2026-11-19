@@ -20,7 +20,10 @@ $text = function ($name) use ($top_id) {
 
 <div class="opening" id="opening" aria-hidden="true">
     <div class="opening__inner">
-        <img src="<?php echo esc_url(theme_img('logo.svg')); ?>" alt="" width="200" height="38" class="opening__logo">
+        <div class="opening__logos">
+            <img src="<?php echo esc_url(theme_img('logo.svg')); ?>" alt="" width="200" height="38" class="opening__logo opening__logo--color">
+            <img src="<?php echo esc_url(theme_img('logo_w.svg')); ?>" alt="" width="200" height="38" class="opening__logo opening__logo--white">
+        </div>
         <p class="opening__text">アルミ手すり専門メーカー<br>ビルテック</p>
     </div>
 </div>

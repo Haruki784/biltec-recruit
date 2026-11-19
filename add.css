@@ -1304,15 +1304,7 @@ a.img-zoom:hover img {
     transform: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .js-ready .js-fade,
-    .js-ready .js-lines .js-lines__line,
-    .js-ready .js-slide {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
-}
+/* 動きは OS の「視差効果を減らす」設定に関係なく出す（デザインの指定。add.js の motion() も同じ） */
 
 /* heading-typeC（和文見出し＋短い線＋青のサブコピー。PCは中央、SPは左寄せ） */
 .heading-typeC {
@@ -1906,47 +1898,50 @@ a.img-zoom:hover img {
     padding: 4rem 6rem;
 }
 
+/* 丸バッジ（Figma 62:222：直径160px・線 #88BADD・文字 14/14/24px Medium）。
+   行の上から 3rem、写真側に 1.7rem だけはみ出す */
 .job-typeA .job__badge {
     position: absolute;
-    top: 1.6rem;
-    right: -8rem;
+    top: 3rem;
+    left: -1.7rem;
     z-index: 2;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 16rem;
     height: 16rem;
     border: 1px solid var(--line-color);
     border-radius: 50%;
-    background: rgba(255, 255, 255, .9);
+    background: #fff;
     color: var(--line-color);
-    flex-direction: column;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 500;
-    line-height: 1.5;
+    line-height: 1.4;
+    letter-spacing: .03em;
     text-align: center;
 }
 
-.job-typeA .job__badge strong {
-    margin-top: .4rem;
-    font-size: 2rem;
-    font-weight: 700;
+.job-typeA .job__item--reverse .job__badge {
+    left: auto;
+    right: -1.7rem;
 }
 
+.job-typeA .job__badge strong {
+    font-size: 2.4rem;
+    font-weight: 500;
+}
+
+/* 職種名はリンクにしない（写真とボタンがリンク） */
 .job-typeA .job__title {
     font-size: 2.4rem;
     font-weight: 700;
     line-height: 1.6;
 }
 
-/* テキストホバーで下線が伸びる */
-.job-typeA .job__title a {
-    background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat;
-    transition: background-size .4s var(--ease-out);
-}
-
-.job-typeA .job__title a:hover {
-    background-size: 100% 1px;
+/* 特徴は「 / 」区切りのかたまりの途中で改行しない */
+.job-typeA .job__tag {
+    display: inline-block;
 }
 
 .job-typeA .job__catch {
@@ -1977,7 +1972,8 @@ a.img-zoom:hover img {
     .job-typeA .job__title { font-size: 2rem; }
     .job-typeA .job__catch { display: none; }
     .job-typeA .job__btn-prefix { display: none; }
-    .job-typeA .job__btn { align-self: stretch; margin: .8rem 2rem 0; }
+    /* btn--l は SP で width:100% になるので、左右の余白は max-width と auto で取る（margin を足すとはみ出す） */
+    .job-typeA .job__btn { align-self: center; width: 100%; max-width: 30rem; margin: .8rem auto 0; }
 }
 
 /* interview-card（写真＋青帯キャッチ＋名前。snippet/interview-card.php） */
@@ -1995,11 +1991,13 @@ a.img-zoom:hover img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform .4s ease;
+    transition: transform .5s ease, filter .5s ease;
 }
 
+/* ホバーで大きく＆モノクロに（参考：ishizaka.gr.jp/recruit） */
 .interview-card__link:hover .interview-card__img img {
     transform: scale(1.08);
+    filter: grayscale(100%);
 }
 
 .interview-card__catch {
@@ -2180,7 +2178,8 @@ a.img-zoom:hover img {
 @media screen and (max-width: 768px) {
     .message-typeA { grid-template-columns: 1fr; }
     .message-typeA .message__img img { aspect-ratio: 375 / 220; height: auto; }
-    .message-typeA .message__body { padding: 3.2rem 1.5rem 6rem; }
+    /* ボタンの下の余白は PC と同じ（約90px）。強みセクションとの間に白い隙間は入れない */
+    .message-typeA .message__body { padding: 3.2rem 1.5rem 9rem; }
     .message-typeA .message__title { font-size: 2.4rem; }
     .message-typeA .message__label { display: none; }
     .message-typeA .message__btn { width: auto; margin: 0 3.2rem; }
@@ -2615,4 +2614,21 @@ a.img-zoom:hover img {
         font-size: 1.3rem;
         line-height: 1.6;
     }
+}
+
+/* cityscape の動き（CTA の上の街並み。footer.php の .js-city）
+   画像がぼんやり出てきて、下から街が立ち上がっていくように見せる。add.js initInview が .is-inview を付ける */
+.js-ready .js-city img {
+    opacity: 0;
+    filter: blur(1.2rem);
+    clip-path: inset(100% 0 0 0);
+    transform: translateY(2rem);
+    transition: opacity 1.6s ease-out, filter 2.4s ease-out, clip-path 2.4s cubic-bezier(.22, 1, .36, 1), transform 2.4s cubic-bezier(.22, 1, .36, 1);
+}
+
+.js-ready .js-city.is-inview img {
+    opacity: 1;
+    filter: blur(0);
+    clip-path: inset(0 0 0 0);
+    transform: none;
 }

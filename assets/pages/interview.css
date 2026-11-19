@@ -100,9 +100,10 @@
     line-height: 1.4;
 }
 
+/* ホバーは TOP と同じく大きく＆モノクロに */
 .iv-cards .interview-card__link:hover .interview-card__img img {
-    transform: none;
-    opacity: .8;
+    transform: scale(1.08);
+    filter: grayscale(100%);
 }
 
 .iv-cards .interview-card__img > img {

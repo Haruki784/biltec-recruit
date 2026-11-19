@@ -2,7 +2,7 @@
 $company = theme_company();
 $nav     = theme_nav();
 ?>
-<div class="cityscape" aria-hidden="true">
+<div class="cityscape js-city" aria-hidden="true">
     <img src="<?php echo esc_url(theme_img('top/sec6_bg.webp')); ?>" alt="" width="2400" height="412" loading="lazy">
 </div>
 
