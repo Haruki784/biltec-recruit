@@ -8,11 +8,10 @@ body.home {
     overflow-x: clip;
 }
 
-/* opening（add.js initOpening）
+/* opening（add.js initOpening。2026-11-19：ロゴがゆっくり消えてから、メインのアニメーションが始まる）
    1. 白い画面にロゴとコピーが下からふわっと出る
-   2. .is-reveal：白い背景（::before）が消えて MV の写真が見えてくる。ロゴとコピーは白に切り替わって残る
-   3. .is-logo-out：ロゴとコピーがゆっくり消える
-   4. .is-skip：要素ごと消す */
+   2. .is-logo-out：白い画面のまま、ロゴとコピーが少し広がりながらゆっくり消える
+   3. .is-skip：白い画面ごと外す → 下の MV（白から始まる）の写真がフェードイン（.top-mv.is-bg-in） */
 html.is-opening {
     overflow: hidden;
 }
@@ -24,14 +23,7 @@ html.is-opening {
     display: none;
     align-items: center;
     justify-content: center;
-}
-
-.opening::before {
-    content: "";
-    position: absolute;
-    inset: 0;
     background: #fff;
-    transition: opacity 1.8s ease;
 }
 
 .js-ready .opening {
@@ -45,11 +37,9 @@ html.is-opening {
     opacity: 0;
     transform: translateY(3rem);
     animation: opening-in 1.2s ease forwards .3s;
-    transition: color 1.2s ease;
 }
 
 .opening__logos {
-    position: relative;
     width: 20rem;
     margin: 0 auto 2rem;
 }
@@ -58,13 +48,6 @@ html.is-opening {
     display: block;
     width: 100%;
     height: auto;
-    transition: opacity 1.2s ease;
-}
-
-.opening__logo--white {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
 }
 
 .opening__text {
@@ -74,34 +57,12 @@ html.is-opening {
     letter-spacing: .05em;
 }
 
-.opening.is-reveal {
-    pointer-events: none;
-}
-
-.opening.is-reveal::before {
-    opacity: 0;
-}
-
-.opening.is-reveal .opening__inner {
-    color: #fff;
-    text-shadow: 0 0 1.6rem rgba(0, 40, 100, .35);
-}
-
-.opening.is-reveal .opening__logo--color { opacity: 0; }
-.opening.is-reveal .opening__logo--white { opacity: 1; }
-
-/* ロゴは少しだけ広がりながら、ゆっくり消える */
 .opening.is-logo-out .opening__inner {
-    animation: opening-out 1.6s ease forwards;
+    animation: opening-out 1.8s ease forwards;
 }
 
 .opening.is-skip {
     display: none;
-}
-
-@keyframes opening-out {
-    from { opacity: 1; transform: none; filter: blur(0); }
-    to { opacity: 0; transform: scale(1.04); filter: blur(4px); }
 }
 
 @keyframes opening-in {
@@ -109,6 +70,11 @@ html.is-opening {
         opacity: 1;
         transform: none;
     }
+}
+
+@keyframes opening-out {
+    from { opacity: 1; transform: none; filter: blur(0); }
+    to { opacity: 0; transform: scale(1.04); filter: blur(4px); }
 }
 
 /* top-mv-typeA：フェードで切り替わる3枚の背景＋キャッチ */
@@ -121,6 +87,29 @@ html.is-opening {
     color: #fff;
     overflow: hidden;
     background: var(--primary);
+}
+
+/* メインのアニメーションの始まり：MV は白から始まり、.is-bg-in で写真・Scroll Down・バーがフェードイン */
+.js-ready .top-mv {
+    background: #fff;
+}
+
+.js-ready .top-mv__slider,
+.js-ready .top-mv__scroll,
+.js-ready .top-mv__progress {
+    opacity: 0;
+    transition: opacity 1.6s ease;
+}
+
+.js-ready .top-mv.is-bg-in .top-mv__slider,
+.js-ready .top-mv.is-bg-in .top-mv__scroll,
+.js-ready .top-mv.is-bg-in .top-mv__progress {
+    opacity: 1;
+}
+
+.js-ready .top-mv.is-bg-in .top-mv__scroll,
+.js-ready .top-mv.is-bg-in .top-mv__progress {
+    transition-delay: 1.2s;
 }
 
 .top-mv__slider,

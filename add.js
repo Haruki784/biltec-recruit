@@ -80,12 +80,11 @@
     }
 
     /**
-     * TOP：オープニング（デザインの指示：最初にロゴとコピーだけが中央に出る → 画像が出てくる →
-     * ロゴがだんだん消える → そのあとテキストが流れる）
-     *   1. 白い画面にロゴとコピーが下からふわっと出る（CSS、約1.2秒）
-     *   2. .is-reveal：白い背景が 1.8秒かけて消えて MV の写真が見えてくる。ロゴは白に切り替わって残る
-     *   3. .is-logo-out：ロゴとコピーが 1.6秒かけてゆっくり消える
-     *   4. onFinish：MV のキャッチが流れる
+     * TOP：オープニング（2026-11-19 の指示：ロゴがゆっくり消えてから、メインのアニメーションが始まる）
+     *   1. 白い画面にロゴとコピーが下からふわっと出る（CSS、約1.2秒）。最低 2.4秒見せる
+     *   2. .is-logo-out：白い画面のまま、ロゴとコピーが約1.8秒かけてゆっくり消える
+     *   3. onReveal：白い画面を外し、MV の写真を白からフェードイン（.is-bg-in）。切り替えとバーも開始
+     *   4. onFinish：写真が出てきたら MV のキャッチが流れる（.is-start）
      * 同じタブで2回目以降に TOP を開いたときはオープニングを飛ばす。
      */
     function initOpening(onReveal, onFinish) {
@@ -100,9 +99,10 @@
         try { seen = sessionStorage.getItem('biltec_opening') === '1'; } catch (e) { /* 使えない環境は毎回出す */ }
 
         if (seen) {
+            // 2回目以降はロゴを飛ばして、MV の写真のフェードイン → キャッチ から
             opening.classList.add('is-skip');
             onReveal();
-            onFinish();
+            setTimeout(onFinish, 1400);
             return;
         }
 
@@ -118,21 +118,20 @@
         // ロゴを最低 2.4秒は見せる。読み込みが遅くても 5秒で先へ進む
         Promise.race([Promise.all([wait(2400), loaded]), wait(5000)])
             .then(function () {
-                opening.classList.add('is-reveal');
-                onReveal();
-                return wait(2000);
+                // ロゴとコピーを白い画面のままゆっくり消す
+                opening.classList.add('is-logo-out');
+                return wait(1900);
             })
             .then(function () {
-                opening.classList.add('is-logo-out');
+                // 白い画面を外す（下の MV も白から始まるので切れ目は見えない）→ MV の写真がフェードイン
+                opening.classList.add('is-skip');
+                document.documentElement.classList.remove('is-opening');
+                onReveal();
                 return wait(1400);
             })
             .then(function () {
-                document.documentElement.classList.remove('is-opening');
+                // 写真が出てきたらキャッチを流す
                 onFinish();
-                return wait(800);
-            })
-            .then(function () {
-                opening.classList.add('is-skip');
             });
     }
 
@@ -181,7 +180,8 @@
 
         initOpening(
             function () {
-                // 写真が見えてきたら背景の切り替え（とバー）を始める
+                // オープニングが消えたら、MV の写真をフェードインさせて切り替え（とバー）を始める
+                mv.classList.add('is-bg-in');
                 setBar(0);
                 if (slider) slider.Components.Autoplay.play();
             },
