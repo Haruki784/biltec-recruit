@@ -1,7 +1,19 @@
 <?php
-$company = theme_company();
-$nav     = theme_nav();
+$company   = theme_company();
+$nav       = theme_nav();
+$loop_text = theme_option('loop_text');
 ?>
+<!-- ここから下（流れる英文・街並み・CTA・フッター）は全ページ共通 -->
+<div class="loop loop-typeA site-loop" aria-hidden="true">
+    <div class="loop__content flex">
+        <?php for ($i = 0; $i < 2; $i++) : ?>
+            <ul class="loop__items flex">
+                <li class="loop__item en"><?php echo esc_html($loop_text); ?></li>
+                <li class="loop__item en"><?php echo esc_html($loop_text); ?></li>
+            </ul>
+        <?php endfor; ?>
+    </div>
+</div>
 <div class="cityscape js-city" aria-hidden="true">
     <img src="<?php echo esc_url(theme_img('top/sec6_bg.webp')); ?>" alt="" width="2400" height="412" loading="lazy">
 </div>

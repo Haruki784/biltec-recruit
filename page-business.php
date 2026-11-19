@@ -35,7 +35,7 @@ $bz_heading = function ($en, $main, $small = '') {
             <p class="bz-lead js-fade"><?php echo theme_text(theme_field('bz_about_lead')); ?></p>
             <p class="bz-text js-fade"><?php echo theme_text(theme_field('bz_about_text')); ?></p>
         </div>
-        <div class="bz-city js-fade">
+        <div class="bz-city js-city">
             <img src="<?php echo esc_url(theme_img('top/sec6_bg.webp')); ?>" alt="" width="2400" height="412" loading="lazy">
         </div>
     </section>
@@ -48,7 +48,7 @@ $bz_heading = function ($en, $main, $small = '') {
             <p class="bz-text js-fade"><?php echo theme_text(theme_field('bz_mission_text')); ?></p>
             <div class="bz-mission__images">
                 <?php for ($i = 1; $i <= 2; $i++) : ?>
-                    <div class="bz-mission__img js-fade">
+                    <div class="bz-mission__img js-fade js-fade--up<?php echo $i === 2 ? ' js-delay-1' : ''; ?>">
                         <?php echo theme_image(theme_field('bz_mission_image_' . $i), 'business/1_2_0' . $i . '.webp', array('width' => 840, 'height' => 660)); ?>
                     </div>
                 <?php endfor; ?>

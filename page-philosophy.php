@@ -91,7 +91,7 @@ $values  = theme_field('ph_values');
         foreach ($blocks as $block) :
             $b = $block['data']; ?>
             <div class="mvv__block mvv__block--<?php echo esc_attr($block['mod']); ?>">
-                <div class="mvv__bg"><?php echo theme_image($b['image'], $block['img'], array('width' => 1440, 'height' => $block['h']), 'full'); ?></div>
+                <div class="mvv__bg js-parallax"><?php echo theme_image($b['image'], $block['img'], array('width' => 1440, 'height' => $block['h']), 'full'); ?></div>
                 <div class="mvv__inner">
                     <h3 class="mvv__head">
                         <span class="mvv__en en js-fade"><?php echo esc_html($b['en']); ?></span>
@@ -106,7 +106,7 @@ $values  = theme_field('ph_values');
         <?php endforeach; ?>
 
         <div class="mvv__block mvv__block--values">
-            <div class="mvv__bg"><?php echo theme_image($values['image'], 'philosophy/1_1_04.webp', array('width' => 1440, 'height' => 1470), 'full'); ?></div>
+            <div class="mvv__bg js-parallax"><?php echo theme_image($values['image'], 'philosophy/1_1_04.webp', array('width' => 1440, 'height' => 1470), 'full'); ?></div>
             <div class="mvv__inner">
                 <h3 class="mvv__head">
                     <span class="mvv__en en js-fade"><?php echo esc_html($values['en']); ?></span>

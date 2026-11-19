@@ -318,3 +318,13 @@
         padding: 4rem 1.5rem;
     }
 }
+
+/* MISSION / VISION / VALUES の背景パララックス（add.js initParallax が --py を入れる）
+   画像を上下に 15% ずつ大きくしておき、スクロールに合わせてゆっくりずらす */
+.mvv-typeC .mvv__bg.js-parallax img {
+    top: -15%;
+    bottom: auto;
+    height: 130%;
+    transform: translate3d(0, var(--py, 0px), 0);
+    will-change: transform;
+}

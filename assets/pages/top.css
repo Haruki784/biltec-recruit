@@ -382,24 +382,6 @@ html.is-opening {
     padding-top: 12rem;
 }
 
-/* 流れる英文 */
-.top-loop {
-    margin: 8rem 0 0;
-}
-
-.top-loop .loop__content {
-    animation-duration: 60s;
-}
-
-.top-loop .loop__item {
-    padding-right: 6rem;
-    color: #000;
-    font-size: 9rem;
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: .05em;
-}
-
 @media screen and (max-width: 991px) {
     .top-mv__content {
         left: 8rem;
@@ -492,14 +474,5 @@ html.is-opening {
 
     .top-main .interview-typeF {
         padding-top: 6rem;
-    }
-
-    .top-loop {
-        margin-top: 4rem;
-    }
-
-    .top-loop .loop__item {
-        font-size: 5rem;
-        padding-right: 3rem;
     }
 }

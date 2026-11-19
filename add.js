@@ -321,7 +321,40 @@
         update();
     }
 
+    /**
+     * js-parallax：要素が画面の中央にあるとき 0、上下に離れるほど画像をずらす（--py に px で入れる）。
+     * ずらす量は要素の高さの 12%。画像は各ページの CSS で上下に余分に大きくしておく。
+     */
+    function initParallax() {
+        var items = Array.prototype.slice.call(document.querySelectorAll('.js-parallax'));
+        if (!items.length) return;
+
+        var ticking = false;
+        var update = function () {
+            var vh = window.innerHeight;
+            items.forEach(function (el) {
+                // 背景の入れ物に高さがない（中の画像が親を基準に絶対配置）ときは親の大きさで計算する
+                var rect = el.getBoundingClientRect();
+                if (!rect.height && el.parentElement) rect = el.parentElement.getBoundingClientRect();
+                if (rect.bottom < -200 || rect.top > vh + 200) return; // 画面外は計算しない
+                var progress = (rect.top + rect.height / 2 - vh / 2) / (vh / 2 + rect.height / 2); // -1〜1
+                progress = Math.max(-1, Math.min(1, progress));
+                el.style.setProperty('--py', (progress * rect.height * 0.12).toFixed(1) + 'px');
+            });
+            ticking = false;
+        };
+        var onScroll = function () {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(update);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        update();
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
+        initParallax();
         initHeaderState();
         initCareerSlider();
         initLines();

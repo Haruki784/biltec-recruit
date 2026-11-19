@@ -203,18 +203,5 @@ $text = function ($name) use ($top_id) {
         </div>
     </section>
 
-    <!-- 流れる英文 -->
-    <?php $loop_text = theme_field('loop_text', null, $top_id); ?>
-    <div class="loop loop-typeA top-loop" aria-hidden="true">
-        <div class="loop__content flex">
-            <?php for ($i = 0; $i < 2; $i++) : ?>
-                <ul class="loop__items flex">
-                    <li class="loop__item en"><?php echo esc_html($loop_text); ?></li>
-                    <li class="loop__item en"><?php echo esc_html($loop_text); ?></li>
-                </ul>
-            <?php endfor; ?>
-        </div>
-    </div>
-
 </main>
 <?php get_footer(); ?>
