@@ -11,3 +11,6 @@ desktop.ini
 # ログ・一時ファイル
 *.log
 node_modules/
+
+# 本番用 ZIP の出力先（_tools/make-theme-zip.ps1）
+_dist/
