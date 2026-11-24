@@ -110,7 +110,8 @@ CSSの読み込み順（head.php）：destyle → splide → settings → settin
 - `assets/base.css` / `base-full.css` のユーティリティを案件のために書き換えない
 - 既存パーツのCSSを、別の見た目にするために上書きしない（新しいtypeを作る）
 - Figma MCP の一時的なアセットURLや placehold.jp を納品コードに残さない
-- `.claude/`・`docs/`・`_design/`・`_samples/`・`page-capture/` を本番サーバーにアップしない（納品時は除外する）。使っていない見本テンプレートは `_samples/` にある
+- `.claude/`・`docs/`・`_design/`・`_samples/`・`_tools/`・`page-capture/`・`*.md` を本番サーバーにアップしない。使っていない見本テンプレートは `_samples/` にある
+  - 本番用のテーマは `_tools/make-theme-zip.ps1` で ZIP にする（コミット済みの内容から作り、上のものは `.gitattributes` の `export-ignore` で外れる）。出力は `_dist/`。外すものを増やすときは `.gitattributes` に足す
 
 ## 既知の不具合・修正履歴
 
