@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main>
+<main id="main">
     <section class="thanks py-9">
         <div class="container">
             <div class="thanks__content grid grid-1 gap-y-6">

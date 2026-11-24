@@ -87,7 +87,7 @@ if (!function_exists('theme_get_canonical_url')) {
     <meta property="og:site_name" content="<?php bloginfo('name'); ?>">
     <meta property="og:type" content="<?php echo is_singular() ? 'article' : 'website'; ?>">
     <meta property="og:url" content="<?php echo is_singular() ? esc_url(get_permalink()) : esc_url(home_url('/')); ?>">
-    <meta property="og:title" content="<?php echo is_singular() ? esc_attr(get_the_title() . ' | ' . get_bloginfo('name')) : esc_attr(get_bloginfo('name')); ?>">
+    <meta property="og:title" content="<?php echo esc_attr(wp_get_document_title()); ?>">
     <meta property="og:description" content="<?php echo esc_attr(theme_get_meta_description()); ?>">
     <meta property="og:image" content="<?php echo is_singular() && has_post_thumbnail() ? esc_url(get_the_post_thumbnail_url(null, 'full')) : esc_url(get_stylesheet_directory_uri() . '/img/ogp.jpg'); ?>">
     <meta name="twitter:card" content="summary_large_image">

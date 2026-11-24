@@ -18,7 +18,7 @@ $bz_heading = function ($en, $main, $small = '') {
 };
 ?>
 
-<main class="bz-main">
+<main id="main" class="bz-main">
 
     <?php get_template_part('snippet/under-mv', null, array(
         'label'    => theme_field('bz_mv_label'),

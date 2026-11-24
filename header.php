@@ -5,6 +5,7 @@
 
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
+    <a class="skip-link screen-reader-text" href="#main">本文へスキップ</a>
     <?php // TOP は MV の上で透明（.is-clear）。スクロールで MV を過ぎたら add.js が外す ?>
     <header class="header header-typeD fixed<?php echo is_front_page() ? ' is-clear' : ''; ?>" id="header">
         <div class="header__container">

@@ -9,7 +9,7 @@
 $jobs = get_posts(array('post_type' => 'job', 'numberposts' => -1, 'orderby' => 'menu_order', 'order' => 'ASC'));
 ?>
 
-<main class="job-main job-archive">
+<main id="main" class="job-main job-archive">
 
     <?php get_template_part('snippet/under-mv', null, array(
         'title'    => theme_option('job_archive_title'),

@@ -4,7 +4,7 @@ get_header();
 $company = theme_company();
 ?>
 
-<main>
+<main id="main">
     <section class="privacy py-9">
         <div class="container grid grid-1 gap-y-8">
             <?php get_template_part('snippet/breadcrumb'); ?>
@@ -22,7 +22,7 @@ $company = theme_company();
             </div>
             <div class="privacy__body grid grid-1 gap-y-6">
                 <div class="privacy__box grid grid-1 gap-y-2">
-                    <h3 class="privacy__title heading-4">1. 個人情報の取得について</h3>
+                    <h2 class="privacy__title heading-4">1. 個人情報の取得について</h2>
                     <p class="privacy__text">
                         当社は、採用活動において応募者の皆様からご提供いただく個人情報を、適法かつ公正な手段により取得いたします。取得する個人情報には、以下のものが含まれます。
                     </p>
@@ -42,7 +42,7 @@ $company = theme_company();
                     </ul>
                 </div>
                 <div class="privacy__box grid grid-1 gap-y-1">
-                    <h3 class="privacy__title heading-4">2.個人情報の利用目的</h3>
+                    <h2 class="privacy__title heading-4">2.個人情報の利用目的</h2>
                     <p class="privacy__text">
                         当社は、取得した個人情報を以下の目的で利用いたします。<br>
                     </p>
@@ -54,14 +54,14 @@ $company = theme_company();
                     </ul>
                 </div>
                 <div class="privacy__box grid grid-1 gap-y-1">
-                    <h3 class="privacy__title heading-4">3.個人情報の管理</h3>
+                    <h2 class="privacy__title heading-4">3.個人情報の管理</h2>
                     <p class="privacy__text">
                         当社は、個人情報の漏洩、滅失、毀損の防止その他の安全管理のため、必要かつ適切な措置を講じます。<br>
                         また、個人情報を取り扱う従業員に対して、個人情報の保護に関する教育を実施し、適切な管理を行います。
                     </p>
                 </div>
                 <div class="privacy__box grid grid-1 gap-y-1">
-                    <h3 class="privacy__title heading-4">4.個人情報の第三者提供</h3>
+                    <h2 class="privacy__title heading-4">4.個人情報の第三者提供</h2>
                     <p class="privacy__text">
                         当社は、法令に基づく場合を除き、ご本人の同意なく個人情報を第三者に提供することはありません。<br>
                         ただし、採用選考の過程で、選考に関わる当社の役員・従業員に情報を開示する場合があります。

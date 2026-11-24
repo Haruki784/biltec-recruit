@@ -43,7 +43,7 @@ $entry_lines = $job_lines(theme_field('job_entry_btn'));
 $entry_main  = array_pop($entry_lines);
 ?>
 
-<main class="job-main job-detail">
+<main id="main" class="job-main job-detail">
 
     <!-- MV（左テキスト／右写真） -->
     <section class="job-mv job-mv-typeA">

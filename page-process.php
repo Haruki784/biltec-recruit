@@ -17,7 +17,7 @@ $sp_br = function ($value) {
 $arrow ='<svg class="flow__arrow" width="136" height="70" viewBox="0 0 136 70" aria-hidden="true"><polyline points="2,2 68,67 134,2" fill="none" stroke="currentColor" stroke-width="3"/></svg>';
 ?>
 
-<main class="process-main">
+<main id="main" class="process-main">
 
     <?php get_template_part('snippet/under-mv', null, array(
         'label'    => theme_field('pr_mv_label'),

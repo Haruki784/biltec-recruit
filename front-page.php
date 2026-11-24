@@ -27,7 +27,7 @@ $text = function ($name) use ($top_id) {
     </div>
 </div>
 
-<main class="top-main">
+<main id="main" class="top-main">
 
     <!-- MV -->
     <section class="top-mv top-mv-typeA" id="top-mv">

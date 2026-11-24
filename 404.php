@@ -81,7 +81,7 @@
     }
 </style>
 
-<main>
+<main id="main">
     <section class="error404 py-9">
         <div class="container grid grid-1 gap-y-6">
             <?php get_template_part('snippet/breadcrumb'); ?>

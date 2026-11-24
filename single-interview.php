@@ -34,7 +34,7 @@
     }
     ?>
 
-    <main class="iv-main iv-single">
+    <main id="main" class="iv-main iv-single">
 
         <div class="iv-single__breadcrumb">
             <?php get_template_part('snippet/breadcrumb'); ?>

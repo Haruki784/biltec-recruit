@@ -11,7 +11,7 @@ $is_casual = isset($_GET['type']) && $_GET['type'] === 'casual';
 $src       = theme_form_src($is_casual ? 'casual' : 'entry');
 ?>
 
-<main>
+<main id="main">
     <section class="entry-form py-9">
         <div class="container grid grid-1 gap-y-8">
             <?php get_template_part('snippet/breadcrumb'); ?>

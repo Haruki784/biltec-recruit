@@ -10,7 +10,7 @@ $paged     = max(1, (int) get_query_var('paged'));
 $max_pages = (int) $wp_query->max_num_pages;
 ?>
 
-<main class="iv-main">
+<main id="main" class="iv-main">
 
     <?php get_template_part('snippet/under-mv', null, array(
         'title'    => post_type_archive_title('', false),

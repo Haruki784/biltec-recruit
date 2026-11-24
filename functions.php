@@ -191,3 +191,55 @@ function theme_register_patterns()
     ]);
 }
 add_action('init', 'theme_register_patterns');
+
+/**
+ * head の不要な出力を外す（絵文字スクリプト、WordPress のバージョン、RSD / wlwmanifest、短縮URL）
+ */
+function theme_clean_head()
+{
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('wp_print_styles', 'print_emoji_styles');
+    remove_action('admin_print_scripts', 'print_emoji_detection_script');
+    remove_action('admin_print_styles', 'print_emoji_styles');
+    remove_action('wp_head', 'wp_generator');
+    remove_action('wp_head', 'rsd_link');
+    remove_action('wp_head', 'wlwmanifest_link');
+    remove_action('wp_head', 'wp_shortlink_wp_head');
+    add_filter('the_generator', '__return_empty_string');
+}
+add_action('init', 'theme_clean_head');
+
+/**
+ * ユーザー名が外から見えないようにする（?author=1 のリダイレクトと REST API の users）
+ */
+function theme_block_author_scan()
+{
+    if (!is_admin() && isset($_GET['author'])) {
+        wp_safe_redirect(home_url('/'), 301);
+        exit;
+    }
+}
+add_action('template_redirect', 'theme_block_author_scan', 1);
+
+function theme_hide_rest_users($endpoints)
+{
+    if (!is_user_logged_in()) {
+        unset($endpoints['/wp/v2/users'], $endpoints['/wp/v2/users/(?P<id>[\d]+)']);
+    }
+    return $endpoints;
+}
+add_filter('rest_endpoints', 'theme_hide_rest_users');
+
+/**
+ * <title> の形：TOP は「サイト名」だけ、下層は「ページ名 | サイト名」（キャッチフレーズは付けない）
+ */
+function theme_title_parts($parts)
+{
+    // TOP ではサイト名が title に入り、キャッチフレーズが tagline に付くので、tagline だけ外す
+    unset($parts['tagline']);
+    return $parts;
+}
+add_filter('document_title_parts', 'theme_title_parts');
+add_filter('document_title_separator', function () {
+    return '|';
+});

@@ -202,16 +202,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     countItems.forEach(item => countObserver.observe(item));
 
-    function formatNumber(num, hasDecimal) {
-        if (hasDecimal) {
-            return num.toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        }
-        return Math.floor(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    // plain が true のときは 3桁区切りのカンマを付けない（西暦など。data-plain を付けた要素）
+    function formatNumber(num, hasDecimal, plain) {
+        const str = hasDecimal ? num.toFixed(1) : Math.floor(num).toString();
+        return plain ? str : str.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
     // 小数点以下を <span class="count__decimal"> で囲んだ HTML 文字列を返す
-    function formatNumberHTML(num, hasDecimal, suffix, appendSuffix) {
-        const formatted = formatNumber(num, hasDecimal);
+    function formatNumberHTML(num, hasDecimal, suffix, appendSuffix, plain) {
+        const formatted = formatNumber(num, hasDecimal, plain);
         const sfx = appendSuffix ? suffix : '';
         if (hasDecimal && formatted.includes('.')) {
             const [intPart, decPart] = formatted.split('.');
@@ -227,17 +226,18 @@ document.addEventListener('DOMContentLoaded', function () {
         const duration = 2000;
         const startTime = performance.now();
         const hasDecimal = targetNumber % 1 !== 0;
+        const plain = element.hasAttribute('data-plain');
 
         function update(currentTime) {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
             const easeProgress = 1 - Math.pow(1 - progress, 3);
             const current = targetNumber * easeProgress;
-            targetEl.innerHTML = formatNumberHTML(current, hasDecimal, suffix, appendSuffix);
+            targetEl.innerHTML = formatNumberHTML(current, hasDecimal, suffix, appendSuffix, plain);
             if (progress < 1) {
                 requestAnimationFrame(update);
             } else {
-                targetEl.innerHTML = formatNumberHTML(targetNumber, hasDecimal, suffix, appendSuffix);
+                targetEl.innerHTML = formatNumberHTML(targetNumber, hasDecimal, suffix, appendSuffix, plain);
             }
         }
 

@@ -35,7 +35,7 @@
             </div>
         </div>
     </section>
-    <main class="my-8 index">
+    <main id="main" class="my-8 index">
         <aside class="index__side">
             <div class="index-container index-typeA">
                 <ul class="index__items grid grid-1 gap-y-2 p-6 pr-4"></ul>

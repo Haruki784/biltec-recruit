@@ -24,7 +24,7 @@ $vision  = theme_field('ph_vision');
 $values  = theme_field('ph_values');
 ?>
 
-<main class="philosophy-main grid grid-1 gap-y-8">
+<main id="main" class="philosophy-main grid grid-1 gap-y-8">
 
     <div class="grid grid-1 gap-y-8">
         <!-- MV -->

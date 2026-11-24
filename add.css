@@ -255,19 +255,19 @@
 }
 
 .menu-typeD .menu__item:nth-of-type(1) {
-    background-image: url(https://placehold.jp/720x300.png);
+    background-color: #ddd; /* 見本の仮画像（外部のダミー画像サービス）を外した。使うときは画像を指定する */
 }
 
 .menu-typeD .menu__item:nth-of-type(2) {
-    background-image: url(https://placehold.jp/720x300.png);
+    background-color: #ddd; /* 見本の仮画像（外部のダミー画像サービス）を外した。使うときは画像を指定する */
 }
 
 .menu-typeD .menu__item:nth-of-type(3) {
-    background-image: url(https://placehold.jp/720x300.png);
+    background-color: #ddd; /* 見本の仮画像（外部のダミー画像サービス）を外した。使うときは画像を指定する */
 }
 
 .menu-typeD .menu__item:nth-of-type(4) {
-    background-image: url(https://placehold.jp/720x300.png);
+    background-color: #ddd; /* 見本の仮画像（外部のダミー画像サービス）を外した。使うときは画像を指定する */
 }
 
 
@@ -316,19 +316,19 @@
     }
 
     .menu-typeD .menu__item:nth-of-type(1) {
-        background-image: url(https://placehold.jp/375x320.png);
+        background-color: #ddd; /* 見本の仮画像（外部のダミー画像サービス）を外した。使うときは画像を指定する */
     }
 
     .menu-typeD .menu__item:nth-of-type(2) {
-        background-image: url(https://placehold.jp/375x320.png);
+        background-color: #ddd; /* 見本の仮画像（外部のダミー画像サービス）を外した。使うときは画像を指定する */
     }
 
     .menu-typeD .menu__item:nth-of-type(3) {
-        background-image: url(https://placehold.jp/375x320.png);
+        background-color: #ddd; /* 見本の仮画像（外部のダミー画像サービス）を外した。使うときは画像を指定する */
     }
 
     .menu-typeD .menu__item:nth-of-type(4) {
-        background-image: url(https://placehold.jp/375x320.png);
+        background-color: #ddd; /* 見本の仮画像（外部のダミー画像サービス）を外した。使うときは画像を指定する */
     }
 }
 
@@ -533,7 +533,7 @@
 .future__text {
     text-align: center;
     line-height: 200%;
-    background-image: url(https://placehold.jp/1440x340.png);
+    background-color: #ddd; /* 見本の仮画像（外部のダミー画像サービス）を外した。使うときは画像を指定する */
     width: 100%;
     aspect-ratio: 1440 / 401;
     background-size: cover;
@@ -2728,4 +2728,68 @@ body:not(.home) {
 .splide__list,
 .splide__slide {
     transition: none;
+}
+
+/* screen-reader-text（画面には出さず、読み上げだけに使う文字。WordPress 標準と同じ名前） */
+.screen-reader-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* archive-list（汎用アーカイブ archive.php の一覧。この案件では通常の投稿は使っていない） */
+.archive-list {
+    padding: 8rem 0 12rem;
+}
+
+.archive-list__items {
+    max-width: 90rem;
+    margin: 0 auto;
+    border-top: 1px solid var(--border-color);
+}
+
+.archive-list__link {
+    display: flex;
+    gap: 2.4rem;
+    padding: 2.4rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.archive-list__date {
+    flex-shrink: 0;
+    color: var(--text-blue);
+}
+
+.archive-list__pager,
+.archive-list__empty {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .archive-list { padding: 6rem 0 8rem; }
+    .archive-list__link { flex-direction: column; gap: .4rem; }
+}
+
+/* skip-link（Tab キーで最初に出る「本文へスキップ」。フォーカス時だけ表示） */
+.skip-link:focus {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10000;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 1.2rem 2rem;
+    clip: auto;
+    background: #fff;
+    color: var(--text-color);
+    font-size: 1.4rem;
+    box-shadow: 0 0 0 2px var(--primary);
 }
