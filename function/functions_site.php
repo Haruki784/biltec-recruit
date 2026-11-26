@@ -235,62 +235,6 @@ function theme_button($name, $fallback_url = '')
 }
 
 /**
- * 「表示名 | URL」を1行ずつ書いたテキストを、リンクの配列にする。
- * 「[job]」のように投稿タイプ名を [ ] で書いた行は、その投稿を並び順（menu_order）どおりに展開する
- * （表示名は投稿の nav_label 項目、なければタイトル）。
- */
-function theme_parse_links($text)
-{
-    $links = array();
-    foreach (preg_split('/\R/u', (string) $text) as $line) {
-        $line = trim($line);
-        if ($line === '') {
-            continue;
-        }
-        if (preg_match('/^\[([a-z0-9_\-]+)\]$/', $line, $m)) {
-            if (post_type_exists($m[1])) {
-                foreach (get_posts(array('post_type' => $m[1], 'numberposts' => -1, 'orderby' => 'menu_order', 'order' => 'ASC')) as $p) {
-                    $links[] = array('label' => theme_field('nav_label', $p->post_title, $p->ID), 'url' => get_permalink($p));
-                }
-            }
-            continue;
-        }
-        $parts = array_map('trim', explode('|', $line, 2));
-        if ($parts[0] === '') {
-            continue;
-        }
-        $links[] = array('label' => $parts[0], 'url' => theme_link($parts[1] ?? '', home_url('/')));
-    }
-    return $links;
-}
-
-/**
- * ナビゲーション（ヘッダー・ドロワー・フッターで共用）。中身は「共通：メニュー」タブ（page-fields/common.php）。
- * 返す形：array( array('label' => 見出し, 'index' => 一覧リンク or null, 'children' => array(リンク...)), ... )
- */
-function theme_nav()
-{
-    static $nav = null;
-    if ($nav !== null) {
-        return $nav;
-    }
-    $nav = array();
-    for ($i = 1; $i <= 4; $i++) {
-        $col = theme_option('nav_' . $i);
-        if (trim((string) ($col['label'] ?? '')) === '') {
-            continue;
-        }
-        $index = theme_parse_links($col['index'] ?? '');
-        $nav[] = array(
-            'label'    => trim($col['label']),
-            'index'    => $index ? $index[0] : null,
-            'children' => theme_parse_links($col['links'] ?? ''),
-        );
-    }
-    return $nav;
-}
-
-/**
  * 共通の矢印アイコン（›）
  */
 function theme_chevron()

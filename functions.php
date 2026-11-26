@@ -7,6 +7,7 @@
 require_once get_template_directory() . '/function/functions_form.php';
 require_once get_template_directory() . '/function/functions_page_fields.php';
 require_once get_template_directory() . '/function/functions_site.php';
+require_once get_template_directory() . '/function/functions_menu.php';
 
 /**
  * テーマの基本機能を有効化（theme_setup）

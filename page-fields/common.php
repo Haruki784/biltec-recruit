@@ -1,12 +1,12 @@
 <?php
 
 /**
- * サイト共通の入力項目（ヘッダー・メニュー・フッター・CTA・フォーム・会社情報）
+ * サイト共通の入力項目（ヘッダー・フッター・CTA・フォーム・会社情報）
  *
  * - TOP（ホームに設定した固定ページ）の編集画面に、TOP の内容の下に出る。テンプレートでは theme_option('項目名') で取り出す。
  * - チョク採テンプレート共通の仕組み。案件ごとに変えるのは default（初期値）だけにする。
  * - URL の項目は「/job/」のようにサイト内のパスで書ける（theme_link() が home_url を付ける）。https:// から始まればそのまま。
- * - メニューは1行に「表示名 | URL」。「[job]」のように投稿タイプ名を [ ] で書くと、その投稿の一覧を並び順どおりに展開する。
+ * - メニューはここではなく WordPress 標準のメニュー（外観 → カスタマイズ → メニュー）。仕組みは function/functions_menu.php。
  * - 画像は未設定ならテーマ内の画像（コメントのパス）を出す。ロゴは SVG をアップロードできないので PNG / WebP で入れる。
  */
 
@@ -20,15 +20,6 @@ $btn = function ($label, $text, $url, $url_note, $small = null) {
     }
     $sub['url'] = array('label' => '飛び先', 'type' => 'text', 'default' => $url, 'instructions' => $url_note);
     return array('label' => $label, 'type' => 'group', 'sub_fields' => $sub);
-};
-
-/** メニューの1列（見出し・一覧リンク・子のリンク） */
-$nav = function ($n, $label, $index, $links) {
-    return array('label' => 'メニュー' . $n, 'type' => 'group', 'sub_fields' => array(
-        'label' => array('label' => '見出し', 'type' => 'text', 'default' => $label, 'instructions' => '空欄ならこの列は出しません。'),
-        'index' => array('label' => '一覧ページへのリンク（任意）', 'type' => 'text', 'default' => $index, 'instructions' => '「表示名 | URL」。ヘッダーとSPメニューで子の先頭に出します（フッターには出しません）。'),
-        'links' => array('label' => '子のリンク（1行に1つ）', 'type' => 'textarea', 'rows' => 4, 'default' => $links, 'instructions' => '「表示名 | URL」を1行ずつ。「[job]」のように投稿タイプ名を書くと、その投稿を並び順どおりに並べます。'),
-    ));
 };
 
 $entry_note  = '空欄ならエントリーフォーム（/entry/）。';
@@ -49,13 +40,7 @@ return array(
         'header_btn_2' => $btn('ボタン2（グラデーション）', 'まずは話を聞いてみる', '', $casual_note),
 
         'tab_nav' => array('label' => '共通：メニュー', 'type' => 'tab'),
-        'nav_note' => array('label' => '', 'type' => 'message', 'message' => 'ヘッダー（PC のドロップダウン・SP メニュー）とフッターのメニューです。見出しが空の列は出しません。'),
-        'nav_home' => array('label' => '先頭の HOME の文字', 'type' => 'text', 'default' => 'HOME', 'instructions' => '空欄なら出しません。'),
-        'nav_1' => $nav(1, '会社を知る', '', "わたしたちの想い | /philosophy/\n事業紹介 | /business/\n会社概要 | /company/"),
-        'nav_2' => $nav(2, '仕事を知る', '', "先輩インタビュー | /interview/\n手すりができるまで | /process/\n教育・キャリアパス | /career/"),
-        'nav_3' => $nav(3, '募集職種', '募集職種一覧 | /job/', '[job]'),
-        'nav_4' => $nav(4, '', '', ''),
-        'footer_links' => array('label' => 'フッター右の太字のリンク（1行に1つ）', 'type' => 'textarea', 'rows' => 4, 'default' => "募集要項 | /job/\nエントリーフォーム | /entry/\nプライバシーポリシー | /privacy/", 'instructions' => '「表示名 | URL」を1行ずつ。'),
+        'nav_note' => array('label' => '', 'type' => 'message', 'message' => 'メニューは「外観 → カスタマイズ → メニュー」（または 外観 → メニュー）で編集します。位置は「グローバルメニュー」（ヘッダー・SPメニュー・フッターの列）と「フッター右の太字リンク」の2つです。'),
 
         'tab_cta' => array('label' => '共通：CTA', 'type' => 'tab'),
         'cta_note' => array('label' => '', 'type' => 'message', 'message' => '全ページの下に出る「流れる英文 → 街並み → ここまで読んでくださって〜」の部分です。'),

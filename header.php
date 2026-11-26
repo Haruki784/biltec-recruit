@@ -2,8 +2,7 @@
 <html <?php language_attributes(); ?>>
 <?php get_template_part('head'); ?>
 <?php
-$nav       = theme_nav();
-$nav_home  = trim((string) theme_option('nav_home'));
+$nav       = theme_nav(); // 外観 → カスタマイズ → メニュー（function/functions_menu.php）
 $logo_sub  = trim((string) theme_option('logo_sub'));
 $btn_1     = theme_button('header_btn_1', home_url('/job/'));
 $btn_2     = theme_button('header_btn_2', theme_entry_url('casual'));
@@ -26,12 +25,13 @@ $btn_2     = theme_button('header_btn_2', theme_entry_url('casual'));
             <div class="header__box">
                 <nav class="gnav header__gnav hide-md-only" aria-label="グローバルナビゲーション">
                     <ul class="gnav__items">
-                        <?php if ($nav_home !== '') : ?>
-                        <li class="gnav__item">
-                            <a href="<?php echo esc_url(home_url('/')); ?>" class="gnav__link"><?php echo esc_html($nav_home); ?></a>
-                        </li>
-                        <?php endif; ?>
                         <?php foreach ($nav as $item) : ?>
+                            <?php if (!$item['children']) : // 子のない項目（HOME など）はそのままリンク ?>
+                                <li class="gnav__item">
+                                    <a href="<?php echo esc_url($item['url'] ?: home_url('/')); ?>" class="gnav__link"><?php echo esc_html($item['label']); ?></a>
+                                </li>
+                                <?php continue; ?>
+                            <?php endif; ?>
                             <li class="gnav__item">
                                 <span class="gnav__link toggle" tabindex="0"><?php echo esc_html($item['label']); ?><span class="gnav__plus" aria-hidden="true"></span></span>
                                 <ul class="nav nav__items">
@@ -63,12 +63,13 @@ $btn_2     = theme_button('header_btn_2', theme_entry_url('casual'));
                 <p class="drawer__title en">MENU</p>
                 <nav class="drawer__nav" aria-label="メニュー">
                     <ul class="drawer__items">
-                        <?php if ($nav_home !== '') : ?>
-                        <li class="drawer__item">
-                            <a href="<?php echo esc_url(home_url('/')); ?>" class="drawer__link"><?php echo esc_html($nav_home); ?></a>
-                        </li>
-                        <?php endif; ?>
                         <?php foreach ($nav as $item) : ?>
+                            <?php if (!$item['children']) : ?>
+                                <li class="drawer__item">
+                                    <a href="<?php echo esc_url($item['url'] ?: home_url('/')); ?>" class="drawer__link"><?php echo esc_html($item['label']); ?></a>
+                                </li>
+                                <?php continue; ?>
+                            <?php endif; ?>
                             <li class="drawer__item">
                                 <button type="button" class="drawer__toggle toggle" aria-expanded="false"><?php echo esc_html($item['label']); ?><span class="gnav__plus" aria-hidden="true"></span></button>
                                 <ul class="drawer__children toggle__content">

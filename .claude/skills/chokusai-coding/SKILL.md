@@ -41,7 +41,7 @@ description: チョク採テンプレート（採用サイト用WordPressテー�
    - SPでの差は、まず `-sp` 付きのユーティリティで対応する。
 4. **新type・新規パーツ**：`add.css` の末尾に `/* <block>-typeX */` という見出しを付けて書く。ブロックのclass名で始まるセレクタだけを使い、SP用の `@media screen and (max-width: 768px)` は同じ見出しの中に置く。書いたら `docs/parts-catalog.md` に1行追記する。
 5. **JS**：既存の機能（`.toggle`、`.tab`、カウントアップ、グラフ、目次）で足りるか先に確認する。足りなければ `add.js` に `init<機能名>()` として追加し、要素がなければ return する。Splide は enqueue 済み。
-6. **リンク**：`home_url('/<slug>/')` で書く。ヘッダー、ドロワー、フッターのナビは `header.php` / `footer.php` ではなく `page-fields/common.php` の「共通：メニュー」の初期値（「表示名 | URL」を1行ずつ）を案件のページ構成に合わせて更新する。
+6. **リンク**：`home_url('/<slug>/')` で書く。ヘッダー、ドロワー、フッターのナビは `header.php` / `footer.php` ではなく `function/functions_menu.php` の `theme_menu_defaults()`（メニューの初期値）を案件のページ構成に合わせて更新する。公開後の変更は 外観 → カスタマイズ → メニュー で行う。
 
 ## フェーズ3：確認
 

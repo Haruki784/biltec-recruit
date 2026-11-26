@@ -9,7 +9,7 @@ $cta_btns     = array(
     array('class' => 'btn--white', 'btn' => theme_button('cta_btn_1', theme_entry_url('casual'))),
     array('class' => 'btn--gradient', 'btn' => theme_button('cta_btn_2', theme_entry_url('entry'))),
 );
-$footer_links = theme_parse_links(theme_option('footer_links'));
+$footer_links = theme_menu('footer'); // メニューの位置「フッター右の太字リンク」
 ?>
 <!-- ここから下（流れる英文・街並み・CTA・フッター）は全ページ共通 -->
 <div class="loop loop-typeA site-loop" aria-hidden="true">
@@ -48,7 +48,8 @@ $footer_links = theme_parse_links(theme_option('footer_links'));
 <footer class="footer footer-typeC">
     <div class="footer__inner container">
         <nav class="footer__nav" aria-label="フッターナビゲーション">
-            <?php foreach ($nav as $item) : ?>
+            <?php foreach ($nav as $item) :
+                if (!$item['children']) continue; // 子のない項目（HOME など）はフッターに出さない ?>
                 <div class="footer__col">
                     <p class="footer__heading"><?php echo esc_html($item['label']); ?></p>
                     <ul class="footer__links">
@@ -61,7 +62,7 @@ $footer_links = theme_parse_links(theme_option('footer_links'));
             <div class="footer__col">
                 <ul class="footer__links footer__links--main">
                     <?php foreach ($footer_links as $link) : ?>
-                        <li><a href="<?php echo esc_url($link['url']); ?>" class="footer__heading footer__link"><?php echo esc_html($link['label']); ?></a></li>
+                        <li><a href="<?php echo esc_url($link['url'] ?: home_url('/')); ?>" class="footer__heading footer__link"><?php echo esc_html($link['label']); ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>

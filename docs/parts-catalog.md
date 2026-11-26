@@ -106,7 +106,7 @@ CSS はすべて add.css 末尾の「ビルテック案件で追加したパー�
 | class | 用途 | 見本 | JS |
 |---|---|---|---|
 | `btn btn--{black,primary,white,outline,gradient} btn--{s,m,l,xl}` | 角丸なし・右端に › のボタン（`theme_chevron()`） | header.php / footer.php | - |
-| `header header-typeD fixed` | 白・透過80%の固定ヘッダー。ドロップダウン（＋）とボタン2つ。文言・ロゴ・メニューは page-fields/common.php | header.php | main.js（hover）、add.js（キーボード） |
+| `header header-typeD fixed` | 白・透過80%の固定ヘッダー。ドロップダウン（＋）とボタン2つ。文言・ロゴは page-fields/common.php、メニューは WordPress のメニュー（function/functions_menu.php） | header.php | main.js（hover）、add.js（キーボード） |
 | `drawer drawer-typeD` | SPメニュー。アコーディオン（`.drawer__toggle.toggle`）＋ボタン2つ | header.php | main.js `.toggle` |
 | `sp-fixed-cta` | SPで画面下に追従する2ボタン | header.php | add.js `initSpFixedCta()` |
 | `heading-wrap heading-typeC` | 和文見出し＋短い線＋青のサブ。PC中央／SP左。`--white` あり | front-page.php | - |
