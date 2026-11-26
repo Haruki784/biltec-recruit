@@ -21,7 +21,7 @@ $text = function ($name) use ($top_id) {
 <div class="opening" id="opening" aria-hidden="true">
     <div class="opening__inner">
         <div class="opening__logos">
-            <img src="<?php echo esc_url(theme_img('logo.svg')); ?>" alt="" width="200" height="38" class="opening__logo">
+            <img src="<?php echo esc_url(theme_image_url(theme_option('logo_image'), 'logo.svg')); ?>" alt="" width="200" height="38" class="opening__logo">
         </div>
         <p class="opening__text">アルミ手すり専門メーカー<br>ビルテック</p>
     </div>

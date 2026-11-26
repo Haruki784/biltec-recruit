@@ -192,30 +192,102 @@ function theme_text($value)
 }
 
 /**
- * ナビゲーション（ヘッダー・ドロワー・フッターで共用）
- * 募集職種の子は CPT job から自動で作る。
+ * 入力された URL をリンク先にする。「/job/」のようなサイト内のパスは home_url を付け、https:// などはそのまま返す。
+ * 空なら $fallback を返す。
+ */
+function theme_link($url, $fallback = '')
+{
+    $url = trim((string) $url);
+    if ($url === '') {
+        return $fallback;
+    }
+    if ($url[0] === '/' && strpos($url, '//') !== 0) {
+        return home_url($url);
+    }
+    return $url;
+}
+
+/**
+ * 画像項目（添付ファイルID）の URL。未設定ならテーマ内の画像（img/ からのパス）の URL。
+ */
+function theme_image_url($attachment_id, $fallback, $size = 'full')
+{
+    if ($attachment_id) {
+        $url = wp_get_attachment_image_url((int) $attachment_id, $size);
+        if ($url) {
+            return $url;
+        }
+    }
+    return theme_img($fallback);
+}
+
+/**
+ * ボタンの項目（group：text / small / url）を、表示用にそろえて返す。url が空なら $fallback_url。
+ */
+function theme_button($name, $fallback_url = '')
+{
+    $btn = theme_option($name);
+    return array(
+        'text'  => trim((string) ($btn['text'] ?? '')),
+        'small' => trim((string) ($btn['small'] ?? '')),
+        'url'   => theme_link($btn['url'] ?? '', $fallback_url),
+    );
+}
+
+/**
+ * 「表示名 | URL」を1行ずつ書いたテキストを、リンクの配列にする。
+ * 「[job]」のように投稿タイプ名を [ ] で書いた行は、その投稿を並び順（menu_order）どおりに展開する
+ * （表示名は投稿の nav_label 項目、なければタイトル）。
+ */
+function theme_parse_links($text)
+{
+    $links = array();
+    foreach (preg_split('/\R/u', (string) $text) as $line) {
+        $line = trim($line);
+        if ($line === '') {
+            continue;
+        }
+        if (preg_match('/^\[([a-z0-9_\-]+)\]$/', $line, $m)) {
+            if (post_type_exists($m[1])) {
+                foreach (get_posts(array('post_type' => $m[1], 'numberposts' => -1, 'orderby' => 'menu_order', 'order' => 'ASC')) as $p) {
+                    $links[] = array('label' => theme_field('nav_label', $p->post_title, $p->ID), 'url' => get_permalink($p));
+                }
+            }
+            continue;
+        }
+        $parts = array_map('trim', explode('|', $line, 2));
+        if ($parts[0] === '') {
+            continue;
+        }
+        $links[] = array('label' => $parts[0], 'url' => theme_link($parts[1] ?? '', home_url('/')));
+    }
+    return $links;
+}
+
+/**
+ * ナビゲーション（ヘッダー・ドロワー・フッターで共用）。中身は「共通：メニュー」タブ（page-fields/common.php）。
+ * 返す形：array( array('label' => 見出し, 'index' => 一覧リンク or null, 'children' => array(リンク...)), ... )
  */
 function theme_nav()
 {
-    $jobs = array();
-    foreach (get_posts(array('post_type' => 'job', 'numberposts' => -1, 'orderby' => 'menu_order', 'order' => 'ASC')) as $job) {
-        $jobs[] = array('label' => theme_field('nav_label', $job->post_title, $job->ID), 'url' => get_permalink($job));
+    static $nav = null;
+    if ($nav !== null) {
+        return $nav;
     }
-
-    return array(
-        array('label' => '会社を知る', 'children' => array(
-            array('label' => 'わたしたちの想い', 'url' => home_url('/philosophy/')),
-            array('label' => '事業紹介', 'url' => home_url('/business/')),
-            array('label' => '会社概要', 'url' => home_url('/company/')),
-        )),
-        array('label' => '仕事を知る', 'children' => array(
-            array('label' => '先輩インタビュー', 'url' => home_url('/interview/')),
-            array('label' => '手すりができるまで', 'url' => home_url('/process/')),
-            array('label' => '教育・キャリアパス', 'url' => home_url('/career/')),
-        )),
-        // 'index'：ヘッダーとSPメニューでは子の先頭に一覧ページへのリンクを出す（フッターには出さない）
-        array('label' => '募集職種', 'index' => array('label' => '募集職種一覧', 'url' => home_url('/job/')), 'children' => $jobs),
-    );
+    $nav = array();
+    for ($i = 1; $i <= 4; $i++) {
+        $col = theme_option('nav_' . $i);
+        if (trim((string) ($col['label'] ?? '')) === '') {
+            continue;
+        }
+        $index = theme_parse_links($col['index'] ?? '');
+        $nav[] = array(
+            'label'    => trim($col['label']),
+            'index'    => $index ? $index[0] : null,
+            'children' => theme_parse_links($col['links'] ?? ''),
+        );
+    }
+    return $nav;
 }
 
 /**

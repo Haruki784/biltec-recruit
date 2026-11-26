@@ -95,6 +95,9 @@ CSSの読み込み順（head.php）：destyle → splide → settings → settin
 - 画像項目は `theme_image($id, 'top/xxx.webp', array('width'=>…, 'height'=>…))`。未設定ならテーマ内の画像を出す。
 - 無料版なのでリピーターは使わない。繰り返しは固定数の group（例：`iv_section_1`〜`8`）か、1行1項目のテキストエリアにする。
 - 項目名はテーマ全体で重ならないようにする（初期値の一覧を共有するため）。
+- **ヘッダー・フッターも管理画面で編集できるようにする。** ロゴ、ロゴ横の文字、ボタン、メニュー、フッターのリンク、流れる英文、CTA（文言・背景・ボタン）、フォームURL、会社情報は `page-fields/common.php`（TOP の編集画面の「共通：〜」タブ）に書き、`header.php` / `footer.php` に文言や画像パスを直書きしない。
+  - メニューは「表示名 | URL」を1行ずつ（URL は `/job/` のようなサイト内パスで書ける）。`[job]` のように投稿タイプ名を書くと、その投稿を並び順どおりに展開する（表示名は投稿の `nav_label` 項目、なければタイトル）
+  - 関数：`theme_nav()`（メニュー）、`theme_parse_links()`（1行1リンクのテキスト）、`theme_button('項目名', 空のときのURL)`（text / small / url）、`theme_link()`（パス→URL）、`theme_image_url($id, 'img/からのパス')`（画像URL。未設定ならテーマの画像）
 - 会社情報は `theme_company()`、応募ボタンの飛び先は `theme_entry_url()`、チョク採フォームの iframe の src は `theme_form_src()`。
 - 文字の出力は `theme_text($value)`（エスケープ＋改行を br）、テーマ内の CSS/JS の URL は `theme_asset()`（更新日時を ?ver= に付けてキャッシュ対策）、画像は `theme_img()`。
 

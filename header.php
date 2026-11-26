@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <?php get_template_part('head'); ?>
-<?php $nav = theme_nav(); ?>
+<?php
+$nav       = theme_nav();
+$nav_home  = trim((string) theme_option('nav_home'));
+$logo_sub  = trim((string) theme_option('logo_sub'));
+$btn_1     = theme_button('header_btn_1', home_url('/job/'));
+$btn_2     = theme_button('header_btn_2', theme_entry_url('casual'));
+?>
 
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
@@ -12,17 +18,19 @@
             <?php $logo_tag = is_front_page() ? 'h1' : 'p'; ?>
             <<?php echo $logo_tag; ?> class="logo header__logo">
                 <a href="<?php echo esc_url(home_url('/')); ?>" class="logo__link">
-                    <img src="<?php echo esc_url(theme_img('logo.svg')); ?>" alt="BILTEC ビルテック株式会社" width="136" height="26" class="logo__img logo__img--color">
-                    <img src="<?php echo esc_url(theme_img('logo_w.svg')); ?>" alt="" width="136" height="26" class="logo__img logo__img--white" aria-hidden="true">
-                    <span class="logo__sub">中途採用サイト</span>
+                    <img src="<?php echo esc_url(theme_image_url(theme_option('logo_image'), 'logo.svg')); ?>" alt="<?php echo esc_attr(theme_option('logo_alt')); ?>" width="136" height="26" class="logo__img logo__img--color">
+                    <img src="<?php echo esc_url(theme_image_url(theme_option('logo_image_white'), 'logo_w.svg')); ?>" alt="" width="136" height="26" class="logo__img logo__img--white" aria-hidden="true">
+                    <?php if ($logo_sub !== '') : ?><span class="logo__sub"><?php echo esc_html($logo_sub); ?></span><?php endif; ?>
                 </a>
             </<?php echo $logo_tag; ?>>
             <div class="header__box">
                 <nav class="gnav header__gnav hide-md-only" aria-label="グローバルナビゲーション">
                     <ul class="gnav__items">
+                        <?php if ($nav_home !== '') : ?>
                         <li class="gnav__item">
-                            <a href="<?php echo esc_url(home_url('/')); ?>" class="gnav__link">HOME</a>
+                            <a href="<?php echo esc_url(home_url('/')); ?>" class="gnav__link"><?php echo esc_html($nav_home); ?></a>
                         </li>
+                        <?php endif; ?>
                         <?php foreach ($nav as $item) : ?>
                             <li class="gnav__item">
                                 <span class="gnav__link toggle" tabindex="0"><?php echo esc_html($item['label']); ?><span class="gnav__plus" aria-hidden="true"></span></span>
@@ -39,8 +47,8 @@
                     </ul>
                 </nav>
                 <div class="header__buttons hide-md-only">
-                    <a href="<?php echo esc_url(home_url('/job/')); ?>" class="btn btn--black btn--s"><span class="btn__text">募集要項</span><?php echo theme_chevron(); ?></a>
-                    <a href="<?php echo esc_url(theme_entry_url('casual')); ?>" class="btn btn--gradient btn--s btn--wide"><span class="btn__text">まずは話を聞いてみる</span><?php echo theme_chevron(); ?></a>
+                    <a href="<?php echo esc_url($btn_1['url']); ?>" class="btn btn--black btn--s"><span class="btn__text"><?php echo esc_html($btn_1['text']); ?></span><?php echo theme_chevron(); ?></a>
+                    <a href="<?php echo esc_url($btn_2['url']); ?>" class="btn btn--gradient btn--s btn--wide"><span class="btn__text"><?php echo esc_html($btn_2['text']); ?></span><?php echo theme_chevron(); ?></a>
                 </div>
                 <button type="button" class="menu header__menu header__menu-typeD show-md-only" aria-label="メニューを開く" aria-controls="drawer" aria-expanded="false">
                     <span></span>
@@ -55,9 +63,11 @@
                 <p class="drawer__title en">MENU</p>
                 <nav class="drawer__nav" aria-label="メニュー">
                     <ul class="drawer__items">
+                        <?php if ($nav_home !== '') : ?>
                         <li class="drawer__item">
-                            <a href="<?php echo esc_url(home_url('/')); ?>" class="drawer__link">HOME</a>
+                            <a href="<?php echo esc_url(home_url('/')); ?>" class="drawer__link"><?php echo esc_html($nav_home); ?></a>
                         </li>
+                        <?php endif; ?>
                         <?php foreach ($nav as $item) : ?>
                             <li class="drawer__item">
                                 <button type="button" class="drawer__toggle toggle" aria-expanded="false"><?php echo esc_html($item['label']); ?><span class="gnav__plus" aria-hidden="true"></span></button>
@@ -74,14 +84,14 @@
                     </ul>
                 </nav>
                 <div class="drawer__buttons">
-                    <a href="<?php echo esc_url(home_url('/job/')); ?>" class="btn btn--black btn--l"><span class="btn__text">募集要項</span></a>
-                    <a href="<?php echo esc_url(theme_entry_url('casual')); ?>" class="btn btn--gradient btn--l"><span class="btn__text">まずは話を聞いてみる</span></a>
+                    <a href="<?php echo esc_url($btn_1['url']); ?>" class="btn btn--black btn--l"><span class="btn__text"><?php echo esc_html($btn_1['text']); ?></span></a>
+                    <a href="<?php echo esc_url($btn_2['url']); ?>" class="btn btn--gradient btn--l"><span class="btn__text"><?php echo esc_html($btn_2['text']); ?></span></a>
                 </div>
             </div>
         </div>
     </header>
 
     <div class="sp-fixed-cta small-hide" aria-label="応募ボタン">
-        <a href="<?php echo esc_url(home_url('/job/')); ?>" class="btn btn--black btn--s"><span class="btn__text">募集要項</span><?php echo theme_chevron(); ?></a>
-        <a href="<?php echo esc_url(theme_entry_url('casual')); ?>" class="btn btn--gradient btn--s"><span class="btn__text">まずは話を聞いてみる</span><?php echo theme_chevron(); ?></a>
+        <a href="<?php echo esc_url($btn_1['url']); ?>" class="btn btn--black btn--s"><span class="btn__text"><?php echo esc_html($btn_1['text']); ?></span><?php echo theme_chevron(); ?></a>
+        <a href="<?php echo esc_url($btn_2['url']); ?>" class="btn btn--gradient btn--s"><span class="btn__text"><?php echo esc_html($btn_2['text']); ?></span><?php echo theme_chevron(); ?></a>
     </div>
