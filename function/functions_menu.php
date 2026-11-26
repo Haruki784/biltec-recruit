@@ -194,3 +194,15 @@ function theme_install_menus()
     set_theme_mod('nav_menu_locations', $locations);
 }
 add_action('after_switch_theme', 'theme_install_menus');
+
+/**
+ * 同じ名前のテーマを上書きしたときは「有効化」が起きないので、管理画面（カスタマイズを含む）を開いたときに1回だけ作る。
+ * 作ったあとにメニューを消しても、もう一度は作らない（theme_menus_installed で覚える）。
+ */
+add_action('admin_init', function () {
+    if (get_option('theme_menus_installed') || !current_user_can('edit_theme_options')) {
+        return;
+    }
+    theme_install_menus();
+    update_option('theme_menus_installed', 1);
+});
