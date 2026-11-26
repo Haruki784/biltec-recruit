@@ -17,6 +17,8 @@
  *
  * 固定ページ用は 'location' の代わりに 'page_slug' => '<スラッグ>' と書ける。
  * 例：return array('title' => '事業紹介の内容', 'page_slug' => 'business', 'hide_on_screen' => array('the_content'), 'fields' => array(...));
+ * 'append_to' => 'top' と書くと単独の箱にはせず、page-fields/top.php のグループのタブの後ろに並べる
+ * （サイト共通の page-fields/common.php で使用。項目のキーは元のファイル名のままなので、保存済みの値はそのまま読める）。
  * 項目名はテーマ全体で重ならないようにする（初期値の一覧を共有するため）。
  */
 
@@ -133,9 +135,21 @@ add_action('acf/include_fields', function () {
             $page = get_page_by_path($group['page_slug']);
             $group['location'] = array(array(array('param' => 'page', 'operator' => '==', 'value' => $page ? (string) $page->ID : '0')));
         }
+        // 'append_to' => 'top' のグループは単独では登録せず、そのグループのタブの後ろに並べる（下でまとめて足す）
+        if (!empty($group['append_to'])) {
+            continue;
+        }
         $fields = array();
         foreach ($group['fields'] as $name => $field) {
             $fields[] = theme_acf_field($key, $name, $field);
+        }
+        foreach (theme_field_groups() as $sub_key => $sub_group) {
+            if (($sub_group['append_to'] ?? '') === $key) {
+                foreach ($sub_group['fields'] as $name => $field) {
+                    // キーは元のファイル名のまま（field_common_xxx）。保存済みの値がそのまま読める
+                    $fields[] = theme_acf_field($sub_key, $name, $field);
+                }
+            }
         }
         acf_add_local_field_group(array(
             'key'            => 'group_theme_' . $key,

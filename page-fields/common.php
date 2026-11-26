@@ -3,7 +3,7 @@
 /**
  * サイト共通の入力項目（ヘッダー・フッター・CTA・フォーム・会社情報）
  *
- * - TOP（ホームに設定した固定ページ）の編集画面に、TOP の内容の下に出る。テンプレートでは theme_option('項目名') で取り出す。
+ * - TOP（ホームに設定した固定ページ）の編集画面で、「TOPページの内容」のタブの後ろに「共通：〜」タブとして並ぶ（append_to）。テンプレートでは theme_option('項目名') で取り出す。
  * - チョク採テンプレート共通の仕組み。案件ごとに変えるのは default（初期値）だけにする。
  * - URL の項目は「/job/」のようにサイト内のパスで書ける（theme_link() が home_url を付ける）。https:// から始まればそのまま。
  * - メニューはここではなく WordPress 標準のメニュー（外観 → カスタマイズ → メニュー）。仕組みは function/functions_menu.php。
@@ -27,8 +27,7 @@ $casual_note = '空欄ならカジュアル面談（/entry/?type=casual）。';
 
 return array(
     'title'          => 'サイト共通（ヘッダー・フッター）',
-    'location'       => array(array(array('param' => 'page_type', 'operator' => '==', 'value' => 'front_page'))),
-    'menu_order'     => 10,
+    'append_to'      => 'top', // 単独の箱にせず、TOP の編集画面の「TOPページの内容」のタブの後ろに並べる
     'fields'         => array(
 
         'tab_header' => array('label' => '共通：ヘッダー', 'type' => 'tab'),

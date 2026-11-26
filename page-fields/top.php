@@ -5,7 +5,7 @@
  * ヘッダー・フッター・CTA・フォーム・会社情報などサイト共通の項目は page-fields/common.php（同じ編集画面の下に出る）。
  */
 return array(
-    'title'          => 'TOPページの内容',
+    'title'          => 'TOPページの内容・サイト共通',
     'location'       => array(array(array('param' => 'page_type', 'operator' => '==', 'value' => 'front_page'))),
     'hide_on_screen' => array('the_content'),
     'fields'         => array(
