@@ -116,12 +116,13 @@ function theme_menu($location)
         $children = array();
         foreach ($items as $item) {
             if ($item->menu_item_parent) {
-                $children[$item->menu_item_parent][] = array('label' => $item->title, 'url' => $item->url);
+                // サイト内パス（/company/ など）で登録したリンクは theme_link() で home_url を付ける
+                $children[$item->menu_item_parent][] = array('label' => $item->title, 'url' => theme_link($item->url));
             }
         }
         foreach ($items as $item) {
             if (!$item->menu_item_parent) {
-                $menu[] = theme_menu_item($item->title, (string) $item->url, trim((string) $item->attr_title), $children[$item->ID] ?? array());
+                $menu[] = theme_menu_item($item->title, theme_link($item->url),trim((string) $item->attr_title), $children[$item->ID] ?? array());
             }
         }
     } else {
@@ -149,8 +150,8 @@ function theme_nav()
 }
 
 /**
- * テーマを有効にしたとき、割り当てのない位置に初期値からメニューを作る。
- * 既存の案件に入れるときは WP-CLI で `wp eval 'theme_install_menus();'` を1回実行する。
+ * テーマを有効にしたとき、割り当てのない位置に初期値からメニューを作る。リンクはサイト内パスのカスタムリンクで登録する。
+ * 上書きアップロードで有効化が起きないときは、下の admin_init で管理画面を開いたときに作る（WP-CLI なら `wp eval 'theme_install_menus();'`）。
  */
 function theme_install_menus()
 {
@@ -171,7 +172,7 @@ function theme_install_menus()
             foreach ($items as $d) {
                 $parent = wp_update_nav_menu_item($menu_id, 0, array(
                     'menu-item-title'     => $d['label'],
-                    'menu-item-url'       => ($d['url'] ?? '#') === '#' ? '#' : home_url($d['url']),
+                    'menu-item-url'       => $d['url'] ?? '#', // サイト内パスのまま登録（ドメインや https 化で切れない）
                     'menu-item-attr-title' => $d['index'] ?? '',
                     'menu-item-type'      => 'custom',
                     'menu-item-status'    => 'publish',
@@ -180,7 +181,7 @@ function theme_install_menus()
                 foreach ($d['children'] ?? array() as $c) {
                     wp_update_nav_menu_item($menu_id, 0, array(
                         'menu-item-title'     => $c[0],
-                        'menu-item-url'       => strpos($c[1], '#') === 0 ? $c[1] : home_url($c[1]),
+                        'menu-item-url'       => $c[1],
                         'menu-item-parent-id' => is_wp_error($parent) ? 0 : $parent,
                         'menu-item-type'      => 'custom',
                         'menu-item-status'    => 'publish',
