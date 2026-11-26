@@ -54,7 +54,7 @@ $footer_links = theme_menu('footer'); // メニューの位置「フッター右
                     <p class="footer__heading"><?php echo esc_html($item['label']); ?></p>
                     <ul class="footer__links">
                         <?php foreach ($item['children'] as $child) : ?>
-                            <li><a href="<?php echo esc_url($child['url']); ?>" class="footer__link"><span class="footer__dash">－</span><?php echo esc_html($child['label']); ?></a></li>
+                            <li><a href="<?php echo esc_url($child['url']); ?>" class="footer__link"<?php echo theme_current_attr($child); ?>><span class="footer__dash">－</span><?php echo esc_html($child['label']); ?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
@@ -62,7 +62,7 @@ $footer_links = theme_menu('footer'); // メニューの位置「フッター右
             <div class="footer__col">
                 <ul class="footer__links footer__links--main">
                     <?php foreach ($footer_links as $link) : ?>
-                        <li><a href="<?php echo esc_url($link['url'] ?: home_url('/')); ?>" class="footer__heading footer__link"><?php echo esc_html($link['label']); ?></a></li>
+                        <li><a href="<?php echo esc_url($link['url'] ?: home_url('/')); ?>" class="footer__heading footer__link"<?php echo theme_current_attr($link); ?>><?php echo esc_html($link['label']); ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>

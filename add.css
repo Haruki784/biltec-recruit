@@ -2793,3 +2793,19 @@ body:not(.home) {
     font-size: 1.4rem;
     box-shadow: 0 0 0 2px var(--primary);
 }
+
+/* 今いるページ（function/functions_menu.php の theme_nav_is_current()。リンクに aria-current="page"、親の li に .is-current）
+   ヘッダー1段目：下線 / ドロップダウン・SPメニュー・フッター：青文字 */
+.header-typeD .gnav__item.is-current > .gnav__link,
+.header-typeD .gnav__item > .gnav__link[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: .6em;
+}
+
+.header-typeD .nav__link[aria-current="page"],
+.drawer-typeD .drawer__item.is-current > .drawer__toggle,
+.drawer-typeD .drawer__link[aria-current="page"],
+.footer-typeC .footer__link[aria-current="page"] {
+    color: var(--primary);
+}

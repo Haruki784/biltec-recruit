@@ -74,25 +74,49 @@ function theme_menu_expand($url)
 }
 
 /**
+ * 今いるページのリンクか。
+ * - # を含むリンク（見出し・ページ内リンク）は対象外
+ * - TOP は TOP のときだけ
+ * - それ以外は「今の URL がそのパスで始まる」（/interview/ は /interview/hashimoto/ でも該当）。$exact なら完全一致だけ
+ */
+function theme_nav_is_current($url, $exact = false)
+{
+    $url = (string) $url;
+    if ($url === '' || strpos($url, '#') !== false) {
+        return false;
+    }
+    $home = trailingslashit(wp_parse_url(home_url('/'), PHP_URL_PATH) ?: '/');
+    $path = trailingslashit(wp_parse_url($url, PHP_URL_PATH) ?: '/');
+    $now  = trailingslashit(wp_parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/');
+    if ($path === $home) {
+        return is_front_page();
+    }
+    return $exact ? $now === $path : strpos($now, $path) === 0;
+}
+
+/**
  * 1段目の項目をテンプレートで使う形にそろえる
- * 返す形：array('label', 'url'（子がないときのリンク先）, 'index' => 一覧リンク or null, 'children' => array(array('label', 'url'), ...))
+ * 返す形：array('label', 'url'（子がないときのリンク先）, 'current', 'index' => 一覧リンク or null,
+ *              'children' => array(array('label', 'url', 'current'), ...))
+ * current：今いるページか。親（見出し）は子・一覧リンクのどれかが該当すれば該当。一覧リンクは完全一致だけ
  */
 function theme_menu_item($label, $url, $index_label, $children)
 {
     $links = array();
     foreach ($children as $child) {
         $expanded = theme_menu_expand($child['url']);
-        if ($expanded !== null) {
-            $links = array_merge($links, $expanded);
-        } else {
-            $links[] = $child;
+        foreach ($expanded !== null ? $expanded : array($child) as $link) {
+            $link['current'] = theme_nav_is_current($link['url']);
+            $links[] = $link;
         }
     }
     $has_url = $url !== '' && $url !== '#';
+    $index   = $links && $has_url ? array('label' => $index_label !== '' ? $index_label : $label . '一覧', 'url' => $url, 'current' => theme_nav_is_current($url, true)) : null;
     return array(
         'label'    => $label,
         'url'      => $has_url ? $url : '',
-        'index'    => $links && $has_url ? array('label' => $index_label !== '' ? $index_label : $label . '一覧', 'url' => $url) : null,
+        'current'  => $links ? ($index && $index['current']) || (bool) array_filter(array_column($links, 'current')) : theme_nav_is_current($url),
+        'index'    => $index,
         'children' => $links,
     );
 }
@@ -150,7 +174,32 @@ function theme_nav()
 }
 
 /**
- * テーマを有効にしたとき、割り当てのない位置に初期値からメニューを作る。リンクはサイト内パスのカスタムリンクで登録する。
+ * メニュー項目の登録内容（種類とリンク先）。初期値のパスから自動で決める。
+ * - そのパスの固定ページがある → 「固定ページ」として登録（スラッグを変えてもリンクが切れない）
+ * - 投稿タイプの一覧（/job/ など）→ 「投稿タイプのアーカイブ」として登録
+ * - それ以外（TOP・# の見出し・#job・まだないページ）→ サイト内パスのカスタムリンク（ドメインや https 化で切れない）
+ */
+function theme_menu_item_args($url)
+{
+    $url  = (string) $url;
+    $path = trim((string) wp_parse_url($url, PHP_URL_PATH), '/');
+    if ($url !== '' && $url[0] === '/' && $path !== '' && strpos($url, '#') === false) {
+        $page = get_page_by_path($path);
+        if ($page && $page->post_status === 'publish') {
+            return array('menu-item-type' => 'post_type', 'menu-item-object' => 'page', 'menu-item-object-id' => $page->ID);
+        }
+        foreach (get_post_types(array('has_archive' => true), 'names') as $type) {
+            $archive = get_post_type_archive_link($type);
+            if ($archive && trim((string) wp_parse_url($archive, PHP_URL_PATH), '/') === $path) {
+                return array('menu-item-type' => 'post_type_archive', 'menu-item-object' => $type);
+            }
+        }
+    }
+    return array('menu-item-type' => 'custom', 'menu-item-url' => $url === '' ? '#' : $url);
+}
+
+/**
+ * テーマを有効にしたとき、割り当てのない位置に初期値からメニューを作る（リンクの種類は theme_menu_item_args()）。
  * 上書きアップロードで有効化が起きないときは、下の admin_init で管理画面を開いたときに作る（WP-CLI なら `wp eval 'theme_install_menus();'`）。
  */
 function theme_install_menus()
@@ -170,20 +219,16 @@ function theme_install_menus()
         if (!$menu) {
             $order = 1;
             foreach ($items as $d) {
-                $parent = wp_update_nav_menu_item($menu_id, 0, array(
-                    'menu-item-title'     => $d['label'],
-                    'menu-item-url'       => $d['url'] ?? '#', // サイト内パスのまま登録（ドメインや https 化で切れない）
+                $parent = wp_update_nav_menu_item($menu_id, 0, theme_menu_item_args($d['url'] ?? '#') + array(
+                    'menu-item-title'      => $d['label'],
                     'menu-item-attr-title' => $d['index'] ?? '',
-                    'menu-item-type'      => 'custom',
-                    'menu-item-status'    => 'publish',
-                    'menu-item-position'  => $order++,
+                    'menu-item-status'     => 'publish',
+                    'menu-item-position'   => $order++,
                 ));
                 foreach ($d['children'] ?? array() as $c) {
-                    wp_update_nav_menu_item($menu_id, 0, array(
+                    wp_update_nav_menu_item($menu_id, 0, theme_menu_item_args($c[1]) + array(
                         'menu-item-title'     => $c[0],
-                        'menu-item-url'       => $c[1],
                         'menu-item-parent-id' => is_wp_error($parent) ? 0 : $parent,
-                        'menu-item-type'      => 'custom',
                         'menu-item-status'    => 'publish',
                         'menu-item-position'  => $order++,
                     ));
@@ -207,3 +252,11 @@ add_action('admin_init', function () {
     theme_install_menus();
     update_option('theme_menus_installed', 1);
 });
+
+/**
+ * 今いるページのリンクに付ける属性（header.php・footer.php で使う）。例：<a href="…"<?php echo theme_current_attr($child); ?>>
+ */
+function theme_current_attr($link)
+{
+    return !empty($link['current']) ? ' aria-current="page"' : '';
+}
