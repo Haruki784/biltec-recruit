@@ -25,6 +25,7 @@ return [
     ['ph_mvv_heading', '見出し', 'text', 'ビルテックの想い'],
     ['ph_mission', 'MISSION', 'group', [
         ['image', '背景写真（PC 1440×660〜740。暗めに加工したもの）', 'image', 'philosophy/1_1_02.webp'],
+        ['image_sp', '背景写真（SP 750×1000 前後。暗めに加工したもの）', 'image', '', '未設定なら SP でも PC の背景写真を出します。'],
         ['en', '英字見出し', 'text', 'MISSION'],
         ['sub', '和文の小見出し', 'text', '存在意義'],
         ['catch', 'キャッチ（改行ごとに1行）', 'textarea', "人と空のあいだに、\n安心と美しさを。"],
@@ -32,6 +33,7 @@ return [
     ]],
     ['ph_vision', 'VISION', 'group', [
         ['image', '背景写真（PC 1440×660〜740。暗めに加工したもの）', 'image', 'philosophy/1_1_03.webp'],
+        ['image_sp', '背景写真（SP 750×1000 前後。暗めに加工したもの）', 'image', '', '未設定なら SP でも PC の背景写真を出します。'],
         ['en', '英字見出し', 'text', 'VISION'],
         ['sub', '和文の小見出し', 'text', '目指す姿'],
         ['catch', 'キャッチ（改行ごとに1行）', 'textarea', "守り抜く品質と、\n進化し続ける組織で、\n手すりの未来をつくる。"],
@@ -39,6 +41,7 @@ return [
     ]],
     ['ph_values', 'VALUES（見出し部分）', 'group', [
         ['image', '背景写真（PC 1440×1470。暗めに加工したもの）', 'image', 'philosophy/1_1_04.webp'],
+        ['image_sp', '背景写真（SP 750×1000 前後。暗めに加工したもの）', 'image', '', '未設定なら SP でも PC の背景写真を出します。'],
         ['en', '英字見出し', 'text', 'VALUES'],
         ['sub', '和文の小見出し', 'text', '5つの行動指針'],
         ['catch', 'キャッチ（改行ごとに1行）', 'textarea', "私たちが大切にする\n5つの行動指針"],

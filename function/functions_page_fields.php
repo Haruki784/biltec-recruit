@@ -85,7 +85,10 @@ function theme_pf_to_acf($def, $prefix)
     if ($type === 'image') {
         $field['return_format'] = 'id';
         $field['preview_size']  = 'medium';
-        $field['instructions']  = trim(($def[4] ?? '') . ' ' . ($value !== '' ? '未設定のときは今の画像（' . $value . '）を表示します' : '未設定のときは表示しません'));
+        // 説明：初期画像があれば「今の画像」を案内。初期画像がなく説明を書いていれば説明だけ（SP 用の任意の画像など）
+        $field['instructions']  = $value !== ''
+            ? trim(($def[4] ?? '') . ' 未設定のときは今の画像（' . $value . '）を表示します')
+            : (($def[4] ?? '') !== '' ? $def[4] : '未設定のときは表示しません');
         return $field;
     }
     if ($type === 'textarea') {

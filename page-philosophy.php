@@ -18,6 +18,19 @@ $ph_lines = function ($value) {
     return implode('<br class="small-hide">', $html);
 };
 
+/**
+ * MISSION / VISION / VALUES の背景写真（PC・SP 別に設定できる）。SP を選んでいなければ SP でも PC の写真
+ * $b は group の値（image / image_sp）
+ */
+$mvv_bg = function ($b, $attr) {
+    $sp   = theme_pf_sp($b['image'], $b['image_sp']);
+    $html = '<picture>';
+    if ($sp) {
+        $html .= '<source srcset="' . esc_url($sp) . '" media="(max-width: 768px)">';
+    }
+    return $html . theme_pf_image($b['image'], $attr, 'full') . '</picture>';
+};
+
 $mission = theme_pf('ph_mission');
 $vision  = theme_pf('ph_vision');
 $values  = theme_pf('ph_values');
@@ -89,7 +102,7 @@ $values  = theme_pf('ph_values');
         foreach ($blocks as $block) :
             $b = $block['data']; ?>
             <div class="mvv__block mvv__block--<?php echo esc_attr($block['mod']); ?>">
-                <div class="mvv__bg js-parallax"><?php echo theme_pf_image($b['image'], array('width' => 1440, 'height' => $block['h']), 'full'); ?></div>
+                <div class="mvv__bg js-parallax"><?php echo $mvv_bg($b, array('width' => 1440, 'height' => $block['h'])); ?></div>
                 <div class="mvv__inner">
                     <h3 class="mvv__head">
                         <span class="mvv__en en js-fade"><?php echo esc_html($b['en']); ?></span>
@@ -104,7 +117,7 @@ $values  = theme_pf('ph_values');
         <?php endforeach; ?>
 
         <div class="mvv__block mvv__block--values">
-            <div class="mvv__bg js-parallax"><?php echo theme_pf_image($values['image'], array('width' => 1440, 'height' => 1470), 'full'); ?></div>
+            <div class="mvv__bg js-parallax"><?php echo $mvv_bg($values, array('width' => 1440, 'height' => 1470)); ?></div>
             <div class="mvv__inner">
                 <h3 class="mvv__head">
                     <span class="mvv__en en js-fade"><?php echo esc_html($values['en']); ?></span>
