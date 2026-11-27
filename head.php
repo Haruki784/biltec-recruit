@@ -108,6 +108,7 @@ if (!function_exists('theme_get_canonical_url')) {
         'business'   => is_page('business'),
         'company'    => is_page('company'),
         'process'    => is_page('process'),
+        'career'     => is_page('career'),
         'job'        => is_post_type_archive('job') || is_singular('job'),
         'interview'  => is_post_type_archive('interview') || is_singular('interview'),
         'entry'      => is_page('entry'),

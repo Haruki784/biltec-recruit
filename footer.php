@@ -29,6 +29,8 @@ $footer_links = theme_menu('footer'); // メニューの位置「フッター右
     <img src="<?php echo esc_url(theme_pf_img(theme_common('city'))); ?>" alt="" width="2400" height="412" loading="lazy">
 </div>
 
+<?php // 「ここまで読んでくださって〜」の CTA。募集職種一覧（/job/）では出さない（2026-11-27 修正依頼） ?>
+<?php if (!is_post_type_archive('job')) : ?>
 <section class="entry entry-typeB">
     <picture class="entry__bg">
         <?php if ($cta_sp) : ?><source srcset="<?php echo esc_url($cta_sp); ?>" media="(max-width: 768px)"><?php endif; ?>
@@ -47,6 +49,7 @@ $footer_links = theme_menu('footer'); // メニューの位置「フッター右
         </div>
     </div>
 </section>
+<?php endif; ?>
 
 <footer class="footer footer-typeC">
     <div class="footer__inner container">

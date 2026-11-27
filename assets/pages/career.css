@@ -1,0 +1,22 @@
+/* 教育・キャリアパス（page-career.php）だけのスタイル。デザイン待ちのため「作成中」の文だけ */
+
+.career-notice {
+    padding: 12rem 0;
+}
+
+.career-notice__text {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.8;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .career-notice {
+        padding: 8rem 0;
+    }
+
+    .career-notice__text {
+        font-size: 1.6rem;
+    }
+}

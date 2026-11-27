@@ -7,7 +7,7 @@ return [
     ['tab', 'MV'],
     ['ph_mv_label', '小ラベル', 'text', '人と空のあいだに、安心と美しさを。'],
     ['ph_mv_title', '見出し（H1）', 'text', '私たちの想い'],
-    ['ph_mv_sub', 'サブ見出し', 'text', 'MVV・第2創業'],
+    ['ph_mv_sub', 'サブ見出し', 'text', ''],
     ['ph_mv_lead', 'リード文', 'textarea', "45年の歴史と自社工場を持つ安定基盤のもと、\n仕組みとチームで誰もが輝ける「第2創業」を推進しています。"],
     ['ph_mv_image', '背景写真（PC 1440×380）', 'image', 'philosophy/1_1_main.webp'],
     ['ph_mv_image_sp', '背景写真（SP）', 'image', 'philosophy/1_1_main_sp.webp', 'PC だけ選んだときは、SP でも PC の画像を出します。'],

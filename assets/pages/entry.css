@@ -11,12 +11,9 @@
     margin: 0 auto;
 }
 
-/* チョク採フォームの高さはフォーム側で変わるので、十分な高さを取る */
+/* チョク採フォーム：幅・高さは埋め込みコードの属性と form-embed.js（高さを自動調整）に任せる。CSS で高さを決めない */
 .entry-form__iframe {
-    display: block;
-    width: 100%;
-    height: 160rem;
-    border: 0;
+    margin: 0 auto;
     background: #fff;
 }
 
@@ -39,10 +36,6 @@
 @media screen and (max-width: 768px) {
     .entry-form__lead {
         font-size: 1.5rem;
-    }
-
-    .entry-form__iframe {
-        height: 200rem;
     }
 
     .entry-form__privacy {
