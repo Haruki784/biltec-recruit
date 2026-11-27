@@ -106,11 +106,11 @@ CSS はすべて add.css 末尾の「ビルテック案件で追加したパー�
 | class | 用途 | 見本 | JS |
 |---|---|---|---|
 | `btn btn--{black,primary,white,outline,gradient} btn--{s,m,l,xl}` | 角丸なし・右端に › のボタン（`theme_chevron()`） | header.php / footer.php | - |
-| `header header-typeD fixed` | 白・透過80%の固定ヘッダー。ドロップダウン（＋）とボタン2つ。文言・ロゴは page-fields/common.php、メニューは WordPress のメニュー（function/functions_menu.php） | header.php | main.js（hover）、add.js（キーボード） |
+| `header header-typeD fixed` | 白・透過80%の固定ヘッダー。ドロップダウン（＋）とボタン2つ。文言・ロゴは function/page-fields/top.php の common_*、メニューは WordPress のメニュー（function/functions_menu.php） | header.php | main.js（hover）、add.js（キーボード） |
 | `drawer drawer-typeD` | SPメニュー。アコーディオン（`.drawer__toggle.toggle`）＋ボタン2つ | header.php | main.js `.toggle` |
 | `sp-fixed-cta` | SPで画面下に追従する2ボタン | header.php | add.js `initSpFixedCta()` |
 | `heading-wrap heading-typeC` | 和文見出し＋短い線＋青のサブ。PC中央／SP左。`--white` あり | front-page.php | - |
-| `entry entry-typeB` | 共通CTA（背景写真＋ボタン2つ）。上に `cityscape`。文言・背景・ボタンは page-fields/common.php | footer.php | - |
+| `entry entry-typeB` | 共通CTA（背景写真＋ボタン2つ）。上に `cityscape`。文言・背景・ボタンは function/page-fields/top.php の common_* | footer.php | - |
 | `footer footer-typeC` | 4列ナビ＋会社情報 | footer.php | - |
 | `message message-typeA` | 左画像／右 濃紺の代表メッセージ | front-page.php | - |
 | `strength strength-typeA` | 中央だけ明るいループスライダー（両サイド暗く） | front-page.php | add.js `initStrengthSlider()` |

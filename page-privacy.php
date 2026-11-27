@@ -1,6 +1,6 @@
 <?php
 get_header();
-// 会社名・代表者・住所・施行日は TOP の「共通：会社情報」タブ（theme_company() / theme_option()）
+// 会社名・代表者・住所・施行日は会社概要ページの「会社基本情報」タブ（theme_company() / theme_pf('company_privacy_date', 'company')）
 $company = theme_company();
 ?>
 
@@ -70,7 +70,7 @@ $company = theme_company();
                 <?php get_template_part('snippet/contact-address'); ?>
                 <div class="privacy__box grid grid-1 gap-y-1">
                     <p class="privacy__text">
-                        附則<br>本ポリシーは、<?php echo esc_html(theme_option('privacy_date')); ?>より施行します。
+                        附則<br>本ポリシーは、<?php echo esc_html(theme_pf('company_privacy_date', 'company')); ?>より施行します。
                     </p>
                 </div>
             </div>

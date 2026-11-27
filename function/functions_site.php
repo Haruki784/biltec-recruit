@@ -52,7 +52,7 @@ add_action('init', 'theme_register_site_post_types');
 
 /**
  * 入力値を取得する。ACF があれば get_field、なければ投稿メタ。
- * 未入力なら page-fields/*.php に書いた初期値を返す（$default を渡したときはそちらを優先）。
+ * カスタム投稿用（固定ページは theme_pf()）。未入力なら post-fields/*.php に書いた初期値を返す（$default を渡したときはそちらを優先）。
  * group 項目は配列で返し、未入力の子項目は初期値で埋める。
  */
 function theme_field($name, $default = null, $post_id = null)
@@ -83,14 +83,6 @@ function theme_field($name, $default = null, $post_id = null)
 }
 
 /**
- * TOP（共通タブ）の入力値
- */
-function theme_option($name)
-{
-    return theme_field($name, null, theme_top_id());
-}
-
-/**
  * 画像項目（添付ファイルID）を <img> で出す。未設定ならテーマ内の画像を出す。
  * $fallback は img/ からのパス、$attr は width / height / alt / loading など。
  */
@@ -105,52 +97,6 @@ function theme_image($attachment_id, $fallback, $attr = array(), $size = 'large'
         $html .= ' ' . esc_attr($key) . '="' . esc_attr($val) . '"';
     }
     return $html . '>';
-}
-
-/**
- * TOP 用固定ページ（slug: top）の ID。共通パーツの入力値はここに持たせる。
- */
-function theme_top_id()
-{
-    static $id = null;
-    if ($id === null) {
-        $page = get_page_by_path('top');
-        $id = $page ? (int) $page->ID : 0;
-    }
-    return $id;
-}
-
-/**
- * 会社情報（フッター・プライバシーポリシーで共用）
- */
-function theme_company()
-{
-    // 値は TOP の「共通：会社情報」タブ（page-fields/top.php）
-    return array(
-        'name'      => theme_option('company_name'),
-        'name_en'   => theme_option('company_name_en'),
-        'zip'       => theme_option('company_zip'),
-        'address'   => theme_option('company_address'),
-        'building'  => theme_option('company_building'),
-        'ceo'       => theme_option('company_ceo'),
-        'tel'       => theme_option('company_tel'),
-        'mail'      => theme_option('company_mail'),
-    );
-}
-
-/**
- * チョク採フォーム（iframe）の src（TOP の「共通：フォーム」タブ）。エントリーページで埋め込みに使う。
- * $type：'entry' か 'casual'。カジュアル面談が空ならエントリーと同じURL。
- */
-function theme_form_src($type = 'entry')
-{
-    if ($type === 'casual') {
-        $casual = theme_option('form_casual_url');
-        if ($casual) {
-            return $casual;
-        }
-    }
-    return theme_option('form_entry_url');
 }
 
 /**
@@ -184,11 +130,16 @@ function theme_asset($path)
 }
 
 /**
- * テキストエリアの値を、エスケープして改行を <br> にして返す（前後の空白は取る）
+ * テキストエリアの値を、エスケープして改行を <br> にして返す（前後の空白は取る）。カスタム投稿の項目（theme_field()）用。
+ * 固定ページの項目（theme_pf()）は改行がすでに <br> になっているので、<br> を含む値は theme_pf_kses()（改行・強調タグだけ許可）で出す。
  */
 function theme_text($value)
 {
-    return nl2br(esc_html(trim((string) $value)));
+    $value = trim((string) $value);
+    if (stripos($value, '<br') !== false) {
+        return theme_pf_kses($value);
+    }
+    return nl2br(esc_html($value));
 }
 
 /**
@@ -205,33 +156,6 @@ function theme_link($url, $fallback = '')
         return home_url($url);
     }
     return $url;
-}
-
-/**
- * 画像項目（添付ファイルID）の URL。未設定ならテーマ内の画像（img/ からのパス）の URL。
- */
-function theme_image_url($attachment_id, $fallback, $size = 'full')
-{
-    if ($attachment_id) {
-        $url = wp_get_attachment_image_url((int) $attachment_id, $size);
-        if ($url) {
-            return $url;
-        }
-    }
-    return theme_img($fallback);
-}
-
-/**
- * ボタンの項目（group：text / small / url）を、表示用にそろえて返す。url が空なら $fallback_url。
- */
-function theme_button($name, $fallback_url = '')
-{
-    $btn = theme_option($name);
-    return array(
-        'text'  => trim((string) ($btn['text'] ?? '')),
-        'small' => trim((string) ($btn['small'] ?? '')),
-        'url'   => theme_link($btn['url'] ?? '', $fallback_url),
-    );
 }
 
 /**

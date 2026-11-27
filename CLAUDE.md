@@ -4,7 +4,11 @@
 各案件はこのテーマをコピーして始め、TOP（`front-page.php`）と固定ページ（`page-<slug>.php`）を Figma をもとに組みます。
 
 - パーツ一覧：[docs/parts-catalog.md](docs/parts-catalog.md)。ページを組む前に必ず読む
-- 案件制作の手順：`.claude/skills/chokusai-coding/SKILL.md`（「チョク採で〇〇ページを作って」で起動）
+- チョク採の手順は全案件共通のスキル（`C:\Users\corek\.claude\skills\`）にある。案件ごとにコピーしない
+  - 案件の段取り（キックオフ〜本番移行）：`chokusai-workflow`（「段取りを決めて」「本番に反映して」で起動）
+  - ページ制作の手順：`chokusai-coding`（「チョク採で〇〇ページを作って」で起動）
+  - 整理（リファクタリング）の手順：`chokusai-refactor`（「リファクタリングして」「コードを整理して」で起動）
+  - 管理画面で文言・画像を編集できるようにする基準（ACF・ヘッダー・フッター・メニュー・エントリーフォーム）：`chokusai-workflow/references/admin-editing.md`（基準の実装は内野建設）
 
 ## 基本方針
 
@@ -90,23 +94,28 @@ CSSの読み込み順（head.php）：destyle → splide → settings → settin
 
 ## 入力項目（ACF 無料版）
 
-- 項目は `page-fields/<名前>.php` に配列で書く（1ファイル＝1フィールドグループ）。`function/functions_page_fields.php` が ACF に登録し、同時に「項目名→初期値」の一覧を作る。
-- テンプレートでは `theme_field('項目名')`（投稿・ページの項目）、`theme_option('項目名')`（TOP の「共通：〜」タブ）で取り出す。未入力なら初期値が返る。**文言はテンプレートに直書きせず `default` に書く。**
-- 画像項目は `theme_image($id, 'top/xxx.webp', array('width'=>…, 'height'=>…))`。未設定ならテーマ内の画像を出す。
-- 無料版なのでリピーターは使わない。繰り返しは固定数の group（例：`iv_section_1`〜`8`）か、1行1項目のテキストエリアにする。
-- 項目名はテーマ全体で重ならないようにする（初期値の一覧を共有するため）。
-- **ヘッダー・フッターも管理画面で編集できるようにする。** ロゴ、ロゴ横の文字、ボタン、流れる英文、CTA（文言・背景・ボタン）、フォームURL、会社情報は `page-fields/common.php`（TOP の編集画面で「TOPページの内容」のタブの後ろに「共通：〜」タブとして並ぶ。`'append_to' => 'top'`）に書き、`header.php` / `footer.php` に文言や画像パスを直書きしない。
-  - **メニューだけは WordPress 標準のメニュー**（外観 → カスタマイズ → メニュー）で編集する。仕組みは `function/functions_menu.php`。位置は `global`（ヘッダー・SPメニュー・フッターの列）と `footer`（フッター右の太字リンク）。案件ごとに変えるのは `theme_menu_defaults()`（初期値）だけ。テーマ有効化時、または管理画面を最初に開いたとき（1回だけ）に、割り当てのない位置へ初期値からメニューを作る
+基準は `chokusai-workflow/references/admin-editing.md`（基準の実装は内野建設）。ビルテックは固定ページと共通部分をこの形にそろえ、カスタム投稿だけ別の仕組みのまま残している（2026-11-27）。
+
+- **固定ページ**：項目は `function/page-fields/<スラッグ>.php` に `['名前', 'ラベル', '種類', '初期値', '説明（任意）']` の配列で書く。`['tab', 'タブ名']`、`['message', '説明文']`、group は4つ目に子の配列。仕組みは `function/functions_page_fields.php`
+  - 取り出し：`theme_pf('名前')`（今のページ）、`theme_pf('名前', 'スラッグ')`（別のページ）。textarea は `theme_pf_kses()` で出す（改行は `<br>` になっている。`<br class="…">`・`<strong>` なども書ける）。1行ずつ分けたいときは `theme_pf_lines()`
+  - 画像：初期値は `img/` からのパス。`theme_pf_img($値)`（URL）、`theme_pf_image($値, array('width'=>…))`（`<img>`）、SP 用は `theme_pf_sp($PCの値, $SPの値)`（PC だけ選んだら SP でも PC の画像）
+  - リンク：`/job/` のようなサイト内パスで書き、`theme_pf_url()` で URL にする
+  - 管理画面で一度も保存していない項目は初期値。空にして保存すると空になる（連番の行は消せる。`theme_pf_rows()` / `theme_pf_list()`）
+  - **編集が必要な画像はすべて項目にする**（MV のスライド・SP 用画像・背景・アイコンも）。テンプレートに `theme_img('…')` を直書きしない
+- **共通部分**（ヘッダー・CTA・フォーム・募集職種一覧の MV）：`function/page-fields/top.php` の `common_*`。トップページの編集画面に「共通：〜」タブで並ぶ。取り出しは `theme_common('名前')`（`common_` は付けない）
+- **会社情報**：会社概要の「会社基本情報」タブ（`company.php` の `company_*`）。`theme_company()`、施行日は `theme_pf('company_privacy_date', 'company')`
+- **メニュー**：WordPress 標準のメニュー（外観 → メニュー）。仕組みは `function/functions_menu.php`。位置は `global`（ヘッダー・SPメニュー・フッターの列）と `footer`（フッター右の太字リンク）。案件ごとに変えるのは `theme_menu_defaults()`（初期値）だけ。テーマ有効化時、または管理画面を最初に開いたとき（1回だけ）に、割り当てのない位置へ初期値からメニューを作る
   - global は2階層まで。子のない1段目はそのままリンク（HOME など、フッターには出ない）。子のある1段目は見出しで、URL を `#` 以外にすると子の先頭に一覧リンク（表示名はタイトル属性、空なら「見出し＋一覧」）。子に URL `#job` のカスタムリンクを置くと投稿タイプ job の投稿を並び順どおりに展開（表示名は投稿の `nav_label` 項目、なければタイトル）
   - 自動作成では、固定ページは「固定ページ」、投稿タイプの一覧は「投稿タイプのアーカイブ」、それ以外はサイト内パスのカスタムリンクとして登録する（`theme_menu_item_args()`）
   - 今いるページ：リンクに `aria-current="page"`（`theme_current_attr()`）、親の `li` に `.is-current`（判定は `theme_nav_is_current()`）。見た目は `add.css` 末尾
-  - 関数：`theme_nav()` / `theme_menu('footer')`（メニュー）、`theme_button('項目名', 空のときのURL)`（text / small / url）、`theme_link()`（パス→URL）、`theme_image_url($id, 'img/からのパス')`（画像URL。未設定ならテーマの画像）
-- 会社情報は `theme_company()`、応募ボタンの飛び先は `theme_entry_url()`、チョク採フォームの iframe の src は `theme_form_src()`。
-- 文字の出力は `theme_text($value)`（エスケープ＋改行を br）、テーマ内の CSS/JS の URL は `theme_asset()`（更新日時を ?ver= に付けてキャッシュ対策）、画像は `theme_img()`。
+- **カスタム投稿**（募集要項 job・先輩インタビュー interview）：`post-fields/<名前>.php` に `'名前' => array('label'…, 'type'…, 'default'…)` で書き、`theme_field('名前')` で取り出す（未入力なら初期値）。仕組みは `function/functions_post_fields.php`。原稿の値が保存済みなので、ファイル名・項目名は変えない
+- 無料版なのでリピーターは使わない。項目名はテーマ全体で重ならないようにする。**入力欄の名前は一度決めたら変えない**（変えると保存済みの値が読めなくなる。ラベル・並び順・タブは変えてよい）
+- 応募ボタンの飛び先は `theme_entry_url()`、チョク採フォームの iframe の src は `theme_form_src()`（共通：フォーム タブ）
+- 文字の出力：カスタム投稿の textarea は `theme_text()`（`<br>` を含む値は `theme_pf_kses()` と同じ扱い）、テーマ内の CSS/JS は `theme_asset()`、画像は `theme_img()`
 
 ## 並行作業（別セッション）のルール
 
-- 1セッション＝1ページ。そのページのファイル（`page-<slug>.php`、`assets/pages/<slug>.css`、`page-fields/<slug>.php`、`img/<slug>/`）だけを触る。
+- 1セッション＝1ページ。そのページのファイル（`page-<slug>.php`、`assets/pages/<slug>.css`、`function/page-fields/<slug>.php`、`img/<slug>/`）だけを触る。
 - 共通ファイル（`add.css`、`header.php`、`footer.php`、`functions.php`、`function/*`、`assets/settings.css`）を変えたいときは、自分では変えずに必要な変更をまとめて報告する（親のセッションでまとめて入れる）。
 - ページ用の CSS は `assets/pages/<slug>.css` に書き、`head.php` の `$page_css` に `'<slug>' => is_page('<slug>'),` を1行だけ足す。
 - 案件の進め方・確認事項は `_design/coding-guide.md`、進捗は `_design/sitemap.md`。

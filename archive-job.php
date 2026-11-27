@@ -12,10 +12,10 @@ $jobs = get_posts(array('post_type' => 'job', 'numberposts' => -1, 'orderby' => 
 <main id="main" class="job-main job-archive">
 
     <?php get_template_part('snippet/under-mv', null, array(
-        'title'    => theme_option('job_archive_title'),
-        'image'    => 'job/3_0_main.webp',
-        'image_sp' => 'job/3_0_main_sp.webp',
-        'image_id' => theme_option('job_archive_image'),
+        // 見出しと画像はトップページの「共通：募集職種一覧」タブ
+        'title'    => theme_common('job_archive_title'),
+        'image'    => theme_common('job_archive_image'),
+        'image_sp' => theme_common('job_archive_image_sp'),
     )); ?>
 
     <section class="job-archive__body">

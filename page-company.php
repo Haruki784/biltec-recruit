@@ -3,7 +3,7 @@
 /*
  * 会社概要（固定ページ slug: company）
  * デザイン：Figma xfXD7OKD6zxIIIKGHeVqiF 156:1249（PC）/ 156:1564（SP）。2026-11-20 作り直し
- * 文言は page-fields/company.php の初期値に書き、ここでは theme_field('項目名') で取り出す。
+ * 文言・画像は function/page-fields/company.php の初期値に書き、ここでは theme_pf('項目名') で取り出す。
  * 使うパーツ：under-mv-typeB / number-typeA（数字。main.js がカウントアップ）/ heading-typeD / table-typeB--info / map-typeA / job-typeA
  * ページ固有のスタイルは assets/pages/company.css。
  */
@@ -23,29 +23,28 @@ $cp_map_link = function ($address) {
 <main id="main" class="cp-main">
 
     <?php get_template_part('snippet/under-mv', null, array(
-        'title'    => theme_field('cp_mv_title'),
-        'image'    => 'company/1_3_main.webp',
-        'image_sp' => 'company/1_3_main_sp.webp',
-        'image_id' => theme_field('cp_mv_image'),
+        'title'    => theme_pf('cp_mv_title'),
+        'image'    => theme_pf('cp_mv_image'),
+        'image_sp' => theme_pf('cp_mv_image_sp'),
     )); ?>
 
     <!-- リード -->
     <section class="cp-lead">
         <div class="container">
-            <p class="cp-lead__text js-fade"><?php echo theme_text(theme_field('cp_lead')); ?></p>
+            <p class="cp-lead__text js-fade"><?php echo theme_pf_kses(theme_pf('cp_lead')); ?></p>
         </div>
     </section>
 
     <!-- 数字で見るビルテック -->
     <section class="cp-numbers">
         <div class="container">
-            <h2 class="cp-numbers__heading js-lines"><?php echo esc_html(theme_field('cp_num_heading')); ?></h2>
+            <h2 class="cp-numbers__heading js-lines"><?php echo esc_html(theme_pf('cp_num_heading')); ?></h2>
             <?php foreach ($cp_groups as $g => $nums) : ?>
                 <div class="cp-numbers__group">
-                    <h3 class="cp-numbers__band js-fade"><?php echo esc_html(theme_field('cp_num_group_' . $g)); ?></h3>
+                    <h3 class="cp-numbers__band js-fade"><?php echo esc_html(theme_pf('cp_num_group_' . $g)); ?></h3>
                     <ul class="cp-numbers__items">
                         <?php foreach ($nums as $i => $n) :
-                            $item  = theme_field('cp_num_' . $n);
+                            $item  = theme_pf('cp_num_' . $n);
                             $value = trim((string) $item['value']);
                             // カウントアップ用の数値（カンマを外す）。カンマなしで入力された数字は西暦などとしてカンマなしで出す
                             $count = str_replace(',', '', $value);
@@ -53,13 +52,13 @@ $cp_map_link = function ($address) {
                             ?>
                             <li class="count__item number-typeA cp-number js-fade<?php echo $i ? ' js-delay-' . $i : ''; ?>">
                                 <div class="number__icon">
-                                    <img src="<?php echo esc_url(theme_img(sprintf('company/1_3_ico%02d.svg', $n))); ?>" alt="" width="60" height="60" loading="lazy">
+                                    <img src="<?php echo esc_url(theme_pf_img($item['icon'])); ?>" alt="" width="60" height="60" loading="lazy">
                                 </div>
-                                <p class="count__text cp-number__title"><?php echo theme_text($item['title']); ?></p>
+                                <p class="count__text cp-number__title"><?php echo theme_pf_kses($item['title']); ?></p>
                                 <p class="count__number cp-number__value" data-count="<?php echo esc_attr($count); ?>"<?php echo $plain ? ' data-plain' : ''; ?>>
                                     <span class="count__number-value en"><?php echo esc_html($value); ?></span><span class="cp-number__unit"><?php echo esc_html($item['unit']); ?></span>
                                 </p>
-                                <p class="cp-number__text"><?php echo theme_text($item['text']); ?></p>
+                                <p class="cp-number__text"><?php echo theme_pf_kses($item['text']); ?></p>
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -76,11 +75,11 @@ $cp_map_link = function ($address) {
                 <table class="table__content">
                     <tbody>
                         <?php for ($i = 1; $i <= 12; $i++) :
-                            $row = theme_field('cp_row_' . $i);
+                            $row = theme_pf('cp_row_' . $i);
                             if (trim((string) $row['label']) === '') continue; ?>
                             <tr class="table__item">
                                 <th class="table__header"><?php echo esc_html($row['label']); ?></th>
-                                <td class="table__data"><?php echo theme_text($row['value']); ?></td>
+                                <td class="table__data"><?php echo theme_pf_kses($row['value']); ?></td>
                             </tr>
                         <?php endfor; ?>
                     </tbody>
@@ -92,10 +91,10 @@ $cp_map_link = function ($address) {
     <!-- 拠点案内・アクセス -->
     <section class="cp-access">
         <div class="container">
-            <h2 class="heading-typeD cp-heading js-fade"><?php echo esc_html(theme_field('cp_access_heading')); ?></h2>
+            <h2 class="heading-typeD cp-heading js-fade"><?php echo esc_html(theme_pf('cp_access_heading')); ?></h2>
             <div class="cp-access__items">
                 <?php for ($b = 1; $b <= 2; $b++) :
-                    $base = theme_field('cp_base_' . $b);
+                    $base = theme_pf('cp_base_' . $b);
                     if (trim((string) $base['name']) === '') continue; ?>
                     <div class="map map-typeA cp-map js-fade<?php echo $b === 2 ? ' js-delay-1' : ''; ?>">
                         <div class="map__head cp-map__frame">
@@ -128,11 +127,11 @@ $cp_map_link = function ($address) {
                             </dl>
                             <dl class="cp-map__list">
                                 <?php for ($r = 1; $r <= 4; $r++) :
-                                    $info = theme_field('cp_base_' . $b . '_info_' . $r);
+                                    $info = theme_pf('cp_base_' . $b . '_info_' . $r);
                                     if (trim((string) $info['label']) === '') continue; ?>
                                     <div class="cp-map__row">
                                         <dt><?php echo esc_html($info['label']); ?></dt>
-                                        <dd><?php echo theme_text($info['value']); ?></dd>
+                                        <dd><?php echo theme_pf_kses($info['value']); ?></dd>
                                     </div>
                                 <?php endfor; ?>
                             </dl>
@@ -147,7 +146,7 @@ $cp_map_link = function ($address) {
     <section class="cp-recruit" id="recruit">
         <div class="container">
             <h2 class="heading-wrap heading-typeC heading-typeC--s">
-                <span class="heading-main js-lines"><?php echo theme_text(theme_field('cp_recruit_heading')); ?></span>
+                <span class="heading-main js-lines"><?php echo theme_pf_kses(theme_pf('cp_recruit_heading')); ?></span>
             </h2>
         </div>
         <?php get_template_part('snippet/job-list'); ?>

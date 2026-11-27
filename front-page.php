@@ -2,28 +2,27 @@
 <?php
 /*
  * TOP（固定ページ slug: top をホームに設定）
- * 文言は page-fields/top.php の初期値に書き、ここでは theme_field('項目名') で取り出す。
+ * 文言・画像は function/page-fields/top.php の初期値に書き、ここでは theme_pf('項目名') で取り出す。
  * 管理画面：固定ページ「TOP」の編集画面で変更できる。
  */
-$top_id = theme_top_id();
 $jobs   = get_posts(array('post_type' => 'job', 'numberposts' => -1, 'orderby' => 'menu_order', 'order' => 'ASC'));
 
 /** テキストエリアの値を「1行ずつの配列」にする */
-$lines = function ($name) use ($top_id) {
-    return array_filter(array_map('trim', preg_split('/\R/u', (string) theme_field($name, null, $top_id))), 'strlen');
+$lines = function ($name) {
+    return theme_pf_lines(theme_pf($name));
 };
-/** テキストエリアの値を改行つきで出す */
-$text = function ($name) use ($top_id) {
-    return nl2br(esc_html(theme_field($name, null, $top_id)));
+/** テキストエリアの値を改行つきで出す（改行・強調タグだけ許可） */
+$text = function ($name) {
+    return theme_pf_kses(theme_pf($name));
 };
 ?>
 
 <div class="opening" id="opening" aria-hidden="true">
     <div class="opening__inner">
         <div class="opening__logos">
-            <img src="<?php echo esc_url(theme_image_url(theme_option('logo_image'), 'logo.svg')); ?>" alt="" width="200" height="38" class="opening__logo">
+            <img src="<?php echo esc_url(theme_pf_img(theme_common('logo'))); ?>" alt="" width="200" height="38" class="opening__logo">
         </div>
-        <p class="opening__text">アルミ手すり専門メーカー<br>ビルテック</p>
+        <p class="opening__text"><?php echo $text('opening_text'); ?></p>
     </div>
 </div>
 
@@ -34,11 +33,13 @@ $text = function ($name) use ($top_id) {
         <div class="top-mv__slider splide" aria-label="メインビジュアル">
             <div class="splide__track">
                 <ul class="splide__list">
-                    <?php for ($i = 1; $i <= 3; $i++) : ?>
+                    <?php for ($i = 1; $i <= 3; $i++) :
+                            $slide = theme_pf('mv_slide_' . $i);
+                            $sp    = theme_pf_sp($slide['pc'], $slide['sp']); ?>
                         <li class="splide__slide top-mv__slide">
                             <picture>
-                                <source srcset="<?php echo esc_url(theme_img("top/main0{$i}_sp.webp")); ?>" media="(max-width: 768px)" width="750" height="1360">
-                                <img src="<?php echo esc_url(theme_img("top/main0{$i}.webp")); ?>" alt="" width="1440" height="780" <?php echo $i === 1 ? 'fetchpriority="high"' : 'loading="lazy"'; ?>>
+                                <?php if ($sp) : ?><source srcset="<?php echo esc_url($sp); ?>" media="(max-width: 768px)" width="750" height="1360"><?php endif; ?>
+                                <img src="<?php echo esc_url(theme_pf_img($slide['pc'])); ?>" alt="" width="1440" height="780" <?php echo $i === 1 ? 'fetchpriority="high"' : 'loading="lazy"'; ?>>
                             </picture>
                         </li>
                     <?php endfor; ?>
@@ -48,12 +49,12 @@ $text = function ($name) use ($top_id) {
         <div class="top-mv__content">
             <h2 class="top-mv__title">
                 <?php foreach ($lines('mv_title') as $line) : ?>
-                    <span class="top-mv__line"><span class="top-mv__line-text"><?php echo esc_html($line); ?></span></span>
+                    <span class="top-mv__line"><span class="top-mv__line-text"><?php echo theme_pf_kses($line); ?></span></span>
                 <?php endforeach; ?>
             </h2>
             <p class="top-mv__lead"><?php echo $text('mv_lead'); ?></p>
         </div>
-        <a href="#top-intro" class="top-mv__scroll en"><span class="top-mv__scroll-text">Scroll Down</span><span class="top-mv__scroll-line"></span></a>
+        <a href="#top-intro" class="top-mv__scroll en"><span class="top-mv__scroll-text"><?php echo esc_html(theme_pf('mv_scroll')); ?></span><span class="top-mv__scroll-line"></span></a>
         <ul class="top-mv__progress" aria-hidden="true">
             <li class="top-mv__bar"><span></span></li>
             <li class="top-mv__bar"><span></span></li>
@@ -63,14 +64,14 @@ $text = function ($name) use ($top_id) {
 
     <!-- ビルテックは今、 -->
     <section class="top-intro" id="top-intro">
-        <img src="<?php echo esc_url(theme_img('top/sec1_bg.webp')); ?>" alt="" width="1220" height="1038" class="top-intro__bg" loading="lazy">
+        <img src="<?php echo esc_url(theme_pf_img(theme_pf('intro_bg'))); ?>" alt="" width="1220" height="1038" class="top-intro__bg" loading="lazy">
         <div class="container top-intro__inner">
             <h2 class="top-intro__title heading-2 js-lines">
                 <?php
-                $accent = theme_field('intro_accent', null, $top_id);
+                $accent = theme_pf('intro_accent');
                 $title_lines = array();
                 foreach ($lines('intro_title') as $line) {
-                    $line = esc_html($line);
+                    $line = theme_pf_kses($line);
                     if ($accent !== '') {
                         $line = str_replace(esc_html($accent), '<em>' . esc_html($accent) . '</em>', $line);
                     }
@@ -82,44 +83,40 @@ $text = function ($name) use ($top_id) {
             <p class="top-intro__text js-fade"><?php echo $text('intro_text'); ?></p>
             <ul class="top-intro__cards">
                 <?php
-                // 3職種の画像リンク（リンク先と表示名は募集要項の投稿。表示名は投稿のタイトル）
-                $intro_cards = array(
-                    array('slug' => 'ishou', 'img' => 'sec1_bnr01.webp'),
-                    array('slug' => 'kouzu', 'img' => 'sec1_bnr02.webp'),
-                    array('slug' => 'factory', 'img' => 'sec1_bnr03.webp'),
-                );
-                foreach ($intro_cards as $card) :
-                    $job = get_page_by_path($card['slug'], OBJECT, 'job');
+                // 3職種の画像リンク（リンク先と表示名は募集要項の投稿。表示名は投稿のタイトル）。スラッグと画像は「ビルテックは今、」タブ
+                for ($i = 1; $i <= 3; $i++) :
+                    $card = theme_pf('intro_card_' . $i);
+                    $job  = $card['job'] !== '' ? get_page_by_path($card['job'], OBJECT, 'job') : null;
                     if (!$job) continue;
                     $url = get_permalink($job);
                     $card['label'] = get_the_title($job);
                 ?>
                     <li class="top-intro__card js-fade">
                         <a href="<?php echo esc_url($url); ?>" class="top-intro__link">
-                            <span class="top-intro__img img-zoom"><img src="<?php echo esc_url(theme_img('top/' . $card['img'])); ?>" alt="" width="720" height="260" loading="lazy"></span>
+                            <span class="top-intro__img img-zoom"><img src="<?php echo esc_url(theme_pf_img($card['image'])); ?>" alt="" width="720" height="260" loading="lazy"></span>
                             <span class="top-intro__label"><?php echo esc_html($card['label']); ?><?php echo theme_chevron(); ?></span>
                         </a>
                     </li>
-                <?php endforeach; ?>
+                <?php endfor; ?>
             </ul>
         </div>
     </section>
 
     <!-- 代表メッセージ -->
     <section class="message message-typeA">
-        <?php $message_image = theme_field('message_image', null, $top_id); ?>
+        <?php $message_sp = theme_pf_sp(theme_pf('message_image'), theme_pf('message_image_sp')); ?>
         <picture class="message__img">
-            <?php if (!$message_image) : ?>
-                <source srcset="<?php echo esc_url(theme_img('top/sec2_bnr01_sp.webp')); ?>" media="(max-width: 768px)" width="750" height="440">
+            <?php if ($message_sp) : ?>
+                <source srcset="<?php echo esc_url($message_sp); ?>" media="(max-width: 768px)" width="750" height="440">
             <?php endif; ?>
-            <?php echo theme_image($message_image, 'top/sec2_bnr01.webp', array('width' => 440, 'height' => 648)); ?>
+            <?php echo theme_pf_image(theme_pf('message_image'), array('width' => 440, 'height' => 648)); ?>
         </picture>
         <div class="message__body">
             <h2 class="message__title heading-3 js-lines"><?php echo $text('message_title'); ?></h2>
-            <p class="message__label js-fade">代表メッセージ</p>
+            <p class="message__label js-fade"><?php echo esc_html(theme_pf('message_label')); ?></p>
             <p class="message__text js-fade"><?php echo $text('message_text'); ?></p>
-            <p class="message__name js-fade"><?php echo esc_html(theme_field('message_name', null, $top_id)); ?></p>
-            <a href="<?php echo esc_url(home_url('/philosophy/')); ?>" class="btn btn--white btn--m message__btn js-fade"><span class="btn__text">もっと見る</span><?php echo theme_chevron(); ?></a>
+            <p class="message__name js-fade"><?php echo esc_html(theme_pf('message_name')); ?></p>
+            <a href="<?php echo esc_url(theme_pf_url(theme_pf('message_btn_link'))); ?>" class="btn btn--white btn--m message__btn js-fade"><span class="btn__text"><?php echo esc_html(theme_pf('message_btn_label')); ?></span><?php echo theme_chevron(); ?></a>
         </div>
     </section>
 
@@ -127,27 +124,27 @@ $text = function ($name) use ($top_id) {
     <section class="strength strength-typeA">
         <div class="container">
             <h2 class="heading-wrap heading-typeC heading-typeC--white">
-                <span class="heading-main js-lines"><?php echo esc_html(theme_field('strength_heading', null, $top_id)); ?></span>
+                <span class="heading-main js-lines"><?php echo esc_html(theme_pf('strength_heading')); ?></span>
                 <span class="heading-line" aria-hidden="true"></span>
-                <span class="heading-sub js-fade"><?php echo esc_html(theme_field('strength_sub', null, $top_id)); ?></span>
+                <span class="heading-sub js-fade"><?php echo esc_html(theme_pf('strength_sub')); ?></span>
             </h2>
             <p class="strength__lead js-fade"><?php echo $text('strength_lead'); ?></p>
         </div>
-        <div class="strength__slider splide js-fade" aria-label="<?php echo esc_attr(theme_field('strength_heading', null, $top_id)); ?>">
+        <div class="strength__slider splide js-fade" aria-label="<?php echo esc_attr(theme_pf('strength_heading')); ?>">
             <div class="splide__track">
                 <ul class="splide__list">
                     <?php for ($i = 1; $i <= 3; $i++) :
-                        $s = theme_field('strength_' . $i, null, $top_id); ?>
+                        $s = theme_pf('strength_' . $i); ?>
                         <li class="splide__slide strength__item">
-                            <div class="strength__img"><?php echo theme_image($s['image'], 'top/sec3_bnr0' . $i . '.webp', array('width' => 720, 'height' => 720)); ?></div>
-                            <p class="strength__title"><?php echo nl2br(esc_html($s['title'])); ?></p>
+                            <div class="strength__img"><?php echo theme_pf_image($s['image'], array('width' => 720, 'height' => 720)); ?></div>
+                            <p class="strength__title"><?php echo theme_pf_kses($s['title']); ?></p>
                         </li>
                     <?php endfor; ?>
                 </ul>
             </div>
         </div>
         <div class="container strength__more js-fade">
-            <a href="<?php echo esc_url(home_url('/business/')); ?>" class="btn btn--white btn--m"><span class="btn__text">事業紹介を一覧で見る</span><?php echo theme_chevron(); ?></a>
+            <a href="<?php echo esc_url(theme_pf_url(theme_pf('strength_btn_link'))); ?>" class="btn btn--white btn--m"><span class="btn__text"><?php echo esc_html(theme_pf('strength_btn_label')); ?></span><?php echo theme_chevron(); ?></a>
         </div>
     </section>
 
@@ -155,14 +152,14 @@ $text = function ($name) use ($top_id) {
     <section class="top-recruit" id="recruit">
         <div class="container">
             <h2 class="heading-wrap heading-typeC">
-                <span class="heading-main js-lines"><?php echo esc_html(theme_field('recruit_heading', null, $top_id)); ?></span>
+                <span class="heading-main js-lines"><?php echo esc_html(theme_pf('recruit_heading')); ?></span>
                 <span class="heading-line" aria-hidden="true"></span>
-                <span class="heading-sub js-fade"><?php echo esc_html(theme_field('recruit_sub', null, $top_id)); ?></span>
+                <span class="heading-sub js-fade"><?php echo esc_html(theme_pf('recruit_sub')); ?></span>
             </h2>
         </div>
         <?php get_template_part('snippet/job-list', null, array('jobs' => $jobs)); ?>
         <div class="container top-recruit__more js-fade">
-            <a href="<?php echo esc_url(home_url('/job/')); ?>" class="btn btn--outline btn--m"><span class="btn__text">募集一覧を見る</span><?php echo theme_chevron(); ?></a>
+            <a href="<?php echo esc_url(theme_pf_url(theme_pf('recruit_btn_link'))); ?>" class="btn btn--outline btn--m"><span class="btn__text"><?php echo esc_html(theme_pf('recruit_btn_label')); ?></span><?php echo theme_chevron(); ?></a>
         </div>
     </section>
 
@@ -170,17 +167,17 @@ $text = function ($name) use ($top_id) {
     <section class="interview interview-typeF">
         <div class="container">
             <h2 class="heading-wrap heading-typeC">
-                <span class="heading-main js-lines"><?php echo esc_html(theme_field('interview_heading', null, $top_id)); ?></span>
+                <span class="heading-main js-lines"><?php echo esc_html(theme_pf('interview_heading')); ?></span>
                 <span class="heading-line" aria-hidden="true"></span>
             </h2>
         </div>
         <div class="interview__wrap">
             <div class="interview__panel">
                 <p class="interview__lead js-fade"><?php echo $text('interview_lead'); ?></p>
-                <a href="<?php echo esc_url(home_url('/interview/')); ?>" class="btn btn--white btn--m js-fade"><span class="btn__text">インタビュー一覧を見る</span><?php echo theme_chevron(); ?></a>
+                <a href="<?php echo esc_url(theme_pf_url(theme_pf('interview_btn_link'))); ?>" class="btn btn--white btn--m js-fade"><span class="btn__text"><?php echo esc_html(theme_pf('interview_btn_label')); ?></span><?php echo theme_chevron(); ?></a>
             </div>
             <div class="interview__slider-wrap">
-                <div class="interview__slider splide" aria-label="<?php echo esc_attr(theme_field('interview_heading', null, $top_id)); ?>">
+                <div class="interview__slider splide" aria-label="<?php echo esc_attr(theme_pf('interview_heading')); ?>">
                     <div class="splide__track">
                         <ul class="splide__list">
                             <?php

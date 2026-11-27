@@ -1,14 +1,17 @@
 <?php
-// 中身は TOP の編集画面の「共通：〜」タブ（page-fields/common.php）
+// 文言・画像はトップページの「共通：CTA」タブ（function/page-fields/top.php の common_*）、会社情報は会社概要ページの「会社基本情報」タブ
 $company      = theme_company();
 $nav          = theme_nav();
-$loop_text    = theme_option('loop_text');
-$cta_bg       = theme_option('cta_bg');
-$cta_bg_sp    = theme_option('cta_bg_sp');
-$cta_btns     = array(
-    array('class' => 'btn--white', 'btn' => theme_button('cta_btn_1', theme_entry_url('casual'))),
-    array('class' => 'btn--gradient', 'btn' => theme_button('cta_btn_2', theme_entry_url('entry'))),
-);
+$loop_text    = theme_common('loop_text');
+$cta_sp       = theme_pf_sp(theme_common('cta_bg'), theme_common('cta_bg_sp'));
+$cta_btns     = array();
+foreach (array(1 => 'btn--white', 2 => 'btn--gradient') as $n => $class) {
+    $cta_btns[] = array('class' => $class, 'btn' => array(
+        'text'  => trim((string) theme_common('cta_btn' . $n . '_label')),
+        'small' => trim((string) theme_common('cta_btn' . $n . '_small')),
+        'url'   => theme_pf_url(theme_common('cta_btn' . $n . '_link')),
+    ));
+}
 $footer_links = theme_menu('footer'); // メニューの位置「フッター右の太字リンク」
 ?>
 <!-- ここから下（流れる英文・街並み・CTA・フッター）は全ページ共通 -->
@@ -23,17 +26,17 @@ $footer_links = theme_menu('footer'); // メニューの位置「フッター右
     </div>
 </div>
 <div class="cityscape js-city" aria-hidden="true">
-    <img src="<?php echo esc_url(theme_image_url(theme_option('city_image'), 'top/sec6_bg.webp')); ?>" alt="" width="2400" height="412" loading="lazy">
+    <img src="<?php echo esc_url(theme_pf_img(theme_common('city'))); ?>" alt="" width="2400" height="412" loading="lazy">
 </div>
 
 <section class="entry entry-typeB">
     <picture class="entry__bg">
-        <source srcset="<?php echo esc_url($cta_bg_sp || $cta_bg ? theme_image_url($cta_bg_sp ?: $cta_bg, '') : theme_img('top/ft_bg_sp.webp')); ?>" media="(max-width: 768px)">
-        <img src="<?php echo esc_url(theme_image_url($cta_bg, 'top/ft_bg.webp')); ?>" alt="" width="1440" height="600" loading="lazy">
+        <?php if ($cta_sp) : ?><source srcset="<?php echo esc_url($cta_sp); ?>" media="(max-width: 768px)"><?php endif; ?>
+        <img src="<?php echo esc_url(theme_pf_img(theme_common('cta_bg'))); ?>" alt="" width="1440" height="600" loading="lazy">
     </picture>
     <div class="entry__inner container">
-        <h2 class="entry__title js-lines"><?php echo theme_text(theme_option('cta_title')); ?></h2>
-        <p class="entry__text js-fade"><?php echo theme_text(theme_option('cta_text')); ?></p>
+        <h2 class="entry__title js-lines"><?php echo theme_pf_kses(theme_common('cta_title')); ?></h2>
+        <p class="entry__text js-fade"><?php echo theme_pf_kses(theme_common('cta_text')); ?></p>
         <div class="entry__buttons js-fade">
             <?php foreach ($cta_btns as $b) :
                 if ($b['btn']['text'] === '') continue; ?>
@@ -69,7 +72,7 @@ $footer_links = theme_menu('footer'); // メニューの位置「フッター右
         </nav>
         <div class="footer__company">
             <a href="<?php echo esc_url(home_url('/')); ?>" class="footer__logo">
-                <img src="<?php echo esc_url(theme_image_url(theme_option('logo_image'), 'logo.svg')); ?>" alt="<?php echo esc_attr(theme_option('logo_alt')); ?>" width="200" height="38" loading="lazy">
+                <img src="<?php echo esc_url(theme_pf_img(theme_common('logo'))); ?>" alt="<?php echo esc_attr(theme_common('logo_alt')); ?>" width="200" height="38" loading="lazy">
             </a>
             <p class="footer__name"><?php echo esc_html($company['name']); ?></p>
             <p class="footer__address en"><?php echo esc_html($company['zip']); ?><br><?php echo esc_html($company['address']); ?><br><?php echo esc_html($company['building']); ?></p>

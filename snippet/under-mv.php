@@ -11,7 +11,8 @@
  *     'image_sp' => 'philosophy/1_1_main_sp.webp',         // 任意
  *     'image_id' => 0,                                     // 任意。ACF の画像（あれば image より優先）
  * ));
- * 値は各ページの page-fields/<slug>.php に項目を作り、theme_field() で渡す。
+ * image / image_sp は img/ からのパスか添付ファイルID。固定ページは function/page-fields/<slug>.php の項目を theme_pf() でそのまま渡す。
+ * カスタム投稿は post-fields/*.php の画像を image_id で渡す（theme_field()）。
  */
 $a = wp_parse_args($args ?? array(), array(
     'label' => '', 'title' => get_the_title(), 'sub' => '', 'lead' => '',
@@ -23,12 +24,18 @@ $a = wp_parse_args($args ?? array(), array(
         <?php get_template_part('snippet/breadcrumb'); ?>
     </div>
     <div class="under-mv__visual">
+        <?php
+        // PC：image_id（カスタム投稿の ACF）> image（添付ファイルID か img/ からのパス。theme_pf() の値をそのまま渡せる）
+        // SP：image_sp を選んでいればその画像。PC だけ選んでいるときは PC の画像を SP でも出す
+        $pc = $a['image_id'] ?: $a['image'];
+        $sp = $a['image_sp'] ? theme_pf_sp($pc, $a['image_sp']) : '';
+        ?>
         <picture class="under-mv__img">
-            <?php if (!$a['image_id'] && $a['image_sp']) : ?>
-                <source srcset="<?php echo esc_url(theme_img($a['image_sp'])); ?>" media="(max-width: 768px)">
+            <?php if ($sp) : ?>
+                <source srcset="<?php echo esc_url($sp); ?>" media="(max-width: 768px)">
             <?php endif; ?>
-            <?php if ($a['image_id'] || $a['image']) {
-                echo theme_image($a['image_id'], $a['image'], array('width' => 1440, 'height' => 380, 'loading' => 'eager', 'fetchpriority' => 'high'), 'full');
+            <?php if ($pc) {
+                echo theme_pf_image($pc,array('width' => 1440, 'height' => 380, 'loading' => 'eager', 'fetchpriority' => 'high'), 'full');
             } ?>
         </picture>
         <div class="under-mv__content container">
@@ -40,11 +47,11 @@ $a = wp_parse_args($args ?? array(), array(
                 <p class="under-mv__sub"><?php echo esc_html($a['sub']); ?></p>
             <?php endif; ?>
             <?php if ($a['lead']) : ?>
-                <p class="under-mv__lead"><?php echo nl2br(esc_html($a['lead'])); ?></p>
+                <p class="under-mv__lead"><?php echo theme_text($a['lead']); ?></p>
             <?php endif; ?>
         </div>
     </div>
     <?php if ($a['lead']) : ?>
-        <p class="under-mv__lead under-mv__lead--sp small-hide container"><?php echo nl2br(esc_html($a['lead'])); ?></p>
+        <p class="under-mv__lead under-mv__lead--sp small-hide container"><?php echo theme_text($a['lead']); ?></p>
     <?php endif; ?>
 </section>

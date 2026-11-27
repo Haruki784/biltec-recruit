@@ -3,9 +3,10 @@
 <?php get_template_part('head'); ?>
 <?php
 $nav       = theme_nav(); // 外観 → カスタマイズ → メニュー（function/functions_menu.php）
-$logo_sub  = trim((string) theme_option('logo_sub'));
-$btn_1     = theme_button('header_btn_1', home_url('/job/'));
-$btn_2     = theme_button('header_btn_2', theme_entry_url('casual'));
+// 文言・画像はトップページの「共通：ヘッダー」タブ（function/page-fields/top.php の common_*）
+$logo_sub  = trim((string) theme_common('site_name'));
+$btn_1     = array('text' => theme_common('btn1_label'), 'url' => theme_pf_url(theme_common('btn1_link')));
+$btn_2     = array('text' => theme_common('btn2_label'), 'url' => theme_pf_url(theme_common('btn2_link')));
 ?>
 
 <body <?php body_class(); ?>>
@@ -17,8 +18,8 @@ $btn_2     = theme_button('header_btn_2', theme_entry_url('casual'));
             <?php $logo_tag = is_front_page() ? 'h1' : 'p'; ?>
             <<?php echo $logo_tag; ?> class="logo header__logo">
                 <a href="<?php echo esc_url(home_url('/')); ?>" class="logo__link">
-                    <img src="<?php echo esc_url(theme_image_url(theme_option('logo_image'), 'logo.svg')); ?>" alt="<?php echo esc_attr(theme_option('logo_alt')); ?>" width="136" height="26" class="logo__img logo__img--color">
-                    <img src="<?php echo esc_url(theme_image_url(theme_option('logo_image_white'), 'logo_w.svg')); ?>" alt="" width="136" height="26" class="logo__img logo__img--white" aria-hidden="true">
+                    <img src="<?php echo esc_url(theme_pf_img(theme_common('logo'))); ?>" alt="<?php echo esc_attr(theme_common('logo_alt')); ?>" width="136" height="26" class="logo__img logo__img--color">
+                    <img src="<?php echo esc_url(theme_pf_img(theme_common('logo_white'))); ?>" alt="" width="136" height="26" class="logo__img logo__img--white" aria-hidden="true">
                     <?php if ($logo_sub !== '') : ?><span class="logo__sub"><?php echo esc_html($logo_sub); ?></span><?php endif; ?>
                 </a>
             </<?php echo $logo_tag; ?>>
