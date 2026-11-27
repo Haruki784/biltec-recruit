@@ -86,7 +86,7 @@ return [
 
     // ここから全ページ共通（theme_common('名前') で取り出す。名前の common_ は付けない）
     ['tab', '共通：ヘッダー'],
-    ['common_logo', 'ロゴ（色付き）', 'image', 'logo.svg', 'フッター・オープニング・手すりができるまで にも使います。PNG / WebP で入れてください（SVG はアップロードできません）。'],
+    ['common_logo', 'ロゴ（色付き）', 'image', 'logo.svg', 'フッター・オープニング・手すりができるまで にも使います。SVG・PNG・WebP で入れられます（SVG は Safe SVG プラグインが必要）。'],
     ['common_logo_white', 'ロゴ（白）', 'image', 'logo_w.svg', 'TOP の MV の上（透明のヘッダー）で使います。'],
     ['common_logo_alt', 'ロゴの代替テキスト（会社名）', 'text', 'BILTEC ビルテック株式会社'],
     ['common_site_name', 'ロゴ横の文字', 'text', '中途採用サイト', '空欄なら出しません。'],
