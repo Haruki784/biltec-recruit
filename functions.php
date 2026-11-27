@@ -245,3 +245,54 @@ add_filter('document_title_parts', 'theme_title_parts');
 add_filter('document_title_separator', function () {
     return '|';
 });
+
+/**
+ * SEO プラグイン（All in One SEO）との役割分担（チョク採テンプレの標準プラグイン）
+ * - プラグインが有効なとき：description・canonical・OGP はプラグインが出す（head.php のテーマの出力は止める）
+ *   足りないところだけテーマから渡す：TOP の title はサイト名だけ、description が空ならテーマの説明文、OGP 画像が空なら img/ogp.jpg
+ * - プラグインがないとき：テーマが出す。WordPress 本体の canonical は止める（テーマの canonical と二重になるため）
+ */
+function theme_seo_plugin_active()
+{
+    return defined('AIOSEO_VERSION');
+}
+
+add_action('wp', function () {
+    if (!theme_seo_plugin_active()) {
+        remove_action('wp_head', 'rel_canonical');
+    }
+});
+
+add_filter('aioseo_title', function ($title) {
+    return is_front_page() ? get_bloginfo('name') : $title;
+});
+
+add_filter('aioseo_description', function ($description) {
+    if (trim((string) $description) === '' && function_exists('theme_get_meta_description')) {
+        return theme_get_meta_description();
+    }
+    return $description;
+});
+
+/** OGP / X の画像が空なら、アイキャッチ画像かテーマの img/ogp.jpg */
+function theme_default_share_image()
+{
+    if (is_singular() && has_post_thumbnail()) {
+        return get_the_post_thumbnail_url(null, 'full');
+    }
+    return get_stylesheet_directory_uri() . '/img/ogp.jpg';
+}
+
+add_filter('aioseo_facebook_tags', function ($tags) {
+    if (empty($tags['og:image'])) {
+        $tags['og:image'] = theme_default_share_image();
+    }
+    return $tags;
+});
+
+add_filter('aioseo_twitter_tags', function ($tags) {
+    if (empty($tags['twitter:image'])) {
+        $tags['twitter:image'] = theme_default_share_image();
+    }
+    return $tags;
+});

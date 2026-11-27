@@ -77,6 +77,8 @@ if (!function_exists('theme_get_canonical_url')) {
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <!-- JSが動く環境だけ動きの初期状態（非表示）を使う -->
     <script>document.documentElement.classList.add('js-ready');</script>
+    <?php // All in One SEO などの SEO プラグインが有効なときは、description・canonical・OGP はプラグインに任せる（二重に出さない。functions.php の theme_seo_plugin_active()） ?>
+    <?php if (!theme_seo_plugin_active()) : ?>
     <!-- SEO: meta description -->
     <meta name="description" content="<?php echo esc_attr(theme_get_meta_description()); ?>">
 
@@ -91,6 +93,7 @@ if (!function_exists('theme_get_canonical_url')) {
     <meta property="og:description" content="<?php echo esc_attr(theme_get_meta_description()); ?>">
     <meta property="og:image" content="<?php echo is_singular() && has_post_thumbnail() ? esc_url(get_the_post_thumbnail_url(null, 'full')) : esc_url(get_stylesheet_directory_uri() . '/img/ogp.jpg'); ?>">
     <meta name="twitter:card" content="summary_large_image">
+    <?php endif; ?>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@3.0.2/destyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
